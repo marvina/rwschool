@@ -317,8 +317,8 @@
     .frame-loader {
       position: absolute;
       inset: 0;
-      background: rgba(10, 15, 29, 0.75);
-      backdrop-filter: blur(8px);
+      background: rgba(10, 15, 29, 0.4);
+      backdrop-filter: blur(4px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -332,7 +332,7 @@
 
     .frame-loader.active {
       opacity: 1;
-      pointer-events: auto;
+      pointer-events: none;
     }
 
     .spinner {
@@ -1226,8 +1226,8 @@
     }
 
     // Switch active scheme
-    function switchScheme(schemeId) {
-      if (schemeId === currentScheme && schemeId !== 'compare') return;
+    function switchScheme(schemeId, force = false) {
+      if (!force && schemeId === currentScheme && schemeId !== 'compare' && frame.src.includes(schemeId)) return;
       currentScheme = schemeId;
 
       // Update Tab Styles
@@ -1259,11 +1259,20 @@
 
         // Show loader and load frame
         loader.classList.add('active');
-        frame.src = data.path;
+        let done = false;
+        const removeLoader = () => {
+          if (!done) {
+            done = true;
+            loader.classList.remove('active');
+          }
+        };
 
         frame.onload = () => {
-          setTimeout(() => loader.classList.remove('active'), 150);
+          setTimeout(removeLoader, 60);
         };
+        setTimeout(removeLoader, 350);
+
+        frame.src = data.path;
 
         showToast(`已切换至 ${data.title}`);
       }

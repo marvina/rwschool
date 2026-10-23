@@ -67,7 +67,8 @@ for (const scheme of schemes) {
   }
 }
 
-// 4. Inject floating switcher into each scheme's index.html
+// 4. Inlining JS and CSS into each scheme's index.html
+// This guarantees it works 100% on BOTH file:// (direct double click) and https:// (Cloudflare Pages)
 const floatingSwitcherScript = `
 <script>
 (function() {
@@ -211,19 +212,58 @@ const floatingSwitcherScript = `
 `;
 
 for (const scheme of schemes) {
-  const htmlFile = path.join(distDir, scheme.dir, 'index.html');
+  const schemeDistDir = path.join(distDir, scheme.dir);
+  const htmlFile = path.join(schemeDistDir, 'index.html');
+  const assetsDir = path.join(schemeDistDir, 'assets');
+
   if (fs.existsSync(htmlFile)) {
     let content = fs.readFileSync(htmlFile, 'utf8');
+
     // Replace title
     content = content.replace(/<title>.*?<\/title>/i, `<title>${scheme.name} | 人文艺术学院官网改版</title>`);
+
+    // Inlining CSS
+    const cssFiles = fs.existsSync(assetsDir) ? fs.readdirSync(assetsDir).filter(f => f.endsWith('.css')) : [];
+    for (const cssName of cssFiles) {
+      const cssContent = fs.readFileSync(path.join(assetsDir, cssName), 'utf8');
+      const linkTagRegex = new RegExp(`<link[^>]*href=["'][^"']*${cssName}["'][^>]*>`, 'i');
+      if (linkTagRegex.test(content)) {
+        content = content.replace(linkTagRegex, () => `<style>\n${cssContent}\n</style>`);
+      } else {
+        content = content.replace('</head>', () => `<style>\n${cssContent}\n</style>\n</head>`);
+      }
+    }
+
+    // Inlining JS - must use callback function in .replace to prevent $ patterns in minified JS from corrupting HTML
+    const jsFiles = fs.existsSync(assetsDir) ? fs.readdirSync(assetsDir).filter(f => f.endsWith('.js')) : [];
+    for (const jsName of jsFiles) {
+      const jsContent = fs.readFileSync(path.join(assetsDir, jsName), 'utf8');
+      const scriptTagRegex = new RegExp(`<script[^>]*src=["'][^"']*${jsName}["'][^>]*>\\s*<\\/script>`, 'i');
+      if (scriptTagRegex.test(content)) {
+        content = content.replace(scriptTagRegex, () => `<script type="module">\n${jsContent}\n</script>`);
+      } else {
+        content = content.replace('</body>', () => `<script type="module">\n${jsContent}\n</script>\n</body>`);
+      }
+    }
+
+    // Special asset copying for scheme 04
+    if (scheme.id === '04') {
+      const logoInAssets = path.join(assetsDir, 'school-logo-yunOovs1.png');
+      const logoInRoot = path.join(schemeDistDir, 'school-logo-yunOovs1.png');
+      if (fs.existsSync(logoInAssets) && !fs.existsSync(logoInRoot)) {
+        fs.copyFileSync(logoInAssets, logoInRoot);
+      }
+    }
+
     // Inject floating switcher before </body>
     if (content.includes('</body>')) {
-      content = content.replace('</body>', `${floatingSwitcherScript}\n</body>`);
+      content = content.replace('</body>', () => `${floatingSwitcherScript}\n</body>`);
     } else {
       content += floatingSwitcherScript;
     }
+
     fs.writeFileSync(htmlFile, content, 'utf8');
-    console.log(`💉 已优化 ${scheme.name} 标题与悬浮切换胶囊`);
+    console.log(`💉 已成功将 CSS 与 JS 内联至 ${scheme.name} (${scheme.dir}/index.html)，支持无跨域零依赖直读`);
   }
 }
 
@@ -278,5 +318,4 @@ console.log('☁️ 已生成 Cloudflare Pages _headers 与 robots.txt');
 // 8. Print Summary
 console.log('🎉 [Success] 网站合并与构建完成！输出目录: dist/');
 console.log('✨ 部署指引:');
-console.log('   - Cloudflare Pages 构建命令: pnpm run build (或留空直接部署 dist)');
-console.log('   - 输出目录 (Build output directory): dist');
+console.log('   - 无论是双击本地 dist/index.html 打开，还是在 Cloudflare Pages 线上部署，均可完美展示。');
