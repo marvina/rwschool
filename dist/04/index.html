@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>方案四：高校规范全功能门户 | 人文艺术学院官网改版</title>
+    
+    <meta name="description" content="Showcases a design school homepage highlighting art and philosophy majors to attract and inform prospective students effectively.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="./favicon.svg">
+    <meta property="og:title" content="Figma Make App">
+    <meta property="og:description" content="Showcases a design school homepage highlighting art and philosophy majors to attract and inform prospective students effectively.">
+    <script type="module" crossorigin src="./assets/index-DYRopg61.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index--Ynnu5_d.css">
+  </head>
+  <body>
+    
+    <div id="root"></div>
+    
+  
+<script>
+(function() {
+  // If inside the portal iframe, hide floating switcher to prevent duplicate bars
+  if (window.self !== window.top) {
+    return;
+  }
+
+  // Detect current scheme
+  const pathname = window.location.pathname;
+  let cur = '01';
+  if (pathname.includes('/02')) cur = '02';
+  else if (pathname.includes('/03')) cur = '03';
+  else if (pathname.includes('/04')) cur = '04';
+
+  const menu = document.createElement('div');
+  menu.id = 'standalone-scheme-dock';
+  menu.innerHTML = `
+    <style>
+      #standalone-scheme-dock {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 999999;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      .dock-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 18px;
+        background: rgba(15, 23, 42, 0.92);
+        color: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 9999px;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.6);
+        cursor: pointer;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        font-size: 13.5px;
+        font-weight: 600;
+        transition: transform 0.2s ease, background 0.2s ease;
+        user-select: none;
+      }
+      .dock-pill:hover {
+        transform: translateY(-2px);
+        background: #1e293b;
+        border-color: rgba(99, 102, 241, 0.5);
+      }
+      .dock-badge {
+        font-size: 11px;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background: rgba(99, 102, 241, 0.3);
+        color: #a5b4fc;
+      }
+      .dock-menu {
+        position: absolute;
+        bottom: calc(100% + 10px);
+        right: 0;
+        width: 250px;
+        background: #0f172a;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+        padding: 6px;
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .dock-menu.show {
+        display: flex;
+      }
+      .dock-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        color: #94a3b8;
+        font-size: 13px;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+      }
+      .dock-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+      }
+      .dock-item.active {
+        background: rgba(99, 102, 241, 0.2);
+        color: #38bdf8;
+        font-weight: 600;
+      }
+      .dock-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 4px 0;
+      }
+    </style>
+    <div class="dock-menu" id="dock-menu">
+      <a href="../index.html" class="dock-item">
+        <span>🏛️ 返回汇报大厅</span>
+        <span>&larr;</span>
+      </a>
+      <a href="../index.html#compare" class="dock-item">
+        <span>📊 方案对比矩阵</span>
+        <span>&rarr;</span>
+      </a>
+      <div class="dock-divider"></div>
+      <a href="../01/index.html" class="dock-item ${cur === '01' ? 'active' : ''}">
+        <span>方案 01 · 现代学术综合</span>
+      </a>
+      <a href="../02/index.html" class="dock-item ${cur === '02' ? 'active' : ''}">
+        <span>方案 02 · 典雅人文年刊</span>
+      </a>
+      <a href="../03/index.html" class="dock-item ${cur === '03' ? 'active' : ''}">
+        <span>方案 03 · 极简当代艺术</span>
+      </a>
+      <a href="../04/index.html" class="dock-item ${cur === '04' ? 'active' : ''}">
+        <span>方案 04 · 高校规范全能</span>
+      </a>
+    </div>
+    <div class="dock-pill" id="dock-toggle">
+      <span>方案 ${cur}</span>
+      <span class="dock-badge">切换方案 ▾</span>
+    </div>
+  `;
+  document.body.appendChild(menu);
+
+  const toggle = document.getElementById('dock-toggle');
+  const dMenu = document.getElementById('dock-menu');
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dMenu.classList.toggle('show');
+  });
+  document.addEventListener('click', () => {
+    dMenu.classList.remove('show');
+  });
+})();
+</script>
+
+</body>
+</html>
