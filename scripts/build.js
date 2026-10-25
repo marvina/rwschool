@@ -13,7 +13,7 @@ console.log('🚀 [Build] 开始构建人文艺术学院官网四套方案整合
 const schemes = [
   { id: '01', name: '方案一：现代学术综合门户', dir: '01' },
   { id: '02', name: '方案二：典雅人文展览年刊', dir: '02' },
-  { id: '03', name: '方案三：3D空间叙事齐鲁造物', dir: '03' },
+  { id: '03', name: '方案三：高定极简典雅风', dir: '03' },
   { id: '04', name: '方案四：高校规范全功能门户', dir: '04' }
 ];
 
@@ -185,7 +185,7 @@ const floatingSwitcherScript = `
         <span>方案 02 · 典雅人文年刊</span>
       </a>
       <a href="../03/index.html" class="dock-item \${cur === '03' ? 'active' : ''}">
-        <span>方案 03 · 3D空间叙事</span>
+        <span>方案 03 · 高定极简典雅</span>
       </a>
       <a href="../04/index.html" class="dock-item \${cur === '04' ? 'active' : ''}">
         <span>方案 04 · 高校规范全能</span>
