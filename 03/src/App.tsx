@@ -16,7 +16,6 @@ interface AcademicProgram {
   name: string
   enName: string
   qualification: string
-  tagClass: "tag-red" | "tag-blue" | "tag-green" | "tag-yellow"
   degree: string
   duration: string
   summary: string
@@ -32,7 +31,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "艺术设计学",
     enName: "Design Studies",
     qualification: "软科 A+ · 国家级一流本科专业",
-    tagClass: "tag-red",
     degree: "艺术学学士 / 硕士 / 博士方向",
     duration: "标准四年制",
     summary: "全国排名前列顶尖学科，致力于设计历史、设计理论、设计批评与设计战略前沿研究，建构中国自主设计话语体系。",
@@ -56,7 +54,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "艺术史论",
     enName: "Art History & Theory",
     qualification: "国家级一流本科专业",
-    tagClass: "tag-blue",
     degree: "艺术学学士 / 硕士",
     duration: "标准四年制",
     summary: "聚焦中国美术史、西方造物史、黄河民艺理论与视觉文化，培养具备深厚历史视野与批判思辨能力的学术英才。",
@@ -80,7 +77,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "文化产业管理",
     enName: "Cultural Management",
     qualification: "国家级一流本科专业",
-    tagClass: "tag-blue",
     degree: "管理学学士 / 硕士",
     duration: "标准四年制",
     summary: "立足文旅深度融合、非遗产业化运营与艺术策展管理，培养兼通人文素养与现代产业运作的高级复合管理人才。",
@@ -104,7 +100,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "美术学",
     enName: "Fine Arts",
     qualification: "国家级特色专业",
-    tagClass: "tag-yellow",
     degree: "艺术学学士",
     duration: "标准四年制",
     summary: "融合当代艺术理论、美术史学方法论与审美教育，注重基础理论建构与社会美育实践的深度贯通。",
@@ -128,7 +123,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "非物质文化遗产保护",
     enName: "Intangible Cultural Heritage",
     qualification: "山东省首批非遗本科专业",
-    tagClass: "tag-green",
     degree: "艺术学学士",
     duration: "标准四年制",
     summary: "依托齐鲁深厚民间手工艺沃土，开展抢救性调查、数字谱系测绘、活态传承与当代造物创新衍生。",
@@ -152,7 +146,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "文物保护与修复",
     enName: "Heritage Conservation",
     qualification: "省级实验教学示范中心依托",
-    tagClass: "tag-green",
     degree: "历史学 / 艺术学学士",
     duration: "标准四年制",
     summary: "依托高水平实验教学示范平台，结合科技检测、古籍纸质文献修复、古代陶瓷金属保护开展跨学科教学。",
@@ -176,7 +169,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "广告策划与管理",
     enName: "Creative Advertising",
     qualification: "省级一流本科专业建设点",
-    tagClass: "tag-blue",
     degree: "文学 / 管理学学士",
     duration: "标准四年制",
     summary: "融合现代传播学、品牌战略、整合营销传播与数字创意实务，屡获全国大学生广告艺术大赛顶级大奖。",
@@ -200,7 +192,6 @@ const academicPrograms: AcademicProgram[] = [
     name: "公共艺术史论教研室",
     enName: "Public Art Studies",
     qualification: "跨学科虚拟教研室",
-    tagClass: "tag-yellow",
     degree: "跨学科通识与虚拟教研协同",
     duration: "贯穿全院多学科",
     summary: "承担全院跨学科公共艺术理论、城乡微更新美育实践与综合通识人文教学，推进科教融汇与协同创新。",
@@ -224,7 +215,6 @@ const academicPrograms: AcademicProgram[] = [
 interface NewsItem {
   id: string
   tag: string
-  tagClass: "tag-red" | "tag-blue" | "tag-green" | "tag-yellow"
   date: string
   day: string
   month: string
@@ -240,8 +230,7 @@ interface NewsItem {
 const newsList: NewsItem[] = [
   {
     id: "news-01",
-    tag: "学院要闻",
-    tagClass: "tag-red",
+    tag: "院务通报",
     date: "2025.03.22",
     day: "22",
     month: "03月",
@@ -254,7 +243,6 @@ const newsList: NewsItem[] = [
   {
     id: "news-02",
     tag: "学术讲堂",
-    tagClass: "tag-yellow",
     date: "2025.03.18",
     day: "18",
     month: "03月",
@@ -265,7 +253,6 @@ const newsList: NewsItem[] = [
   {
     id: "news-03",
     tag: "教学展览",
-    tagClass: "tag-blue",
     date: "2025.03.14",
     day: "14",
     month: "03月",
@@ -276,7 +263,6 @@ const newsList: NewsItem[] = [
   {
     id: "news-04",
     tag: "荣誉成果",
-    tagClass: "tag-green",
     date: "2025.03.10",
     day: "10",
     month: "03月",
@@ -292,7 +278,6 @@ interface ResearchProject {
   code: string
   title: string
   category: string
-  categoryClass: "tag-red" | "tag-blue" | "tag-green" | "tag-yellow"
   dept: string
   year: string
   leader: string
@@ -312,7 +297,6 @@ const researchProjects: ResearchProject[] = [
     code: "KEY-2026-01",
     title: "黄河流域民间手工艺调查与数字化活化图录",
     category: "国家重点课题",
-    categoryClass: "tag-red",
     dept: "黄河流域民间艺术研究所",
     year: "2025 / 2026",
     leader: "民间美术与文化遗产研究所团队",
@@ -330,7 +314,6 @@ const researchProjects: ResearchProject[] = [
     code: "PUB-2026-04",
     title: "中国古代造物思想与器物制度考论",
     category: "学术专著出版",
-    categoryClass: "tag-blue",
     dept: "艺术史论系 / 齐鲁文化特藏室",
     year: "2026",
     leader: "古代造物制度与艺术史文献研究团队",
@@ -348,7 +331,6 @@ const researchProjects: ResearchProject[] = [
     code: "LAB-2026-03",
     title: "乡土美育与在地设计介入实验：乡村社区微更新模型",
     category: "全国美展成果",
-    categoryClass: "tag-green",
     dept: "艺术设计学系",
     year: "2026",
     leader: "社会服务与在地设计联合工作坊",
@@ -366,7 +348,6 @@ const researchProjects: ResearchProject[] = [
     code: "LAB-2026-02",
     title: "算法诗学：生成式交互装置与多通道空间感知实验",
     category: "前沿计算实验",
-    categoryClass: "tag-yellow",
     dept: "跨媒介艺术与计算交互重点实验室",
     year: "2026",
     leader: "跨媒介与数字艺术重点实验室团队",
@@ -392,8 +373,7 @@ const lectureSeries = [
     speaker: "范迪安 教授",
     speakerTitle: "中国美术家协会主席 / 原中央美术学院院长",
     location: "长清校区人文艺术学院二楼学术报告厅",
-    status: "名家讲座 · 席位预约",
-    statusClass: "tag-red",
+    status: "名家讲席 · 席位预约",
     isVip: true,
     capacity: "限额 260 人",
   },
@@ -407,7 +387,6 @@ const lectureSeries = [
     speakerTitle: "院学术委员会主任 / 博士生导师 / 国务院特贴专家",
     location: "学院三楼视觉文献特藏室",
     status: "学术席位开放",
-    statusClass: "tag-yellow",
     isVip: false,
     capacity: "限额 60 人",
   },
@@ -421,7 +400,6 @@ const lectureSeries = [
     speakerTitle: "跨媒介艺术实验室主任 / 国际策展人",
     location: "实验中心一楼沉浸式视听研讨厅",
     status: "课题组优先",
-    statusClass: "tag-blue",
     isVip: false,
     capacity: "限额 40 人",
   },
@@ -607,169 +585,182 @@ export default function App() {
 
       {/* ================= 页面主画布：完全重构的内容空间 ================= */}
       <main className="editorial-canvas" id="top">
-        {/* ================= 2. HERO: 空间排版与悬浮典藏画卷 (完全颠覆文字框) ================= */}
+        {/* ================= 2. HERO: 典雅学术三联体画卷 (高定博物馆风，无横向网格，平衡尊崇) ================= */}
         <section className="arch-hero-stage" id="sec-hero">
-          {/* 背景典藏水印 */}
+          {/* 背景古典学术微水印 */}
           <div className="hero-archival-watermark" aria-hidden="true">
-            SHANDONG CRAFT & HUMANITIES · SUAD 2026
+            SHANDONG CRAFT & HUMANITIES · 1973–2026
           </div>
 
-          {/* 顶栏学术定位横轴 */}
-          <div className="hero-academic-axis">
-            <div className="axis-item axis-left">
-              <span className="axis-index-pill">SECTION 01</span>
-              <span className="axis-title-text">齐鲁造物文脉与当代创新教育高地</span>
+          {/* 顶端纯净极简学术标尺（无全宽横线） */}
+          <div className="hero-editorial-mast-kicker">
+            <div className="mast-kicker-left">
+              <span className="kicker-mono-index">VOL. 2026 / 08</span>
+              <span className="kicker-sep">/</span>
+              <span className="kicker-topic">齐鲁造物学派文献库与一流学科高地</span>
             </div>
-            <div className="axis-item axis-right">
-              <span className="axis-meta-mono">ARCHIVAL DOSSIER {`{VOL.2026-08}`}</span>
+            <div className="mast-kicker-right">
+              <span className="kicker-coords">JINAN · 36.65°N, 116.82°E</span>
             </div>
           </div>
 
-          {/* 巨幅空间排版层：文字作为建筑体直接依附网格，不被容器拘束 */}
-          <div className="hero-monumental-typography">
-            <div className="monumental-row row-1">
-              <h1 className="hero-primary-h1">
-                <span className="char-serif">赓续文脉</span>
-                <span className="char-symbol">·</span>
-                <span className="char-serif">构筑高地</span>
+          {/* 三列典藏排版主体 (Left Editorial Flank · Center Architectural Anchor · Right Editorial Flank) */}
+          <div className="hero-tripartite-spread">
+            {/* 左翼：文脉传承与史论奠基 (占第 1 至 4 列) */}
+            <div className="hero-flank hero-flank-heritage">
+              <div className="flank-kicker-row">
+                <span className="flank-rubric">[ 01 / 文脉溯源 · ROOTS ]</span>
+              </div>
+              <h1 className="flank-title-serif">
+                <span className="title-line">赓续文脉</span>
+                <span className="title-line">构筑高地</span>
               </h1>
-              <div className="hero-floating-rank-badge">
-                <span className="badge-rank-text">全国 A+ 学科</span>
-                <span className="badge-sub-text">软科顶尖评级</span>
+              <p className="flank-prose">
+                承袭齐鲁千年造物哲思与学术文脉，立足软科 A+ 顶尖学科与国家级一流专业建设点。深耕设计史论、古代造物制度与黄河民艺抢救性测绘，建构中国自主设计理论学术话语体系。
+              </p>
+              <div className="flank-action-row">
+                <a href="#sec-disciplines" className="flank-action-btn">
+                  <span>探索专业拓扑与文脉谱系</span>
+                  <span className="action-circle-arrow">→</span>
+                </a>
+              </div>
+              <div className="flank-archival-stamp">
+                <div className="archival-seal-block" title="齐鲁造物印鉴">
+                  <span>齊魯</span>
+                  <span>造物</span>
+                </div>
+                <div className="stamp-meta">
+                  <span className="stamp-code">ARCHIVE NO. SDADA-DES-1305</span>
+                  <span className="stamp-desc">国家一流本科专业建设点档案</span>
+                </div>
               </div>
             </div>
 
-            <div className="monumental-row row-2">
-              <h2 className="hero-secondary-h2">
-                <span className="char-serif">以人文涵养艺术</span>
-                <span className="char-symbol">·</span>
-                <span className="char-serif">以设计赋能时代</span>
+            {/* 中轴：单幅庄严建筑焦点画幅与平滑典藏切换 (占第 5 至 8 列) */}
+            <div className="hero-anchor-gallery">
+              <div className="anchor-frame">
+                <img
+                  src={
+                    activePlate === 2
+                      ? curatedAssets.fieldLibrary
+                      : activePlate === 3
+                      ? curatedAssets.folkResearch
+                      : curatedAssets.heroExhibition
+                  }
+                  alt={
+                    activePlate === 2
+                      ? "齐鲁造物文献特藏室与古籍善本"
+                      : activePlate === 3
+                      ? "黄河流域民间艺术抢救性田野测绘"
+                      : "学院当代艺术展陈空间与实践现场"
+                  }
+                  className="anchor-img"
+                />
+                <div className="anchor-hud-tag">
+                  <span className="anchor-hud-code">
+                    {activePlate === 2
+                      ? "PLATE #02 · ARCHIVAL FOLIO"
+                      : activePlate === 3
+                      ? "PLATE #03 · FIELD SURVEY SPECIMEN"
+                      : "PLATE #01 · CONTEMPORARY EXHIBITION"}
+                  </span>
+                  <span className="anchor-hud-title">
+                    {activePlate === 2
+                      ? "齐鲁造物文献特藏室 · 古籍善本"
+                      : activePlate === 3
+                      ? "黄河流域民间手工艺抢救性田野测绘"
+                      : "国家级实验教学示范中心 · 现场实景"}
+                  </span>
+                </div>
+              </div>
+
+              {/* 沉静极简的典藏画幅切换器（纯正编辑排版，无花哨浮标） */}
+              <div className="anchor-plate-tabs">
+                <button
+                  className={`plate-tab-item ${activePlate === 1 || activePlate === null ? "is-active" : ""}`}
+                  onClick={() => setActivePlate(1)}
+                >
+                  <span className="tab-idx">01</span>
+                  <span className="tab-text">当代展陈</span>
+                </button>
+                <span className="tab-divider">/</span>
+                <button
+                  className={`plate-tab-item ${activePlate === 2 ? "is-active" : ""}`}
+                  onClick={() => setActivePlate(2)}
+                >
+                  <span className="tab-idx">02</span>
+                  <span className="tab-text">文献特藏</span>
+                </button>
+                <span className="tab-divider">/</span>
+                <button
+                  className={`plate-tab-item ${activePlate === 3 ? "is-active" : ""}`}
+                  onClick={() => setActivePlate(3)}
+                >
+                  <span className="tab-idx">03</span>
+                  <span className="tab-text">民艺田野</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 右翼：当代使命与英才引航 (占第 9 至 12 列) */}
+            <div className="hero-flank hero-flank-vision">
+              <div className="flank-kicker-row">
+                <span className="flank-rubric">[ 02 / 时代引航 · VISION ]</span>
+              </div>
+              <h2 className="flank-title-serif">
+                <span className="title-line">以人文涵养艺术</span>
+                <span className="title-line">以设计赋能时代</span>
               </h2>
-            </div>
-          </div>
-
-          {/* 空间非对称蒙太奇：多尺度画幅直接在网格列间穿插流动 */}
-          <div className="hero-spatial-gallery">
-            {/* 画幅 1: 当代艺术展陈空间 (宽画幅，占第 5 至 12 列) */}
-            <div
-              className={`spatial-plate plate-wide ${activePlate === 1 ? "is-focused" : ""}`}
-              onMouseEnter={() => setActivePlate(1)}
-              onMouseLeave={() => setActivePlate(null)}
-              onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
-            >
-              <div className="plate-img-viewport">
-                <img
-                  src={curatedAssets.heroExhibition}
-                  alt="学院当代艺术展陈空间与实践现场"
-                  className="spatial-img"
-                />
-                <div className="plate-hud-strip">
-                  <div className="hud-code">PLATE #01 · CONTEMPORARY EXHIBITION HALL</div>
-                  <div className="hud-title">国家级实验教学示范中心 · 现场实景</div>
-                </div>
+              <p className="flank-prose">
+                面向国家文化战略与前沿社会创新命题，汇聚国务院特贴专家、全国美展评委与国家级教学名师。深化“史论考据、田野测绘、策展实践与跨媒介实验”拔尖育人体系，培养引领未来的领军学人。
+              </p>
+              <div className="flank-action-row">
+                <a href="#sec-admissions" className="flank-action-btn">
+                  <span>查阅 2026 招考与拔尖培养指南</span>
+                  <span className="action-circle-arrow">→</span>
+                </a>
               </div>
-            </div>
-
-            {/* 画幅 2: 齐鲁文献特藏室 (竖画幅，占第 1 至 4 列，下沉穿插) */}
-            <div
-              className={`spatial-plate plate-tall ${activePlate === 2 ? "is-focused" : ""}`}
-              onMouseEnter={() => setActivePlate(2)}
-              onMouseLeave={() => setActivePlate(null)}
-              onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
-            >
-              <div className="plate-img-viewport">
-                <img
-                  src={curatedAssets.fieldLibrary}
-                  alt="齐鲁文献特藏室与古籍善本"
-                  className="spatial-img"
-                />
-                <div className="plate-hud-strip">
-                  <div className="hud-code">PLATE #02 · ARCHIVAL FOLIO</div>
-                  <div className="hud-title">齐鲁造物文献特藏室</div>
-                </div>
-              </div>
-            </div>
-
-            {/* 画幅 3: 黄河民艺田野测绘 (精细考察，跨立在第 7 至 11 列) */}
-            <div
-              className={`spatial-plate plate-field ${activePlate === 3 ? "is-focused" : ""}`}
-              onMouseEnter={() => setActivePlate(3)}
-              onMouseLeave={() => setActivePlate(null)}
-              onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
-            >
-              <div className="plate-img-viewport">
-                <img
-                  src={curatedAssets.folkResearch}
-                  alt="黄河民艺田野调研标本档案"
-                  className="spatial-img"
-                />
-                <div className="plate-hud-strip">
-                  <div className="hud-code">PLATE #03 · FIELD SURVEY SPECIMEN</div>
-                  <div className="hud-title">黄河流域民间艺术抢救性测绘</div>
+              <div className="flank-accolade-card">
+                <div className="accolade-rank-strong">软科顶尖学科 A+</div>
+                <div className="accolade-desc-mono">
+                  全国排名前列 · 艺术设计学与艺术史论双双入选国家级一流本科专业
                 </div>
               </div>
             </div>
           </div>
 
-          {/* 学术宣言阐述与交互锚点 (占第 1 至 6 列) */}
-          <div className="hero-manifesto-dock">
-            <p className="manifesto-paragraph">
-              立足齐鲁深厚文化根脉，面向当代科技与社会发展命题。构筑融“理论研究、田野调查、策展实践、跨媒介创新”为一体的人文艺术教育与创新高地。
-            </p>
-            <div className="hero-plate-selector-pills">
-              <span
-                className={`selector-pill ${activePlate === 1 ? "is-active" : ""}`}
-                onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
-              >
-                [ 01 当代展陈空间 ]
-              </span>
-              <span
-                className={`selector-pill ${activePlate === 2 ? "is-active" : ""}`}
-                onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
-              >
-                [ 02 齐鲁文献特藏 ]
-              </span>
-              <span
-                className={`selector-pill ${activePlate === 3 ? "is-active" : ""}`}
-                onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
-              >
-                [ 03 黄河民艺田野 ]
-              </span>
-            </div>
-          </div>
-
-          {/* 网格坐标锚定数据层 (完全打破“盒子”，数据直接落脚于第 1/4/7/10 轴线) */}
-          <div className="hero-grounded-metrics">
-            <div className="grounded-metric-col col-a-plus">
-              <div className="metric-axis-meta">COORDINATE 01 · RANKING #01</div>
-              <div className="metric-large-val">全国 A+</div>
-              <div className="metric-desc-title">软科中国大学专业排名顶尖评级</div>
-              <div className="metric-desc-sub">艺术设计学专业连续三年保持全国前列，建构中国特色自主学术体系。</div>
+          {/* 四列学术坐标定位标尺（直接落于 12 列垂直线之间，零横向网格线） */}
+          <div className="hero-architectural-metrics">
+            <div className="arch-metric-cell">
+              <div className="metric-meta-rubric">COORDINATE 01 · DISCIPLINE RANK</div>
+              <div className="metric-number-display">全国 A+</div>
+              <div className="metric-title-text">软科中国大学专业排名顶尖评级</div>
+              <div className="metric-detail-p">艺术设计学专业连续保持全国排名前列，奠定自主造物学派体系。</div>
             </div>
 
-            <div className="grounded-metric-col col-national">
-              <div className="metric-axis-meta">COORDINATE 02 · NATIONAL FIRST-CLASS</div>
-              <div className="metric-large-val">
-                2 <span className="val-unit">个</span>
+            <div className="arch-metric-cell">
+              <div className="metric-meta-rubric">COORDINATE 02 · NATIONAL FIRST-CLASS</div>
+              <div className="metric-number-display">
+                2 <span className="metric-unit-tag">个</span>
               </div>
-              <div className="metric-desc-title">国家级一流本科专业建设点</div>
-              <div className="metric-desc-sub">艺术设计学与艺术史论双双入选国家一流，构筑全省唯一双国家一流理论阵地。</div>
+              <div className="metric-title-text">国家级一流本科专业建设点</div>
+              <div className="metric-detail-p">艺术设计学与艺术史论双双入选国家一流，构筑全省唯一双一流理论阵地。</div>
             </div>
 
-            <div className="grounded-metric-col col-faculty">
-              <div className="metric-axis-meta">COORDINATE 03 · FACULTY PROPORTION</div>
-              <div className="metric-large-val">100%</div>
-              <div className="metric-desc-title">专任教师高职及博士比例</div>
-              <div className="metric-desc-sub">汇聚国务院特贴专家、全国美展评委与省部级教学名师团队。</div>
+            <div className="arch-metric-cell">
+              <div className="metric-meta-rubric">COORDINATE 03 · FACULTY EXCELLENCE</div>
+              <div className="metric-number-display">100%</div>
+              <div className="metric-title-text">专任教师高职及博士学位比例</div>
+              <div className="metric-detail-p">汇聚国务院特贴专家、全国美展评委与省部级教学名师高水平团队。</div>
             </div>
 
-            <div className="grounded-metric-col col-research">
-              <div className="metric-axis-meta">COORDINATE 04 · MAJOR PROJECTS</div>
-              <div className="metric-large-val">
-                50+ <span className="val-unit">项</span>
+            <div className="arch-metric-cell">
+              <div className="metric-meta-rubric">COORDINATE 04 · MAJOR RESEARCH</div>
+              <div className="metric-number-display">
+                50+ <span className="metric-unit-tag">项</span>
               </div>
-              <div className="metric-desc-title">国家社科及省部重点课题</div>
-              <div className="metric-desc-sub">涵盖黄河流域民间手工艺数字化、古代造物制度考论与社会美育实践。</div>
+              <div className="metric-title-text">国家社科艺术学及省部重点课题</div>
+              <div className="metric-detail-p">涵盖黄河流域民间手工艺数字化抢救、古代造物制度考据与美育实践。</div>
             </div>
           </div>
         </section>
@@ -780,7 +771,7 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">02</span>
               <div className="sec-title-wrap">
-                <span className="sec-tag-pill">ACADEMIC CHRONICLE & DISPATCH</span>
+                <div className="sec-kicker">[ 02 / ACADEMIC CHRONICLE · 学术纪事与动态 ]</div>
                 <h2 className="sec-heading-serif">学院新闻与学术动态</h2>
               </div>
             </div>
@@ -799,7 +790,7 @@ export default function App() {
                   className="chronicle-lead-img"
                 />
                 <div className="feature-date-badge">
-                  <span className="badge-tag">学院要闻</span>
+                  <span className="dispatch-rubric">{newsList[0].tag}</span>
                   <span className="badge-date">{newsList[0].date}</span>
                 </div>
               </div>
@@ -822,12 +813,12 @@ export default function App() {
               </div>
             </article>
 
-            {/* 右侧纵向速递时间轴 (占第 9 至 12 列，三个完全不同的质感卡片) */}
+            {/* 右侧纵向速递时间轴 (占第 9 至 12 列) */}
             <div className="dispatch-vertical-rail">
               {/* Dispatch 1: 学术讲堂 */}
               <article className="dispatch-entry entry-colloquium">
                 <div className="entry-header-row">
-                  <span className="entry-tag-yellow">学术讲堂</span>
+                  <span className="dispatch-rubric">学术讲堂</span>
                   <span className="entry-speaker-pill">{newsList[1].speaker}</span>
                   <span className="entry-date">{newsList[1].day} {newsList[1].month}</span>
                 </div>
@@ -839,7 +830,7 @@ export default function App() {
               {/* Dispatch 2: 教学展览 */}
               <article className="dispatch-entry entry-exhibition">
                 <div className="entry-header-row">
-                  <span className="entry-tag-blue">教学展览</span>
+                  <span className="dispatch-rubric">教学展览</span>
                   <span className="entry-date">{newsList[2].day} {newsList[2].month}</span>
                 </div>
                 <h4 className="entry-title">{newsList[2].title}</h4>
@@ -857,7 +848,7 @@ export default function App() {
               {/* Dispatch 3: 荣誉成果 */}
               <article className="dispatch-entry entry-honor">
                 <div className="entry-header-row">
-                  <span className="entry-tag-green">荣誉成果</span>
+                  <span className="dispatch-rubric">荣誉成果</span>
                   <span className="honor-medal-badge">{newsList[3].badgeStat}</span>
                   <span className="entry-date">{newsList[3].day} {newsList[3].month}</span>
                 </div>
@@ -869,13 +860,13 @@ export default function App() {
           </div>
         </section>
 
-        {/* ================= 4. SECTION 03: 专业拓扑与学术矩阵 (彻底抛弃8个死板文字框，改用交互式大案卷展台) ================= */}
+        {/* ================= 4. SECTION 03: 专业拓扑与学术矩阵 ================= */}
         <section className="arch-section sec-discipline-topology" id="sec-disciplines">
           <div className="arch-section-header">
             <div className="header-index-block">
               <span className="sec-num-large">03</span>
               <div className="sec-title-wrap">
-                <span className="sec-tag-pill">CURRICULUM MATRIX & TOPOLOGY</span>
+                <div className="sec-kicker">[ 03 / CURRICULUM MATRIX · 学科专业拓扑 ]</div>
                 <h2 className="sec-heading-serif">学科设置与专业矩阵</h2>
               </div>
             </div>
@@ -926,8 +917,8 @@ export default function App() {
 
               <div className="dossier-top-bar">
                 <div className="dossier-badge-cluster">
-                  <span className={`tag-pill ${currentProgram.tagClass}`}>
-                    {currentProgram.qualification}
+                  <span className="dossier-academic-rank">
+                    [ {currentProgram.qualification} ]
                   </span>
                   <span className="dossier-meta-pill">{currentProgram.degree}</span>
                   <span className="dossier-meta-pill">{currentProgram.duration}</span>
@@ -1024,7 +1015,7 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">04</span>
               <div className="sec-title-wrap">
-                <span className="sec-tag-pill">NATIONAL RESEARCH & FIELD SPECIMENS</span>
+                <div className="sec-kicker">[ 04 / RESEARCH REPOSITORY · 重点科研案卷 ]</div>
                 <h2 className="sec-heading-serif">学术研究与科研高地</h2>
               </div>
             </div>
@@ -1050,7 +1041,7 @@ export default function App() {
                     >
                       <div className="proj-idx-row">
                         <span className="proj-num">#{proj.id}</span>
-                        <span className={`tag-pill ${proj.categoryClass}`}>{proj.category}</span>
+                        <span className="proj-category-label">[ {proj.category} ]</span>
                       </div>
                       <div className="proj-code-line">
                         <span>{proj.code}</span>
@@ -1100,7 +1091,7 @@ export default function App() {
                     className="specimen-hero-image"
                   />
                   <div className="specimen-tag-badge-overlay">
-                    <span className="tag-pill tag-yellow">{selectedResearch.category}</span>
+                    <span className="specimen-category-stamp">[ {selectedResearch.category} ]</span>
                     <span className="specimen-code-tag">{selectedResearch.code}</span>
                   </div>
                   {/* 中国传统藏书印鉴 */}
@@ -1216,7 +1207,7 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">05</span>
               <div className="sec-title-wrap">
-                <span className="sec-tag-pill">COLLOQUIUM PASS & SCHOLAR FORUM</span>
+                <div className="sec-kicker">[ 05 / SCHOLAR FORUM · 文心讲堂与学术通报 ]</div>
                 <h2 className="sec-heading-serif">文心讲堂与学术通报</h2>
               </div>
             </div>
@@ -1232,7 +1223,7 @@ export default function App() {
               <div className="ticket-inner-deck">
                 <div className="ticket-top-badge-row">
                   <span className="ticket-star-id">★ PASS #01 · 旗舰讲坛</span>
-                  <span className="tag-pill tag-red">{lectureSeries[0].status}</span>
+                  <span className="ticket-status-pill">[ {lectureSeries[0].status} ]</span>
                 </div>
                 <div className="ticket-series-mono">{lectureSeries[0].series}</div>
                 <h3 className="ticket-headline-serif">{lectureSeries[0].title}</h3>
@@ -1269,7 +1260,7 @@ export default function App() {
               <div className="ticket-inner-deck">
                 <div className="ticket-top-badge-row">
                   <span className="ticket-star-id">PASS #02 · 课题汇报</span>
-                  <span className="tag-pill tag-yellow">{lectureSeries[1].status}</span>
+                  <span className="ticket-status-pill">[ {lectureSeries[1].status} ]</span>
                 </div>
                 <div className="ticket-series-mono">{lectureSeries[1].series}</div>
                 <h3 className="ticket-headline-serif">{lectureSeries[1].title}</h3>
@@ -1306,7 +1297,7 @@ export default function App() {
               <div className="ticket-inner-deck">
                 <div className="ticket-top-badge-row">
                   <span className="ticket-star-id">PASS #03 · 实验研讨</span>
-                  <span className="tag-pill tag-blue">{lectureSeries[2].status}</span>
+                  <span className="ticket-status-pill">[ {lectureSeries[2].status} ]</span>
                 </div>
                 <div className="ticket-series-mono">{lectureSeries[2].series}</div>
                 <h3 className="ticket-headline-serif">{lectureSeries[2].title}</h3>
@@ -1384,7 +1375,7 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">06</span>
               <div className="sec-title-wrap">
-                <span className="sec-tag-pill">TALENT CULTIVATION & ENROLLMENT</span>
+                <div className="sec-kicker">[ 06 / TALENT CULTIVATION · 招生与学业培养 ]</div>
                 <h2 className="sec-heading-serif">招生与学业培养</h2>
               </div>
             </div>
@@ -1418,8 +1409,7 @@ export default function App() {
             {/* 深色炭黑块（研究生） */}
             <div className="admissions-slab slab-charcoal">
               <div className="slab-top-deck">
-                <span className="slab-accent-badge">POSTGRADUATE & PHD</span>
-                <span className="slab-year-mono">2026 学年度</span>
+                <span className="slab-accent-badge">[ POSTGRADUATE & PHD · 2026 学年度 ]</span>
               </div>
               <h3 className="slab-heading-serif">研究生招考与拔尖学者培育通道</h3>
               <p className="slab-desc-p">
@@ -1457,8 +1447,7 @@ export default function App() {
             {/* 暖白精装块（本科生） */}
             <div className="admissions-slab slab-bonewhite">
               <div className="slab-top-deck">
-                <span className="tag-pill tag-blue">UNDERGRADUATE STUDIES</span>
-                <span className="slab-year-mono">2026 本科招生</span>
+                <span className="slab-accent-badge">[ UNDERGRADUATE · 2026 本科招生 ]</span>
               </div>
               <h3 className="slab-heading-serif">本科各专业招考与卓越培养计划</h3>
               <p className="slab-desc-p">
@@ -1642,8 +1631,8 @@ export default function App() {
             <div className="modal-body">
               <div className="modal-title-deck">
                 <div className="modal-badge-row">
-                  <span className={`tag-pill ${activeProgramModal.tagClass}`}>
-                    {activeProgramModal.qualification}
+                  <span className="modal-qualification-tag">
+                    [ {activeProgramModal.qualification} ]
                   </span>
                   <span className="modal-meta-pill">{activeProgramModal.degree}</span>
                   <span className="modal-meta-pill">{activeProgramModal.duration}</span>
@@ -1748,8 +1737,8 @@ export default function App() {
 
               <div className="modal-title-deck">
                 <div className="modal-badge-row">
-                  <span className={`tag-pill ${modalProject.categoryClass}`}>
-                    {modalProject.category}
+                  <span className="modal-category-tag">
+                    [ {modalProject.category} ]
                   </span>
                   <span className="modal-dept">{modalProject.dept}</span>
                 </div>
