@@ -291,8 +291,9 @@ export default function App() {
   const [modalProject, setModalProject] = useState<ResearchProject | null>(null)
   const [activePlate, setActivePlate] = useState<number | null>(null)
   const [activeProgramIndex, setActiveProgramIndex] = useState<number>(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
 
-  // 键盘 Esc 快捷键关闭弹窗
+  // 键盘快捷键响应
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setModalProject(null)
@@ -311,7 +312,7 @@ export default function App() {
 
   return (
     <div className="minimalist-editorial-root">
-      {/* 结构性背景基准四轴发丝线网格（完全与页面内容容器同宽、无缝对齐） */}
+      {/* 结构性背景基准四轴发丝网格（全宽100%铺展，响应式列折叠） */}
       <div className="grid-overlay" aria-hidden="true">
         <div className="grid-col" />
         <div className="grid-col" />
@@ -319,7 +320,7 @@ export default function App() {
         <div className="grid-col" />
       </div>
 
-      {/* 顶部极简学术刊物风格导览（Snap to Grid Columns） */}
+      {/* 顶部极简学术刊物风格导览（100% 全宽流体） */}
       <header className="masthead-container">
         <div className="masthead-left">
           <a href="#top" className="masthead-logo-link" title="山东工艺美术学院 人文艺术学院">
@@ -334,28 +335,52 @@ export default function App() {
           </span>
         </div>
 
-        <nav className="masthead-nav">
-          <a href="#sec-overview" className="nav-item">
+        <nav className={`masthead-nav ${mobileMenuOpen ? "is-open" : ""}`}>
+          <a
+            href="#sec-overview"
+            className="nav-item"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <span>01 文脉本体</span>
             <kbd className="nav-kbd">1</kbd>
           </a>
-          <a href="#sec-news" className="nav-item">
+          <a
+            href="#sec-news"
+            className="nav-item"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <span>02 学院动态</span>
             <kbd className="nav-kbd">2</kbd>
           </a>
-          <a href="#sec-disciplines" className="nav-item">
+          <a
+            href="#sec-disciplines"
+            className="nav-item"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <span>03 专业设置</span>
             <kbd className="nav-kbd">3</kbd>
           </a>
-          <a href="#sec-research" className="nav-item">
+          <a
+            href="#sec-research"
+            className="nav-item"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <span>04 重点科研</span>
             <kbd className="nav-kbd">4</kbd>
           </a>
-          <a href="#sec-lectures" className="nav-item">
+          <a
+            href="#sec-lectures"
+            className="nav-item"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <span>05 艺文讲坛</span>
             <kbd className="nav-kbd">5</kbd>
           </a>
-          <a href="#sec-admissions" className="nav-item">
+          <a
+            href="#sec-admissions"
+            className="nav-item"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <span>06 招考通道</span>
             <kbd className="nav-kbd">6</kbd>
           </a>
@@ -366,19 +391,26 @@ export default function App() {
             <span>2026 招考指南</span>
             <span className="btn-icon">↗</span>
           </a>
+          <button
+            className="btn-mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="切换导览菜单"
+          >
+            {mobileMenuOpen ? "✕" : "☰"}
+          </button>
         </div>
       </header>
 
-      {/* 页面主内容区域：所有 section 严格对齐 4 轴发丝网格 */}
+      {/* 页面主内容区域：100% 满宽，窄屏自适应响应 */}
       <main className="editorial-canvas" id="top">
-        {/* ================= SECTION 1: HERO OVERVIEW (图文大幅交叠与焦点展示) ================= */}
+        {/* ================= SECTION 1: HERO OVERVIEW (100% 全宽与窄屏自适应布局) ================= */}
         <section className="editorial-section sec-hero" id="sec-overview">
           {/* 背景典雅水印 */}
           <div className="hero-archival-watermark" aria-hidden="true">
             SHANDONG CRAFT & HUMANITIES · SUAD 2026
           </div>
 
-          {/* 首屏顶栏 Kicker（跨 4 列） */}
+          {/* 首屏顶栏 Kicker */}
           <div className="section-kicker-row">
             <div className="kicker-group">
               <span className="tag-pill tag-red">SHANDONG CRAFT & HUMANITIES</span>
@@ -389,9 +421,9 @@ export default function App() {
             </div>
           </div>
 
-          {/* 标语文字与大幅图片相互交叠的核心展区 */}
+          {/* 标语文字与大幅图片自适应舞台（宽屏侧翼透叠，窄屏规整纵列不挡字） */}
           <div className="hero-stage">
-            {/* 巨幅排版文字底座 */}
+            {/* 巨幅排版文字区 */}
             <div className="hero-typography-layer">
               <div className="hero-headline-row row-first">
                 <span className="headline-text">赓续文脉</span>
@@ -406,7 +438,7 @@ export default function App() {
                 <span className="headline-text">以设计赋能时代</span>
               </div>
 
-              {/* 核心学术宣言与学科锚点（对齐 Col 1-2） */}
+              {/* 核心学术宣言与学科锚点 */}
               <div className="hero-lead-deck">
                 <p className="hero-lead-text">
                   立足齐鲁深厚文化根脉，面向当代科技与社会发展命题。构筑融“理论研究、田野调查、策展实践、跨媒介创新”为一体的人文艺术教育与创新高地。
@@ -416,6 +448,7 @@ export default function App() {
                     className={`interactive-chip ${activePlate === 1 ? "chip-active" : ""}`}
                     onMouseEnter={() => setActivePlate(1)}
                     onMouseLeave={() => setActivePlate(null)}
+                    onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
                   >
                     [01 当代展陈空间]
                   </span>
@@ -423,6 +456,7 @@ export default function App() {
                     className={`interactive-chip ${activePlate === 2 ? "chip-active" : ""}`}
                     onMouseEnter={() => setActivePlate(2)}
                     onMouseLeave={() => setActivePlate(null)}
+                    onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
                   >
                     [02 齐鲁文献特藏]
                   </span>
@@ -430,6 +464,7 @@ export default function App() {
                     className={`interactive-chip ${activePlate === 3 ? "chip-active" : ""}`}
                     onMouseEnter={() => setActivePlate(3)}
                     onMouseLeave={() => setActivePlate(null)}
+                    onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
                   >
                     [03 黄河民艺田野]
                   </span>
@@ -437,15 +472,16 @@ export default function App() {
               </div>
             </div>
 
-            {/* 大幅图片交叠层（鼠标 hover 时焦点展示） */}
+            {/* 大幅画幅层（宽屏侧翼多层悬浮，窄屏转为规整展示带） */}
             <div className="hero-plates-container">
-              {/* Plate 1: 展陈空间（右上跨入字行，交互焦点） */}
+              {/* Plate 1: 展陈空间 */}
               <div
                 className={`hero-plate plate-exhibition ${activePlate === 1 ? "is-focused" : ""} ${
                   activePlate !== null && activePlate !== 1 ? "is-dimmed" : ""
                 }`}
                 onMouseEnter={() => setActivePlate(1)}
                 onMouseLeave={() => setActivePlate(null)}
+                onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
               >
                 <div className="plate-inner-wrap">
                   <img
@@ -466,13 +502,14 @@ export default function App() {
                 <div className="plate-reg-mark br">┘</div>
               </div>
 
-              {/* Plate 2: 文献特藏（中左穿插文字与留白） */}
+              {/* Plate 2: 文献特藏 */}
               <div
                 className={`hero-plate plate-library ${activePlate === 2 ? "is-focused" : ""} ${
                   activePlate !== null && activePlate !== 2 ? "is-dimmed" : ""
                 }`}
                 onMouseEnter={() => setActivePlate(2)}
                 onMouseLeave={() => setActivePlate(null)}
+                onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
               >
                 <div className="plate-inner-wrap">
                   <img
@@ -493,13 +530,14 @@ export default function App() {
                 <div className="plate-reg-mark br">┘</div>
               </div>
 
-              {/* Plate 3: 民艺田野（右下交叠字行与指标栏） */}
+              {/* Plate 3: 民艺田野 */}
               <div
                 className={`hero-plate plate-research ${activePlate === 3 ? "is-focused" : ""} ${
                   activePlate !== null && activePlate !== 3 ? "is-dimmed" : ""
                 }`}
                 onMouseEnter={() => setActivePlate(3)}
                 onMouseLeave={() => setActivePlate(null)}
+                onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
               >
                 <div className="plate-inner-wrap">
                   <img
@@ -522,7 +560,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* 严谨对齐四列发丝线的学术核心指标条（4 Cells strictly snap to 4 Grid Columns） */}
+          {/* 严谨扣合发丝网格的学术核心指标条（响应式 4列 -> 2列 -> 1列） */}
           <div className="hero-metrics-grid">
             <div className="metric-grid-cell col-1">
               <div className="metric-val-wrap">
@@ -558,7 +596,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ================= SECTION 2: 学院新闻与动态 (新增板块·报刊式非对称排版) ================= */}
+        {/* ================= SECTION 2: 学院新闻与动态 (报刊式非对称排版) ================= */}
         <section className="editorial-section sec-news" id="sec-news">
           <div className="section-title-strip">
             <div className="strip-left">
@@ -571,9 +609,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* 报刊式无框非对称排版：左边头条大幅影像，右边3篇发丝线通告行 */}
           <div className="news-press-grid">
-            {/* 左侧头条（对齐 Col 1-2，跨半屏） */}
+            {/* 左侧头条 */}
             <article className="news-lead-feature">
               <div className="lead-img-viewport">
                 <img src={newsList[0].image} alt={newsList[0].title} className="lead-img" />
@@ -597,7 +634,7 @@ export default function App() {
               </div>
             </article>
 
-            {/* 右侧速递清单（对齐 Col 3-4，水平发丝线分割） */}
+            {/* 右侧速递清单 */}
             <div className="news-dispatch-list">
               {newsList.slice(1).map((item, index) => (
                 <article key={item.id} className="news-list-row">
@@ -622,7 +659,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ================= SECTION 3: 学科设置与专业矩阵 (源自01/02的8大专业·4列建筑表格) ================= */}
+        {/* ================= SECTION 3: 学科设置与专业矩阵 (8大专业·响应式建筑表格) ================= */}
         <section className="editorial-section sec-disciplines" id="sec-disciplines">
           <div className="section-title-strip">
             <div className="strip-left">
@@ -635,7 +672,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* 4列 × 2行 无缝建筑索引表（完全扣合四列发丝线，杜绝浮动卡片） */}
           <div className="programs-table-grid">
             {academicPrograms.map((prog, idx) => (
               <div
@@ -685,9 +721,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* 全景水平双联展陈：左侧策展名录交互抽取，右侧全高档案实景标本 */}
           <div className="research-panoramic-split">
-            {/* 左侧项目名录（Col 1-2） */}
+            {/* 左侧项目名录 */}
             <div className="research-curation-list">
               <div className="list-mast-kicker">
                 <span>PROJECT DOSSIER SELECTION · 重点课题集刊</span>
@@ -720,7 +755,7 @@ export default function App() {
               })}
             </div>
 
-            {/* 右侧学术标本检视视窗（Col 3-4） */}
+            {/* 右侧学术标本检视视窗 */}
             <div className="research-specimen-viewer">
               <div className="viewer-specimen-frame">
                 <img
@@ -776,11 +811,9 @@ export default function App() {
             </div>
           </div>
 
-          {/* 票根式穿孔通行证布局 */}
           <div className="lectures-ticket-strip">
             {lectureSeries.map((lec) => (
               <div key={lec.no} className="lecture-ticket-card">
-                <div className="ticket-perforation-edge" />
                 <div className="ticket-body">
                   <div className="ticket-top-row">
                     <span className="ticket-pass-id">PASS #{lec.no}</span>
@@ -806,7 +839,7 @@ export default function App() {
             ))}
           </div>
 
-          {/* 学术委员会专家席（横向结构化名册，对齐四列网格） */}
+          {/* 学术委员会专家席 */}
           <div className="faculty-committee-strip">
             <div className="committee-header-col">
               <div className="committee-title">学术委员会与学科领航学者</div>
@@ -827,7 +860,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ================= SECTION 6: 招考通道与育人体系 (深黑深色块对比压轴) ================= */}
+        {/* ================= SECTION 6: 招考通道与育人体系 (双色对比色块压轴) ================= */}
         <section className="editorial-section sec-admissions" id="sec-admissions">
           <div className="section-title-strip">
             <div className="strip-left">
@@ -840,9 +873,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* 对比色块布局：左侧深黑炭黑高级块（研究生），右侧暖骨白精装块（本科生） */}
           <div className="admissions-contrast-grid">
-            {/* 深色炭黑块（研究生教育） */}
+            {/* 深色炭黑块（研究生） */}
             <div className="admissions-card card-dark">
               <div className="card-top-deck">
                 <span className="card-badge badge-dark-accent">POSTGRADUATE & PHD</span>
@@ -881,7 +913,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* 暖白精装块（本科生教育） */}
+            {/* 暖白精装块（本科生） */}
             <div className="admissions-card card-bone">
               <div className="card-top-deck">
                 <span className="tag-pill tag-blue">UNDERGRADUATE STUDIES</span>
@@ -921,7 +953,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* 全宽 4 列咨询横幅（Snap to Grid Lines） */}
+          {/* 全宽咨询横幅 */}
           <div className="admissions-hotline-strip">
             <div className="hotline-cell">
               <span className="hl-kicker">招考咨询热线</span>
@@ -952,7 +984,7 @@ export default function App() {
         </section>
       </main>
 
-      {/* ================= 官方严谨学术四列页脚 (Snap to Grid Columns) ================= */}
+      {/* ================= 官方严谨学术四列页脚 (100% 全宽) ================= */}
       <footer className="editorial-footer">
         <div className="footer-container">
           <div className="footer-col col-brand">
@@ -1025,7 +1057,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* 弹窗：科研档案详细卷宗（点击任意课题调取） */}
+      {/* 弹窗：科研档案详细卷宗 */}
       {modalProject && (
         <div className="curatorial-modal-backdrop" onClick={() => setModalProject(null)}>
           <div
