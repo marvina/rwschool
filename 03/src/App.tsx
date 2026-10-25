@@ -604,39 +604,9 @@ export default function App() {
             </div>
           </div>
 
-          {/* 三列典藏排版主体 (Left Editorial Flank · Center Architectural Anchor · Right Editorial Flank) */}
-          <div className="hero-tripartite-spread">
-            {/* 左翼：文脉传承与史论奠基 (占第 1 至 4 列) */}
-            <div className="hero-flank hero-flank-heritage">
-              <div className="flank-kicker-row">
-                <span className="flank-rubric">[ 01 / 文脉溯源 · ROOTS ]</span>
-              </div>
-              <h1 className="flank-title-serif">
-                <span className="title-line">赓续文脉</span>
-                <span className="title-line">构筑高地</span>
-              </h1>
-              <p className="flank-prose">
-                承袭齐鲁千年造物哲思与学术文脉，立足软科 A+ 顶尖学科与国家级一流专业建设点。深耕设计史论、古代造物制度与黄河民艺抢救性测绘，建构中国自主设计理论学术话语体系。
-              </p>
-              <div className="flank-action-row">
-                <a href="#sec-disciplines" className="flank-action-btn">
-                  <span>探索专业拓扑与文脉谱系</span>
-                  <span className="action-circle-arrow">→</span>
-                </a>
-              </div>
-              <div className="flank-archival-stamp">
-                <div className="archival-seal-block" title="齐鲁造物印鉴">
-                  <span>齊魯</span>
-                  <span>造物</span>
-                </div>
-                <div className="stamp-meta">
-                  <span className="stamp-code">ARCHIVE NO. SDADA-DES-1305</span>
-                  <span className="stamp-desc">国家一流本科专业建设点档案</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 中轴：单幅庄严建筑焦点画幅与平滑典藏切换 (占第 5 至 8 列) */}
+          {/* 非对称高定学术画卷 (左侧巨幅建筑展陈画卷 · 右侧庄严学术篇章) */}
+          <div className="hero-asymmetric-spread">
+            {/* 左侧：巨幅建筑焦点画卷与平滑典藏切换 (占第 1 至 7 列，延伸至左边缘) */}
             <div className="hero-anchor-gallery">
               <div className="anchor-frame">
                 <img
@@ -702,28 +672,47 @@ export default function App() {
               </div>
             </div>
 
-            {/* 右翼：当代使命与英才引航 (占第 9 至 12 列) */}
+            {/* 右侧：当代使命与学术英才引航主章 (占第 8 至 12 列) */}
             <div className="hero-flank hero-flank-vision">
               <div className="flank-kicker-row">
-                <span className="flank-rubric">[ 02 / 时代引航 · VISION ]</span>
+                <span className="flank-rubric">[ 01 / 时代引航 · 学院愿景与学术文脉 · VISION & HERITAGE ]</span>
               </div>
-              <h2 className="flank-title-serif">
+              <h1 className="flank-title-serif">
                 <span className="title-line">以人文涵养艺术</span>
                 <span className="title-line">以设计赋能时代</span>
-              </h2>
+              </h1>
               <p className="flank-prose">
-                面向国家文化战略与前沿社会创新命题，汇聚国务院特贴专家、全国美展评委与国家级教学名师。深化“史论考据、田野测绘、策展实践与跨媒介实验”拔尖育人体系，培养引领未来的领军学人。
+                承袭齐鲁千年造物哲思与学术文脉，立足软科 A+ 顶尖学科与国家级一流专业建设点。深耕设计史论、古代造物制度与黄河民艺抢救性测绘，建构中国自主设计理论学术话语体系。面向国家文化战略与前沿社会创新命题，深化拔尖育人体系，培养引领未来的领军学人。
               </p>
               <div className="flank-action-row">
-                <a href="#sec-admissions" className="flank-action-btn">
-                  <span>查阅 2026 招考与拔尖培养指南</span>
+                <a href="#sec-disciplines" className="flank-action-btn">
+                  <span>探索专业拓扑与文脉谱系</span>
                   <span className="action-circle-arrow">→</span>
                 </a>
+                <a href="#sec-admissions" className="flank-action-btn secondary">
+                  <span>2026 招考指南</span>
+                  <span className="action-circle-arrow">↗</span>
+                </a>
               </div>
-              <div className="flank-accolade-card">
-                <div className="accolade-rank-strong">软科顶尖学科 A+</div>
-                <div className="accolade-desc-mono">
-                  全国排名前列 · 艺术设计学与艺术史论双双入选国家级一流本科专业
+
+              {/* 权威认证与印鉴双重背书 */}
+              <div className="flank-cultural-endorsement">
+                <div className="flank-archival-stamp">
+                  <div className="archival-seal-block" title="齐鲁造物印鉴">
+                    <span>齊魯</span>
+                    <span>造物</span>
+                  </div>
+                  <div className="stamp-meta">
+                    <span className="stamp-code">ARCHIVE NO. SDADA-DES-1305</span>
+                    <span className="stamp-desc">国家一流本科专业建设点档案</span>
+                  </div>
+                </div>
+
+                <div className="flank-accolade-card">
+                  <div className="accolade-rank-strong">软科顶尖学科 A+</div>
+                  <div className="accolade-desc-mono">
+                    全国排名前列 · 艺术设计学与艺术史论双双入选国家级一流本科专业
+                  </div>
                 </div>
               </div>
             </div>

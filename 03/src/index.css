@@ -421,190 +421,27 @@ body {
   color: var(--text-muted);
 }
 
-/* 三联体主体画卷：左翼文脉 + 中轴画幅 + 右翼使命 */
-.hero-tripartite-spread {
+/* 非对称高定画卷：左侧画幅延伸至左边缘 + 右侧学术主章 */
+.hero-asymmetric-spread {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: clamp(24px, 3vw, 48px);
-  align-items: start;
-}
-
-/* 左翼与右翼通用 */
-.hero-flank {
-  display: flex;
-  flex-direction: column;
-}
-
-.hero-flank-heritage {
-  grid-column: span 4;
-}
-
-.hero-flank-vision {
-  grid-column: span 4;
-}
-
-.flank-kicker-row {
-  margin-bottom: 14px;
-}
-
-.flank-rubric {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--text-secondary);
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.flank-title-serif {
-  font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 3.4vw, 3.8rem);
-  font-weight: 700;
-  line-height: 1.14;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.title-line {
-  display: block;
-}
-
-.flank-prose {
-  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
-  line-height: 1.85;
-  color: var(--text-secondary);
-  margin-top: clamp(16px, 2vw, 24px);
-  text-align: justify;
-}
-
-.flank-action-row {
-  margin-top: clamp(20px, 2.5vw, 32px);
-}
-
-.flank-action-btn {
-  display: inline-flex;
+  gap: clamp(28px, 4vw, 56px);
   align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
-  transition: color 0.2s ease;
 }
 
-.flank-action-btn:hover {
-  color: var(--text-secondary);
-}
-
-.action-circle-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  line-height: 1;
-  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
-}
-
-.flank-action-btn:hover .action-circle-arrow {
-  transform: translateX(4px);
-  background-color: var(--text-primary);
-  color: #FFFFFF;
-}
-
-/* 左翼典藏印鉴 */
-.flank-archival-stamp {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: clamp(28px, 3.5vw, 44px);
-  padding-top: 20px;
-}
-
-.archival-seal-block {
-  width: 44px;
-  height: 44px;
-  background-color: #B83A2E;
-  color: #FAF9F6;
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 0.875rem;
-  line-height: 1.1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  padding: 4px;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(184, 58, 46, 0.25);
-  flex-shrink: 0;
-  letter-spacing: 0;
-}
-
-.stamp-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.stamp-code {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-}
-
-.stamp-desc {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-/* 右翼学术评级卡 */
-.flank-accolade-card {
-  margin-top: clamp(28px, 3.5vw, 44px);
-  padding: 16px 20px;
-  background-color: rgba(20, 20, 22, 0.03);
-  border-left: 2px solid var(--text-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.accolade-rank-strong {
-  font-family: var(--font-serif);
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: 0.04em;
-}
-
-.accolade-desc-mono {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-}
-
-/* 中轴：单幅庄严焦点画幅 */
+/* 左侧：巨幅建筑焦点画卷 (占第 1 至 7 列，延伸至左边缘) */
 .hero-anchor-gallery {
-  grid-column: span 4;
+  grid-column: 1 / span 7;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .anchor-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background-color: #E8E7E2;
   box-shadow: 0 16px 44px rgba(20, 20, 22, 0.08);
@@ -654,7 +491,7 @@ body {
 .anchor-plate-tabs {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -699,6 +536,190 @@ body {
 .tab-divider {
   color: var(--border-hairline);
   font-size: 0.75rem;
+}
+
+/* 右侧：学术篇章与英才引航 (占第 8 至 12 列) */
+.hero-flank-vision {
+  grid-column: 8 / span 5;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flank-kicker-row {
+  margin-bottom: 14px;
+}
+
+.flank-rubric {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.flank-title-serif {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.4vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title-line {
+  display: block;
+}
+
+.flank-prose {
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-top: clamp(16px, 2vw, 24px);
+  text-align: justify;
+}
+
+.flank-action-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: clamp(20px, 2.5vw, 32px);
+}
+
+.flank-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.flank-action-btn:hover {
+  color: var(--text-secondary);
+}
+
+.flank-action-btn.secondary {
+  color: var(--text-secondary);
+}
+
+.flank-action-btn.secondary .action-circle-arrow {
+  border-color: var(--border-hairline);
+}
+
+.flank-action-btn.secondary:hover {
+  color: var(--text-primary);
+}
+
+.flank-action-btn.secondary:hover .action-circle-arrow {
+  border-color: var(--text-primary);
+}
+
+.action-circle-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.flank-action-btn:hover .action-circle-arrow {
+  transform: translateX(4px);
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+}
+
+/* 权威认证条章：齐鲁造物印章 + 软科顶尖学科 */
+.flank-cultural-endorsement {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: clamp(24px, 3vw, 36px);
+  flex-wrap: wrap;
+}
+
+.flank-archival-stamp {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.archival-seal-block {
+  width: 44px;
+  height: 44px;
+  background-color: #B83A2E;
+  color: #FAF9F6;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  padding: 4px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(184, 58, 46, 0.25);
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+.stamp-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stamp-code {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.stamp-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.flank-accolade-card {
+  padding: 12px 18px;
+  background-color: rgba(20, 20, 22, 0.03);
+  border-left: 2px solid var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.accolade-rank-strong {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.accolade-desc-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
 /* 四列学术坐标定位标尺（直接落于 12 列垂直线之间，零横向网格割裂） */
@@ -2883,25 +2904,23 @@ body {
     display: block;
   }
 
-  /* Hero tripartite adjustments */
-  .hero-tripartite-spread {
+  /* Hero asymmetric adjustments */
+  .hero-asymmetric-spread {
     grid-template-columns: repeat(12, 1fr);
     gap: 36px;
   }
 
-  .hero-flank-heritage {
-    grid-column: span 6;
+  .hero-anchor-gallery {
+    grid-column: span 12;
+    order: 2;
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
   }
 
   .hero-flank-vision {
-    grid-column: span 6;
-  }
-
-  .hero-anchor-gallery {
     grid-column: span 12;
-    order: 3;
-    max-width: 640px;
-    margin: 0 auto;
+    order: 1;
     width: 100%;
   }
 
@@ -3015,29 +3034,30 @@ body {
     opacity: 0.75;
   }
 
-  .hero-tripartite-spread {
+  .hero-asymmetric-spread {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-  }
-
-  .hero-flank-heritage,
-  .hero-flank-vision,
-  .hero-anchor-gallery {
-    width: 100%;
-  }
-
-  .hero-flank-heritage {
-    order: 1;
+    gap: 32px;
   }
 
   .hero-anchor-gallery {
     order: 2;
-    max-width: 100%;
+    width: 100%;
   }
 
   .hero-flank-vision {
-    order: 3;
+    order: 1;
+    width: 100%;
+  }
+
+  .flank-cultural-endorsement {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .flank-accolade-card {
+    width: 100%;
   }
 
   .flank-title-serif {
