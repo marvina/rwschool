@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react"
 
-// 精选学术展陈、文献特藏与田野考察影像
+// 精选学术展陈、文献特藏与田野考察影像（每处独一无二，绝不重复）
 const curatedAssets = {
   heroExhibition: "./hero-exhibition.jpg",
   fieldLibrary: "./field-library.jpg",
   folkResearch: "./research-folk-art.jpg",
+  newsSymposium: "./news-symposium.jpg",
+  newsExhibition: "./news-exhibition.jpg",
+  researchRural: "./research-rural.jpg",
+  researchArchaeology: "./research-archaeology.jpg",
   installation: "https://images.unsplash.com/photo-1541753866388-0b3c701627d3?auto=format&fit=crop&w=1200&q=82",
   digitalMedia: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=82",
 }
@@ -236,7 +240,7 @@ const newsList: NewsItem[] = [
     month: "03月",
     title: "学院召开2025年学科建设与拔尖创新人才培养推进会",
     excerpt: "全面梳理一流学科与核心课程建设进展，深化产教协同与科教融汇，强化学术创新与成果转化，扎实推进学院内涵式高质量发展。",
-    image: curatedAssets.heroExhibition,
+    image: curatedAssets.newsSymposium,
     isLead: true,
     quote: "以一流学科建设为引擎，深化科教融汇与拔尖人才培养新范式。",
   },
@@ -258,7 +262,7 @@ const newsList: NewsItem[] = [
     month: "03月",
     title: "“在场之思”2025届人文与艺术综合实践教学汇报展启幕",
     excerpt: "集中呈现跨学科田野考察、文献整理、策展实践与跨媒介设计的阶段性教学与拔尖育人成果。",
-    image: curatedAssets.fieldLibrary,
+    image: curatedAssets.newsExhibition,
   },
   {
     id: "news-04",
@@ -320,7 +324,7 @@ const researchProjects: ResearchProject[] = [
     role: "教育部人文社会科学重点研究基地重大成果",
     medium: "文献考据、出土实物拓本重构、先秦至明清造物谱系图志",
     summary: "系统梳理传世文献与考古新发现，深度剖析中华器物文明背后的礼制规约、造物审美演变及其对当代生活方式设计的启示。",
-    image: curatedAssets.fieldLibrary,
+    image: curatedAssets.researchArchaeology,
     fundInfo: "教育部重点研究基地重大攻关项目资助",
     targetMilestone: "结集三卷本《中国造物器度考》并开展学术研讨巡展",
     coordinates: "36.56°N, 116.79°E · 齐鲁文化文献特藏馆",
@@ -337,7 +341,7 @@ const researchProjects: ResearchProject[] = [
     role: "第十四届全国美术作品展览设计艺术展入选成果",
     medium: "在地建筑构件活化、乡土公共空间改造方案、社会美育参与模型",
     summary: "拒绝大拆大建式旅游景观开发，将设计介入转化为乡村社区日常交往仪式的激活剂，探索手工艺与现代设计协同赋能的乡村美育新范式。",
-    image: curatedAssets.heroExhibition,
+    image: curatedAssets.researchRural,
     fundInfo: "文化和旅游部与中国美协重点支持示范成果",
     targetMilestone: "建立齐鲁沿黄九县区乡村美育工作站常态示范点",
     coordinates: "36.42°N, 117.15°E · 泰山乡村美育实验驻地",
@@ -825,7 +829,7 @@ export default function App() {
                 <h4 className="entry-title">{newsList[2].title}</h4>
                 <div className="entry-thumb-deck">
                   <img
-                    src={curatedAssets.fieldLibrary}
+                    src={curatedAssets.newsExhibition}
                     alt="教学展览现场"
                     className="entry-mini-thumbnail"
                   />
