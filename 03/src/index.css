@@ -628,29 +628,157 @@ body {
   transform: scale(0.97);
 }
 
-/* 4-Cell Rigid Academic Metrics Bar (3 cols each in 12-col grid) */
+/* ==========================================================================
+   ACADEMIC METRICS BAR (局部变化：4:2:3:3 非对称结构指标矩阵)
+   ========================================================================== */
 .hero-metrics-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #FFFFFF;
   width: 100%;
 }
 
 .metric-grid-cell {
-  padding: 26px 22px;
+  padding: 24px 22px;
   border-right: 1px solid var(--grid-line-color);
   display: flex;
   flex-direction: column;
 }
 
-.metric-grid-cell.col-1 { grid-column: 1 / 4; }
-.metric-grid-cell.col-2 { grid-column: 4 / 7; }
-.metric-grid-cell.col-3 { grid-column: 7 / 10; }
-.metric-grid-cell.col-4 {
+/* 顶尖主锚点（占 1-4 列，有温润纸墨质感与持续领跑徽标） */
+.metric-lead-cell {
+  grid-column: 1 / 5;
+  border-left: 3px solid var(--pastel-red-text);
+  background: rgba(158, 42, 43, 0.025);
+}
+
+.metric-pill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.metric-rank-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pastel-red-text);
+  letter-spacing: 0.04em;
+}
+
+.live-lead-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--pastel-green-text);
+  background: var(--pastel-green-bg);
+  padding: 2px 6px;
+  border: 1px solid rgba(45, 90, 39, 0.2);
+  border-radius: 2px;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--pastel-green-text);
+  display: inline-block;
+  animation: livePulse 2s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.highlight-num {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 2.8vw, 42px);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* 结构柱指标（占 5-6 列，纵向紧凑立柱） */
+.metric-compact-pillar {
+  grid-column: 5 / 7;
+  padding: 24px 18px;
+  background-color: #FAF9F6;
+}
+
+.metric-top-num-stack {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.metric-top-num-stack .metric-strong {
+  font-size: clamp(30px, 3vw, 40px);
+}
+
+.metric-unit-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.metric-stacked-tags {
+  margin-bottom: 6px;
+}
+
+.metric-pillar-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* 师资实力指标（占 7-9 列，含微型进度标尺刻度） */
+.metric-faculty-meter {
+  grid-column: 7 / 10;
+}
+
+.metric-mini-meter {
+  width: 100%;
+  height: 4px;
+  background: rgba(20, 20, 22, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0 10px;
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--text-primary);
+}
+
+/* 科研集群指标（占 10-12 列，含多维度课题标签簇） */
+.metric-research-cluster {
   grid-column: 10 / 13;
   border-right: none;
+}
+
+.metric-tag-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.micro-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  background: rgba(20, 20, 22, 0.04);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
 }
 
 .metric-val-wrap {
@@ -679,7 +807,7 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 2: 学院新闻与动态 (12列黄金比率 7:5 排版)
+   SECTION 2: 学院新闻与动态 (局部形态差异化)
    ========================================================================== */
 .news-press-grid {
   display: grid;
@@ -768,7 +896,31 @@ body {
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+/* 引言引文带 */
+.lead-quote-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(20, 20, 22, 0.025);
+  border-left: 2px solid var(--text-primary);
+  margin-bottom: 18px;
+  font-family: var(--font-serif);
+}
+
+.quote-mark {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--pastel-red-text);
+}
+
+.quote-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
 .lead-action-row {
@@ -790,7 +942,7 @@ body {
   gap: 10px;
 }
 
-/* 右侧速递清单（占 8 至 12 列，41.7%） */
+/* 右侧速递清单（占 8 至 12 列，三种完全不同的卡片微形态） */
 .news-dispatch-list {
   grid-column: 8 / 13;
   padding-left: 32px;
@@ -799,7 +951,7 @@ body {
 }
 
 .news-list-row {
-  padding: 24px 0;
+  padding: 22px 0;
   border-bottom: 1px solid var(--grid-line-color);
   display: grid;
   grid-template-columns: 60px 1fr 20px;
@@ -815,6 +967,62 @@ body {
 
 .news-list-row:hover {
   background-color: rgba(20, 20, 22, 0.015);
+}
+
+/* Dispatch 1 特色讲座柔和底色 */
+.row-lecture-tinted {
+  background-color: rgba(180, 83, 9, 0.025);
+  padding-left: 12px;
+  padding-right: 12px;
+  border-left: 2px solid var(--pastel-yellow-text);
+  margin-top: 4px;
+}
+
+.speaker-inline-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--pastel-yellow-text);
+  background: var(--pastel-yellow-bg);
+  padding: 2px 6px;
+  border: 1px solid rgba(120, 89, 15, 0.2);
+}
+
+/* Dispatch 2 教学展览缩略图视窗 */
+.row-exhibition-card .row-thumb-deck {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 6px;
+}
+
+.row-mini-thumb {
+  width: 72px;
+  height: 48px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-hairline);
+  background-color: #E2DFD8;
+}
+
+.row-excerpt-clamp {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Dispatch 3 荣誉成果国家大奖徽章 */
+.honor-pill-gold {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #854D0E;
+  background: #FEF9C3;
+  padding: 2px 6px;
+  border: 1px solid rgba(133, 77, 14, 0.25);
 }
 
 .row-date-badge {
@@ -889,10 +1097,9 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 3: 学科设置与专业矩阵 (12列非对称层级排版 6:6 + 4:4:4 + 4:4:4)
-   A+ 顶尖学科与一流学术主干更开阔，下方专业规整平铺
+   SECTION 3: 学科设置与专业矩阵 (Bento 非对称矩阵与交互抽屉)
    ========================================================================== */
-.programs-table-grid {
+.bento-disciplines-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   border-top: 1px solid var(--grid-line-color);
@@ -902,7 +1109,7 @@ body {
 }
 
 .program-table-cell {
-  padding: 30px 26px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -910,50 +1117,193 @@ body {
   position: relative;
 }
 
-/* 第一行：两所国家一流顶尖专业（各占 6 列，视野广阔） */
-.cell-item-1 {
-  grid-column: 1 / 7;
+/* 旗舰卡片 01: 艺术设计学（占 1 至 7 列，7列主场） */
+.bento-hero-program {
+  grid-column: 1 / 8;
+  background-color: #FFFDF9;
   border-right: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
-  background-color: #FCFAF6;
+  padding: 34px 30px;
 }
 
-.cell-item-2 {
-  grid-column: 7 / 13;
+.cell-no-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flagship-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pastel-red-text);
+}
+
+.cell-degree-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.sep-divider {
+  color: var(--border-hairline);
+}
+
+.code-text {
+  color: var(--text-secondary);
+}
+
+/* 可交互试听课程胶囊 */
+.bento-courses-interactive {
+  margin-top: 18px;
+  padding: 14px;
+  background: rgba(20, 20, 22, 0.03);
+  border: 1px solid var(--border-hairline);
+  margin-bottom: 16px;
+}
+
+.courses-interactive-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.interactive-course-pill-deck {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.course-pill-btn {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  padding: 3px 8px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.course-pill-btn:hover,
+.course-pill-btn.is-active {
+  background: var(--text-primary);
+  color: #FFFFFF;
+  border-color: var(--text-primary);
+}
+
+.course-explainer-box {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(20, 20, 22, 0.1);
+  display: flex;
+  gap: 6px;
+}
+
+.explainer-bullet {
+  color: var(--pastel-red-text);
+  font-weight: 700;
+}
+
+/* 顶尖主干 02: 艺术史论（占 8 至 12 列，5列典雅典籍质感） */
+.bento-theory-program {
+  grid-column: 8 / 13;
   border-bottom: 1px solid var(--grid-line-color);
+  padding: 34px 28px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 第二行：三个国家级/特色专业（各占 4 列） */
-.cell-item-3 {
+.watermark-seal-bg {
+  position: absolute;
+  right: 18px;
+  top: 20px;
+  font-family: var(--font-serif);
+  font-size: 54px;
+  font-weight: 900;
+  color: rgba(158, 42, 43, 0.038);
+  border: 3px solid rgba(158, 42, 43, 0.04);
+  padding: 4px 8px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.1em;
+}
+
+/* 第二行：5 : 4 : 3 非对称三联 */
+.cell-bento-mgt {
+  grid-column: 1 / 6;
+  border-right: 1px solid var(--grid-line-color);
+  border-bottom: 1px solid var(--grid-line-color);
+  padding: 26px 24px;
+}
+
+.cell-industry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.industry-pill {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  background: rgba(27, 73, 101, 0.05);
+  color: var(--pastel-blue-text);
+  border: 1px solid rgba(27, 73, 101, 0.15);
+}
+
+.cell-bento-fa {
+  grid-column: 6 / 10;
+  border-right: 1px solid var(--grid-line-color);
+  border-bottom: 1px solid var(--grid-line-color);
+  padding: 26px 24px;
+}
+
+.cell-bento-ich {
+  grid-column: 10 / 13;
+  border-bottom: 1px solid var(--grid-line-color);
+  padding: 26px 22px;
+  background: #FCFCF9;
+}
+
+.ich-field-badge {
+  margin-top: auto;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--pastel-green-text);
+  background: var(--pastel-green-bg);
+  padding: 4px 8px;
+  border: 1px solid rgba(45, 90, 39, 0.2);
+  margin-bottom: 14px;
+}
+
+/* 第三行：4 : 4 : 4 实验室与教研室 */
+.cell-bento-con {
   grid-column: 1 / 5;
   border-right: 1px solid var(--grid-line-color);
-  border-bottom: 1px solid var(--grid-line-color);
+  padding: 26px 22px;
 }
 
-.cell-item-4 {
+.cell-bento-adv {
   grid-column: 5 / 9;
   border-right: 1px solid var(--grid-line-color);
-  border-bottom: 1px solid var(--grid-line-color);
+  padding: 26px 22px;
 }
 
-.cell-item-5 {
+.cell-bento-pub {
   grid-column: 9 / 13;
-  border-bottom: 1px solid var(--grid-line-color);
-}
-
-/* 第三行：三个省一流建设点与公共教研室（各占 4 列） */
-.cell-item-6 {
-  grid-column: 1 / 5;
-  border-right: 1px solid var(--grid-line-color);
-}
-
-.cell-item-7 {
-  grid-column: 5 / 9;
-  border-right: 1px solid var(--grid-line-color);
-}
-
-.cell-item-8 {
-  grid-column: 9 / 13;
+  padding: 26px 22px;
 }
 
 .program-table-cell:hover,
@@ -988,8 +1338,11 @@ body {
   margin-bottom: 3px;
 }
 
-.cell-item-1 .cell-prog-name,
-.cell-item-2 .cell-prog-name {
+.bento-hero-program .cell-prog-name {
+  font-size: 24px;
+}
+
+.bento-theory-program .cell-prog-name {
   font-size: 22px;
 }
 
@@ -1050,6 +1403,7 @@ body {
   font-family: var(--font-mono);
   font-weight: 600;
   color: var(--text-primary);
+  margin-top: auto;
 }
 
 .cell-arrow {
@@ -1061,8 +1415,7 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 4: 重点科研基地与学术高地 (12列 5:7 策展双联视窗)
-   与新闻板块 7:5 形成美妙的镜像反差 Cadence
+   SECTION 4: 重点科研基地与学术高地 (三重视角视窗切换)
    ========================================================================== */
 .research-panoramic-split {
   display: grid;
@@ -1156,12 +1509,43 @@ body {
   color: var(--pastel-red-text);
 }
 
-/* 右侧标本检视视窗（占 6 至 12 列，58.3% 舒展大图） */
+/* 右侧标本检视视窗（占 6 至 12 列，58.3% 舒展大图与三态 HUD） */
 .research-specimen-viewer {
   grid-column: 6 / 13;
-  padding: 32px 36px;
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
+}
+
+/* 三态 HUD 切换栏 */
+.specimen-hud-switch-bar {
+  display: flex;
+  border-bottom: 1px solid var(--grid-line-color);
+  margin-bottom: 18px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hud-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.hud-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.hud-tab-btn.is-active {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
 }
 
 .viewer-specimen-frame {
@@ -1199,6 +1583,27 @@ body {
   border-radius: 2px;
 }
 
+/* 传统金石印鉴 */
+.specimen-seal-mark {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #8C2222;
+  color: #8C2222;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  letter-spacing: 2px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+}
+
 .specimen-coordinates {
   position: absolute;
   bottom: 0;
@@ -1211,6 +1616,125 @@ body {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.04em;
+}
+
+/* 指标表格视窗 */
+.viewer-metrics-table-panel {
+  border: 1px solid var(--border-hairline);
+  margin-bottom: 20px;
+  background: #FAF9F6;
+}
+
+.metrics-panel-kicker {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-hairline);
+  background: rgba(20, 20, 22, 0.02);
+}
+
+.metrics-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.metrics-spec-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.metrics-spec-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tb-label {
+  width: 130px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border-right: 1px solid var(--border-hairline);
+}
+
+.tb-val {
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* 田野测绘雷达视窗 */
+.viewer-map-network-panel {
+  border: 1px solid var(--border-hairline);
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #FAF9F6;
+}
+
+.map-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.map-badge {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.map-stat {
+  color: var(--pastel-green-text);
+  font-weight: 600;
+}
+
+.map-coordinates-radar {
+  position: relative;
+  height: 150px;
+  background: rgba(20, 20, 22, 0.03);
+  border: 1px dashed var(--border-hairline);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.radar-grid-line {
+  position: absolute;
+  background: rgba(20, 20, 22, 0.06);
+}
+.radar-grid-line.h1 { top: 33%; left: 0; right: 0; height: 1px; }
+.radar-grid-line.h2 { top: 66%; left: 0; right: 0; height: 1px; }
+.radar-grid-line.v1 { left: 33%; top: 0; bottom: 0; width: 1px; }
+.radar-grid-line.v2 { left: 66%; top: 0; bottom: 0; width: 1px; }
+
+.radar-station-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-primary);
+}
+
+.node-ping {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pastel-red-text);
+  box-shadow: 0 0 0 3px rgba(158, 42, 43, 0.2);
+}
+
+.station-jinan { top: 18%; left: 8%; }
+.station-weifang { top: 38%; left: 54%; }
+.station-heze { top: 66%; left: 16%; }
+.station-zibo { top: 70%; left: 60%; }
+
+.map-panel-footer {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
 }
 
 .viewer-data-deck {
@@ -1302,7 +1826,7 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 5: 文心讲堂与学术通报 (12列 4:4:4 票根 + 3:3:3:3 委员会)
+   SECTION 5: 文心讲堂与学术通报 (5:4:3 票根 + 两层名家学术席)
    ========================================================================== */
 .lectures-ticket-strip {
   display: grid;
@@ -1315,16 +1839,26 @@ body {
 }
 
 .lecture-ticket-card {
-  border-right: 2px dashed rgba(20, 20, 22, 0.16);
   padding: 30px 24px;
   display: flex;
   flex-direction: column;
 }
 
-.lecture-ticket-card:nth-child(1) { grid-column: 1 / 5; }
-.lecture-ticket-card:nth-child(2) { grid-column: 5 / 9; }
-.lecture-ticket-card:nth-child(3) {
-  grid-column: 9 / 13;
+/* 5:4:3 局部不对称比例 */
+.ticket-vip-card {
+  grid-column: 1 / 6;
+  border-right: 2px dashed rgba(20, 20, 22, 0.16);
+  border-left: 3px solid var(--pastel-red-text);
+  background: #FFFDFB;
+}
+
+.ticket-academic-card {
+  grid-column: 6 / 10;
+  border-right: 2px dashed rgba(20, 20, 22, 0.16);
+}
+
+.ticket-lab-card {
+  grid-column: 10 / 13;
   border-right: none;
 }
 
@@ -1333,6 +1867,14 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+}
+
+.ticket-vip-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pastel-red-text);
+  font-weight: 700;
 }
 
 .ticket-pass-id {
@@ -1366,6 +1908,10 @@ body {
   margin-bottom: 18px;
 }
 
+.speaker-block-vip {
+  border-left-color: var(--pastel-red-text) !important;
+}
+
 .speaker-name {
   font-size: 14px;
   font-weight: 700;
@@ -1395,12 +1941,44 @@ body {
   color: var(--text-primary);
 }
 
+.meta-loc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
 .meta-loc {
   color: var(--text-muted);
   font-size: 10px;
 }
 
-/* 学术委员会专家席 (3 cols each in 12-col grid) */
+.meta-cap {
+  font-size: 10px;
+  color: var(--pastel-red-text);
+  font-weight: 600;
+}
+
+.btn-ticket-reserve {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--text-primary);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-ticket-reserve:hover {
+  background: var(--text-primary);
+  color: #FFFFFF;
+}
+
+/* 学术委员会分级专家席 */
 .faculty-committee-strip {
   margin-top: 40px;
   border: 1px solid var(--grid-line-color);
@@ -1432,64 +2010,206 @@ body {
   color: var(--text-muted);
 }
 
-.committee-grid {
+/* 第一层级：名誉院长与学术导师（两栏阔版 6:6） */
+.committee-tier-senior {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--grid-line-color);
 }
 
-.committee-cell {
-  padding: 24px 20px;
+.senior-scholar-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.senior-scholar-card:first-child {
+  border-right: 1px solid var(--grid-line-color);
+}
+
+.senior-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.senior-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pastel-red-text);
+}
+
+.senior-idx {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.senior-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.senior-spec {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.senior-monograph {
+  font-size: 11px;
+  color: var(--pastel-blue-text);
+  background: var(--pastel-blue-bg);
+  padding: 4px 8px;
+  border: 1px solid rgba(27, 73, 101, 0.15);
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.senior-bio {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 第二层级：学科带头人（紧凑细线结构 6:6） */
+.committee-tier-chairs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.chair-scholar-card {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chair-scholar-card:first-child {
+  border-right: 1px solid var(--grid-line-color);
+}
+
+.chair-top-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.chair-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.chair-name {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.chair-role {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.chair-spec {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   SECTION 6: 招考通道与育人体系 (招考时间轴 + 双色对比)
+   ========================================================================== */
+.admissions-milestone-strip {
+  border: 1px solid var(--grid-line-color);
+  background: #FFFFFF;
+  margin-bottom: 30px;
+}
+
+.milestone-strip-header {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--grid-line-color);
+  background: rgba(20, 20, 22, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.m-title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.m-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.milestone-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.milestone-node {
+  padding: 22px 20px;
   border-right: 1px solid var(--grid-line-color);
   display: flex;
   flex-direction: column;
 }
 
-.committee-cell:nth-child(1) { grid-column: 1 / 4; }
-.committee-cell:nth-child(2) { grid-column: 4 / 7; }
-.committee-cell:nth-child(3) { grid-column: 7 / 10; }
-.committee-cell:nth-child(4) {
-  grid-column: 10 / 13;
+.milestone-node:last-child {
   border-right: none;
 }
 
-.scholar-avatar-frame {
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--text-primary);
+.m-step-indicator {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  background: #FAF9F6;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
-.scholar-name {
-  font-family: var(--font-serif);
-  font-size: 15px;
+.m-num {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--pastel-red-text);
+}
+
+.m-period {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.m-node-title {
+  font-size: 13px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 3px;
+  margin-bottom: 6px;
 }
 
-.scholar-role {
-  font-size: 11px;
-  font-family: var(--font-mono);
-  color: var(--pastel-red-text);
-  margin-bottom: 4px;
-}
-
-.scholar-spec {
+.m-node-desc {
   font-size: 11px;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-/* ==========================================================================
-   SECTION 6: 招考通道与育人体系 (12列 6:6 对比色块)
-   ========================================================================== */
 .admissions-contrast-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -1646,7 +2366,7 @@ body {
   border: 1px solid var(--text-primary);
 }
 
-/* 全宽咨询横幅 (3 cols each in 12-col grid) */
+/* 全宽咨询横幅 (带一键复制与即时反馈) */
 .admissions-hotline-strip {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -1671,11 +2391,33 @@ body {
   border-right: none;
 }
 
+.hotline-cell.is-copyable {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.hotline-cell.is-copyable:hover {
+  background-color: #F0ECE1;
+}
+
+.hl-kicker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.copy-hint {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--pastel-red-text);
+  font-weight: 600;
+}
+
 .hl-kicker {
   font-size: 10px;
   font-family: var(--font-mono);
   color: var(--text-muted);
-  margin-bottom: 3px;
 }
 
 .hl-main {
@@ -1834,8 +2576,9 @@ body {
 }
 
 /* ==========================================================================
-   CURATORIAL MODAL DIALOG
+   EDITORIAL & CURATORIAL MODAL DIALOGS
    ========================================================================== */
+.editorial-modal-backdrop,
 .curatorial-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1849,6 +2592,7 @@ body {
   padding: 30px 16px;
 }
 
+.editorial-modal-dialog,
 .curatorial-modal-dialog {
   width: 100%;
   max-width: 860px;
@@ -1859,8 +2603,12 @@ body {
   box-shadow: 0 32px 72px -12px rgba(20, 20, 22, 0.4);
 }
 
-.modal-header-strip {
-  padding: 14px 20px;
+.program-modal-dialog {
+  max-width: 800px;
+}
+
+.modal-header {
+  padding: 14px 24px;
   border-bottom: 1px solid var(--border-hairline);
   background: #FFFFFF;
   display: flex;
@@ -1868,61 +2616,102 @@ body {
   justify-content: space-between;
 }
 
-.modal-tags {
+.modal-kicker-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.modal-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
 }
 
 .modal-code {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--pastel-red-text);
+  background: var(--pastel-red-bg);
+  padding: 2px 6px;
+  border-radius: 2px;
 }
 
 .modal-close-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
   background: transparent;
   border: none;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-secondary);
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 4px 8px;
+  line-height: 1;
 }
 
 .modal-close-btn:hover {
   color: var(--text-primary);
 }
 
-.modal-hero-image {
-  width: 100%;
-  max-height: 340px;
-  overflow: hidden;
-  background-color: #E2DFD8;
+.modal-body {
+  padding: 28px;
 }
 
-.modal-hero-image img {
+.modal-hero-image-wrap {
+  position: relative;
+  width: 100%;
+  max-height: 320px;
+  overflow: hidden;
+  background-color: #E2DFD8;
+  border: 1px solid var(--border-hairline);
+  margin-bottom: 22px;
+}
+
+.modal-hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.modal-content-deck {
-  padding: 28px;
+.modal-img-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 6px 12px;
+  background: rgba(20, 20, 22, 0.85);
+  color: #D1D1D6;
+  font-family: var(--font-mono);
+  font-size: 10px;
 }
 
-.modal-dept-row {
+.modal-title-deck {
+  margin-bottom: 20px;
+}
+
+.modal-badge-row {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.modal-dept {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 6px;
+}
+
+.modal-meta-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: rgba(20, 20, 22, 0.04);
+  padding: 2px 6px;
+  border: 1px solid var(--border-hairline);
 }
 
 .modal-title {
@@ -1931,7 +2720,13 @@ body {
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.35;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+}
+
+.modal-en-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
 }
 
 .modal-role-highlight {
@@ -1939,68 +2734,147 @@ body {
   font-family: var(--font-mono);
   color: var(--pastel-red-text);
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-top: 6px;
 }
 
-.modal-grid-meta {
+.modal-meta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 20px;
-  padding: 14px;
-  background: rgba(20, 20, 22, 0.03);
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 16px;
+  background: rgba(20, 20, 22, 0.025);
   border: 1px solid var(--border-hairline);
 }
 
-.meta-lbl {
-  display: block;
-  font-size: 10px;
-  font-family: var(--font-mono);
+.modal-meta-item {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.meta-label {
   color: var(--text-muted);
-  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
 }
 
-.meta-str {
-  font-size: 12px;
-  font-weight: 600;
+.meta-val {
   color: var(--text-primary);
+  font-weight: 600;
 }
 
-.modal-narrative {
-  margin-bottom: 28px;
+.modal-section-block,
+.modal-desc-block {
+  margin-bottom: 22px;
 }
 
-.narrative-head {
-  font-size: 12px;
+.modal-block-heading,
+.modal-desc-heading {
+  font-size: 13px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
 }
 
-.narrative-body {
+.modal-desc {
   font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.75;
 }
 
-.modal-footer-action {
+.modal-course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.modal-course-card {
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-hairline);
   display: flex;
-  justify-content: flex-end;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
 }
 
-.btn-modal-action {
+.course-idx {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pastel-red-text);
+}
+
+.course-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.modal-direction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.direction-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.dir-dot {
+  color: var(--pastel-red-text);
+  font-weight: 700;
+}
+
+.modal-career-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.career-pill {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  padding: 4px 10px;
+  background: rgba(20, 20, 22, 0.04);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+}
+
+.modal-footer {
+  padding: 16px 28px;
+  border-top: 1px solid var(--border-hairline);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-footer-note {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.btn-modal-close-action {
   font-size: 12px;
   font-family: var(--font-mono);
   font-weight: 600;
   background: var(--text-primary);
   color: var(--bg-canvas);
-  padding: 9px 20px;
+  padding: 8px 20px;
   border: 1px solid var(--text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.btn-modal-action:hover {
+.btn-modal-close-action:hover {
   background: transparent;
   color: var(--text-primary);
 }
@@ -2053,21 +2927,26 @@ body {
     grid-template-columns: repeat(6, 1fr);
   }
 
-  .metric-grid-cell.col-1 {
-    grid-column: 1 / 4;
+  .metric-lead-cell {
+    grid-column: 1 / 7 !important;
+    border-right: none !important;
     border-bottom: 1px solid var(--grid-line-color);
   }
-  .metric-grid-cell.col-2 {
-    grid-column: 4 / 7;
-    border-right: none;
+
+  .metric-compact-pillar {
+    grid-column: 1 / 3 !important;
     border-bottom: 1px solid var(--grid-line-color);
   }
-  .metric-grid-cell.col-3 {
-    grid-column: 1 / 4;
+
+  .metric-faculty-meter {
+    grid-column: 3 / 7 !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--grid-line-color);
   }
-  .metric-grid-cell.col-4 {
-    grid-column: 4 / 7;
-    border-right: none;
+
+  .metric-research-cluster {
+    grid-column: 1 / 7 !important;
+    border-right: none !important;
   }
 
   .news-press-grid {
@@ -2092,35 +2971,56 @@ body {
     grid-template-columns: repeat(6, 1fr);
   }
 
-  .cell-item-1 {
-    grid-column: 1 / 4;
+  .bento-hero-program {
+    grid-column: 1 / 7 !important;
+    border-right: none !important;
   }
-  .cell-item-2 {
-    grid-column: 4 / 7;
+
+  .bento-theory-program {
+    grid-column: 1 / 7 !important;
+    border-right: none !important;
+  }
+
+  .cell-bento-mgt {
+    grid-column: 1 / 4 !important;
+  }
+
+  .cell-bento-fa {
+    grid-column: 4 / 7 !important;
+    border-right: none !important;
+  }
+
+  .cell-bento-ich {
+    grid-column: 1 / 4 !important;
+  }
+
+  .cell-bento-con {
+    grid-column: 4 / 7 !important;
+    border-right: none !important;
+  }
+
+  .cell-bento-adv {
+    grid-column: 1 / 4 !important;
+    border-bottom: none !important;
+  }
+
+  .cell-bento-pub {
+    grid-column: 4 / 7 !important;
+    border-right: none !important;
+    border-bottom: none !important;
+  }
+
+  .milestone-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .milestone-node:nth-child(1),
+  .milestone-node:nth-child(2) {
+    border-bottom: 1px solid var(--grid-line-color);
+  }
+
+  .milestone-node:nth-child(2) {
     border-right: none;
-  }
-  .cell-item-3 {
-    grid-column: 1 / 4;
-  }
-  .cell-item-4 {
-    grid-column: 4 / 7;
-    border-right: none;
-  }
-  .cell-item-5 {
-    grid-column: 1 / 4;
-  }
-  .cell-item-6 {
-    grid-column: 4 / 7;
-    border-right: none;
-  }
-  .cell-item-7 {
-    grid-column: 1 / 4;
-    border-bottom: none;
-  }
-  .cell-item-8 {
-    grid-column: 4 / 7;
-    border-right: none;
-    border-bottom: none;
   }
 
   .research-panoramic-split {
@@ -2356,11 +3256,41 @@ body {
     grid-column: 1 / -1 !important;
     border-right: none !important;
     border-bottom: 1px solid var(--grid-line-color) !important;
-    padding: 20px 0;
+    padding: 24px 0 !important;
   }
 
   .program-table-cell:last-child {
     border-bottom: none !important;
+  }
+
+  .bento-hero-program {
+    padding: 24px 0 !important;
+  }
+
+  .bento-theory-program {
+    padding: 24px 0 !important;
+  }
+
+  .committee-tier-senior,
+  .committee-tier-chairs {
+    grid-template-columns: 1fr;
+  }
+
+  .senior-scholar-card,
+  .chair-scholar-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--grid-line-color);
+    padding: 20px 0;
+  }
+
+  .milestone-timeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .milestone-node {
+    border-right: none !important;
+    border-bottom: 1px solid var(--grid-line-color);
+    padding: 16px 0;
   }
 
   .research-list-item {
