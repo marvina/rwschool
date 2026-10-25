@@ -1,13 +1,15 @@
 /* ==========================================================================
    SHANDONG CRAFT & HUMANITIES · 方案三：高定极简典雅风 (Minimalist Editorial)
-   100% 满宽流体画卷 · 响应式 4列 / 2列 / 1列 发丝线建筑网格体系
-   解决窄屏适配瓶颈：宽屏侧翼透叠，窄屏图文分层不遮挡，全屏宽流体呼吸感
+   100% 满宽流体画卷 · 十二轴精微建筑网格系统 (12-Column Architectural System)
+   黄金比例非对称布局（7:5 报刊、6:6/4:4:4 矩阵、5:7 策展双联、4:4:4 票根）
+   极高布局灵活性，宽屏满幅呼吸感，窄屏智能响应无缝折叠
    ========================================================================== */
 
 :root {
   --canvas-width: 100%;
   --canvas-padding: clamp(20px, 3.5vw, 56px);
-  --grid-line-color: rgba(20, 20, 22, 0.08);
+  --grid-line-color: rgba(20, 20, 22, 0.05);
+  --grid-axis-color: rgba(20, 20, 22, 0.10);
 
   --bg-canvas: #FAF9F6;
   --bg-card: #FFFFFF;
@@ -62,7 +64,7 @@ body {
   width: 100%;
 }
 
-/* Master Root Wrapper: 100% Width Full-Bleed */
+/* Master Root Wrapper */
 .minimalist-editorial-root {
   min-height: 100vh;
   width: 100%;
@@ -71,7 +73,10 @@ body {
   overflow-x: hidden;
 }
 
-/* 100% 满宽背景发丝网格 (动态感知屏幕宽度) */
+/* ==========================================================================
+   12-COLUMN ARCHITECTURAL GRID OVERLAY
+   精微建筑发丝网格：每列一根参考线，主轴线（3, 6, 9）轻度加重，如建筑蓝图
+   ========================================================================== */
 .grid-overlay {
   position: absolute;
   top: 0;
@@ -81,7 +86,7 @@ body {
   width: 100%;
   padding: 0 var(--canvas-padding);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   pointer-events: none;
   z-index: 1;
 }
@@ -95,8 +100,15 @@ body {
   border-left: 1px solid var(--grid-line-color);
 }
 
+/* 关键建筑主轴线微增强 (25%, 50%, 75% 处) */
+.grid-col:nth-child(3),
+.grid-col:nth-child(6),
+.grid-col:nth-child(9) {
+  border-right-color: var(--grid-axis-color);
+}
+
 /* ==========================================================================
-   MASTHEAD / TOP BAR (100% Full-bleed Fluid)
+   MASTHEAD / TOP BAR (100% Fluid Edge-to-Edge)
    ========================================================================== */
 .masthead-container {
   position: sticky;
@@ -148,7 +160,7 @@ body {
 .masthead-nav {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 1.6vw, 24px);
+  gap: clamp(10px, 1.4vw, 24px);
 }
 
 .nav-item {
@@ -218,7 +230,7 @@ body {
 }
 
 /* ==========================================================================
-   CANVAS & SECTION BASICS (100% Full Width Fluid Architecture)
+   CANVAS & SECTION BASICS (100% Fluid Width)
    ========================================================================== */
 .editorial-canvas {
   width: 100%;
@@ -229,12 +241,12 @@ body {
 
 .editorial-section {
   position: relative;
-  padding: clamp(48px, 6vw, 90px) 0;
+  padding: clamp(48px, 5.5vw, 84px) 0;
 }
 
 .sec-hero {
   padding-top: 36px;
-  padding-bottom: 56px;
+  padding-bottom: 50px;
 }
 
 /* Background Archival Watermark */
@@ -259,7 +271,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--grid-line-color);
   margin-bottom: 36px;
   flex-wrap: wrap;
@@ -289,7 +301,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding-bottom: 20px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--border-hairline);
   margin-bottom: 40px;
   flex-wrap: wrap;
@@ -311,7 +323,7 @@ body {
 
 .strip-h2 {
   font-family: var(--font-serif);
-  font-size: clamp(24px, 3vw, 38px);
+  font-size: clamp(24px, 2.8vw, 36px);
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text-primary);
@@ -365,21 +377,23 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 1: HERO OVERVIEW (100% 满宽与响应式自适应舞台)
+   SECTION 1: HERO OVERVIEW (12列非对称构图：文字 1-7 列 / 媒体 8-12 列)
    ========================================================================== */
 .hero-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1.28fr) minmax(360px, 1fr);
-  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0;
   align-items: start;
-  margin-bottom: 50px;
+  margin-bottom: 48px;
   position: relative;
 }
 
-/* 巨幅排版文字区 (占据左侧) */
+/* 巨幅排版文字区 (占 1 至 7 列，58.3% 黄金比率) */
 .hero-typography-layer {
+  grid-column: 1 / 8;
   position: relative;
   z-index: 5;
+  padding-right: 32px;
 }
 
 .hero-headline-row {
@@ -388,7 +402,7 @@ body {
   flex-wrap: wrap;
   gap: 12px;
   font-family: var(--font-serif);
-  font-size: clamp(34px, 4.2vw, 68px);
+  font-size: clamp(34px, 4.2vw, 66px);
   font-weight: 700;
   line-height: 1.18;
   letter-spacing: -0.02em;
@@ -420,12 +434,12 @@ body {
 }
 
 .hero-lead-deck {
-  max-width: 640px;
-  margin-top: 28px;
+  max-width: 620px;
+  margin-top: 26px;
 }
 
 .hero-lead-text {
-  font-size: clamp(14px, 1.15vw, 17px);
+  font-size: clamp(14px, 1.1vw, 17px);
   line-height: 1.75;
   color: var(--text-secondary);
   margin-bottom: 20px;
@@ -456,10 +470,11 @@ body {
   border-color: var(--text-primary);
 }
 
-/* 宽屏右侧画幅展示区 (三画幅艺术错落，绝不挡住左侧文字) */
+/* 宽屏右侧画幅展示区 (占 8 至 12 列，41.7%) */
 .hero-plates-container {
+  grid-column: 8 / 13;
   position: relative;
-  height: 440px;
+  height: clamp(480px, 34vw, 540px);
   width: 100%;
 }
 
@@ -568,25 +583,25 @@ body {
   right: -4px;
 }
 
-/* Plate Positions on Desktop */
+/* Plate Positions on 12-Column Desktop Grid */
 .plate-exhibition {
   top: 0;
   right: 0;
-  width: clamp(260px, 24vw, 380px);
+  width: 86%;
   z-index: 12;
 }
 
 .plate-library {
-  top: 110px;
-  left: 10px;
-  width: clamp(230px, 21vw, 320px);
+  top: 85px;
+  left: -12%;
+  width: 76%;
   z-index: 11;
 }
 
 .plate-research {
-  top: 220px;
-  right: 40px;
-  width: clamp(240px, 22vw, 340px);
+  top: 175px;
+  right: 15px;
+  width: 80%;
   z-index: 13;
 }
 
@@ -613,10 +628,10 @@ body {
   transform: scale(0.97);
 }
 
-/* 4-Cell Rigid Academic Metrics Bar (Snaps strictly to Grid Columns) */
+/* 4-Cell Rigid Academic Metrics Bar (3 cols each in 12-col grid) */
 .hero-metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
   background-color: rgba(255, 255, 255, 0.5);
@@ -624,13 +639,17 @@ body {
 }
 
 .metric-grid-cell {
-  padding: 28px 24px;
+  padding: 26px 22px;
   border-right: 1px solid var(--grid-line-color);
   display: flex;
   flex-direction: column;
 }
 
-.metric-grid-cell:last-child {
+.metric-grid-cell.col-1 { grid-column: 1 / 4; }
+.metric-grid-cell.col-2 { grid-column: 4 / 7; }
+.metric-grid-cell.col-3 { grid-column: 7 / 10; }
+.metric-grid-cell.col-4 {
+  grid-column: 10 / 13;
   border-right: none;
 }
 
@@ -640,7 +659,7 @@ body {
 
 .metric-strong {
   font-family: var(--font-serif);
-  font-size: clamp(26px, 2.8vw, 40px);
+  font-size: clamp(26px, 2.8vw, 38px);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
@@ -660,19 +679,20 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 2: 学院新闻与动态 (报刊式非对称排版)
+   SECTION 2: 学院新闻与动态 (12列黄金比率 7:5 排版)
    ========================================================================== */
 .news-press-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 0;
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
   width: 100%;
 }
 
+/* 左侧头条（占 1 至 7 列，58.3% 宽幅） */
 .news-lead-feature {
-  grid-column: 1 / 3;
+  grid-column: 1 / 8;
   border-right: 1px solid var(--grid-line-color);
   padding: 32px 32px 32px 0;
   display: flex;
@@ -770,8 +790,9 @@ body {
   gap: 10px;
 }
 
+/* 右侧速递清单（占 8 至 12 列，41.7%） */
 .news-dispatch-list {
-  grid-column: 3 / 5;
+  grid-column: 8 / 13;
   padding-left: 32px;
   display: flex;
   flex-direction: column;
@@ -868,11 +889,12 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 3: 学科设置与专业矩阵 (8大专业·响应式建筑表格)
+   SECTION 3: 学科设置与专业矩阵 (12列非对称层级排版 6:6 + 4:4:4 + 4:4:4)
+   A+ 顶尖学科与一流学术主干更开阔，下方专业规整平铺
    ========================================================================== */
 .programs-table-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
   background-color: #FFFFFF;
@@ -880,9 +902,7 @@ body {
 }
 
 .program-table-cell {
-  border-right: 1px solid var(--grid-line-color);
-  border-bottom: 1px solid var(--grid-line-color);
-  padding: 30px 24px;
+  padding: 30px 26px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -890,12 +910,50 @@ body {
   position: relative;
 }
 
-.program-table-cell:nth-child(4n) {
-  border-right: none;
+/* 第一行：两所国家一流顶尖专业（各占 6 列，视野广阔） */
+.cell-item-1 {
+  grid-column: 1 / 7;
+  border-right: 1px solid var(--grid-line-color);
+  border-bottom: 1px solid var(--grid-line-color);
+  background-color: #FCFAF6;
 }
 
-.program-table-cell:nth-child(n + 5) {
-  border-bottom: none;
+.cell-item-2 {
+  grid-column: 7 / 13;
+  border-bottom: 1px solid var(--grid-line-color);
+}
+
+/* 第二行：三个国家级/特色专业（各占 4 列） */
+.cell-item-3 {
+  grid-column: 1 / 5;
+  border-right: 1px solid var(--grid-line-color);
+  border-bottom: 1px solid var(--grid-line-color);
+}
+
+.cell-item-4 {
+  grid-column: 5 / 9;
+  border-right: 1px solid var(--grid-line-color);
+  border-bottom: 1px solid var(--grid-line-color);
+}
+
+.cell-item-5 {
+  grid-column: 9 / 13;
+  border-bottom: 1px solid var(--grid-line-color);
+}
+
+/* 第三行：三个省一流建设点与公共教研室（各占 4 列） */
+.cell-item-6 {
+  grid-column: 1 / 5;
+  border-right: 1px solid var(--grid-line-color);
+}
+
+.cell-item-7 {
+  grid-column: 5 / 9;
+  border-right: 1px solid var(--grid-line-color);
+}
+
+.cell-item-8 {
+  grid-column: 9 / 13;
 }
 
 .program-table-cell:hover,
@@ -928,6 +986,11 @@ body {
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 3px;
+}
+
+.cell-item-1 .cell-prog-name,
+.cell-item-2 .cell-prog-name {
+  font-size: 22px;
 }
 
 .cell-en-name {
@@ -998,26 +1061,28 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 4: 重点科研基地与学术高地 (全景水平双联展陈)
+   SECTION 4: 重点科研基地与学术高地 (12列 5:7 策展双联视窗)
+   与新闻板块 7:5 形成美妙的镜像反差 Cadence
    ========================================================================== */
 .research-panoramic-split {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
   background-color: #FFFFFF;
   width: 100%;
 }
 
+/* 左侧课题清单（占 1 至 5 列，41.7%） */
 .research-curation-list {
-  grid-column: 1 / 3;
+  grid-column: 1 / 6;
   border-right: 1px solid var(--grid-line-color);
   display: flex;
   flex-direction: column;
 }
 
 .list-mast-kicker {
-  padding: 16px 28px;
+  padding: 16px 26px;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
@@ -1028,7 +1093,7 @@ body {
 }
 
 .research-list-item {
-  padding: 24px 28px;
+  padding: 24px 26px;
   border-bottom: 1px solid var(--grid-line-color);
   display: grid;
   grid-template-columns: 74px 1fr 20px;
@@ -1091,9 +1156,10 @@ body {
   color: var(--pastel-red-text);
 }
 
+/* 右侧标本检视视窗（占 6 至 12 列，58.3% 舒展大图） */
 .research-specimen-viewer {
-  grid-column: 3 / 5;
-  padding: 32px;
+  grid-column: 6 / 13;
+  padding: 32px 36px;
   display: flex;
   flex-direction: column;
 }
@@ -1138,7 +1204,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 6px 10px;
+  padding: 6px 12px;
   background: rgba(20, 20, 22, 0.85);
   backdrop-filter: blur(8px);
   color: #D1D1D6;
@@ -1236,11 +1302,11 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 5: 文心讲堂与学术通报 (票根式学术通行证 + 委员会)
+   SECTION 5: 文心讲堂与学术通报 (12列 4:4:4 票根 + 3:3:3:3 委员会)
    ========================================================================== */
 .lectures-ticket-strip {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 0;
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
@@ -1255,7 +1321,10 @@ body {
   flex-direction: column;
 }
 
-.lecture-ticket-card:last-child {
+.lecture-ticket-card:nth-child(1) { grid-column: 1 / 5; }
+.lecture-ticket-card:nth-child(2) { grid-column: 5 / 9; }
+.lecture-ticket-card:nth-child(3) {
+  grid-column: 9 / 13;
   border-right: none;
 }
 
@@ -1331,7 +1400,7 @@ body {
   font-size: 10px;
 }
 
-/* 学术委员会专家席 */
+/* 学术委员会专家席 (3 cols each in 12-col grid) */
 .faculty-committee-strip {
   margin-top: 40px;
   border: 1px solid var(--grid-line-color);
@@ -1365,7 +1434,7 @@ body {
 
 .committee-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .committee-cell {
@@ -1375,7 +1444,11 @@ body {
   flex-direction: column;
 }
 
-.committee-cell:last-child {
+.committee-cell:nth-child(1) { grid-column: 1 / 4; }
+.committee-cell:nth-child(2) { grid-column: 4 / 7; }
+.committee-cell:nth-child(3) { grid-column: 7 / 10; }
+.committee-cell:nth-child(4) {
+  grid-column: 10 / 13;
   border-right: none;
 }
 
@@ -1415,11 +1488,11 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 6: 招考通道与育人体系 (双色对比色块)
+   SECTION 6: 招考通道与育人体系 (12列 6:6 对比色块)
    ========================================================================== */
 .admissions-contrast-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   border-top: 1px solid var(--grid-line-color);
   border-bottom: 1px solid var(--grid-line-color);
   width: 100%;
@@ -1432,7 +1505,7 @@ body {
 }
 
 .card-dark {
-  grid-column: 1 / 3;
+  grid-column: 1 / 7;
   background-color: var(--bg-dark);
   color: var(--text-light);
 }
@@ -1528,7 +1601,7 @@ body {
 }
 
 .card-bone {
-  grid-column: 3 / 5;
+  grid-column: 7 / 13;
   background-color: #FFFFFF;
   border-left: 1px solid var(--grid-line-color);
   color: var(--text-primary);
@@ -1573,9 +1646,10 @@ body {
   border: 1px solid var(--text-primary);
 }
 
+/* 全宽咨询横幅 (3 cols each in 12-col grid) */
 .admissions-hotline-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   background-color: #F8F6F1;
   border-bottom: 1px solid var(--grid-line-color);
   width: 100%;
@@ -1589,7 +1663,11 @@ body {
   justify-content: center;
 }
 
-.hotline-cell:last-child {
+.hotline-cell:nth-child(1) { grid-column: 1 / 4; }
+.hotline-cell:nth-child(2) { grid-column: 4 / 7; }
+.hotline-cell:nth-child(3) { grid-column: 7 / 10; }
+.hotline-cell:nth-child(4) {
+  grid-column: 10 / 13;
   border-right: none;
 }
 
@@ -1621,7 +1699,7 @@ body {
 }
 
 /* ==========================================================================
-   OFFICIAL FOOTER (100% Full Width)
+   OFFICIAL FOOTER (12列结构：4列品牌 + 2列专业 + 3列科研 + 3列行政)
    ========================================================================== */
 .editorial-footer {
   border-top: 1px solid var(--grid-line-color);
@@ -1636,7 +1714,7 @@ body {
   width: 100%;
   padding: 0 var(--canvas-padding);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 0;
 }
 
@@ -1647,14 +1725,20 @@ body {
   flex-direction: column;
 }
 
-.footer-col:last-child {
+.footer-col.col-brand { grid-column: 1 / 5; }
+.footer-col.col-nav {
+  grid-column: 5 / 7;
+  padding-left: 24px;
+}
+.footer-col.col-research {
+  grid-column: 7 / 10;
+  padding-left: 24px;
+}
+.footer-col.col-admin {
+  grid-column: 10 / 13;
   border-right: none;
   padding-right: 0;
-  padding-left: 28px;
-}
-
-.footer-col:not(:first-child):not(:last-child) {
-  padding-left: 28px;
+  padding-left: 24px;
 }
 
 .footer-logo-img {
@@ -1922,9 +2006,21 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (智能应对窄屏与小屏幕：4列 -> 2列 -> 1列 丝滑折叠)
+   RESPONSIVE DESIGN (12列 -> 6列 -> 2列 建筑网格自适应折叠)
    ========================================================================== */
 @media (max-width: 1140px) {
+  .grid-overlay {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .grid-col:nth-child(n + 7) {
+    display: none;
+  }
+
+  .grid-col:nth-child(3) {
+    border-right-color: var(--grid-axis-color);
+  }
+
   .masthead-motto-badge {
     display: none;
   }
@@ -1934,7 +2030,13 @@ body {
     gap: 32px;
   }
 
+  .hero-typography-layer {
+    grid-column: 1 / -1;
+    padding-right: 0;
+  }
+
   .hero-plates-container {
+    grid-column: 1 / -1;
     height: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1947,34 +2049,25 @@ body {
     height: auto;
   }
 
-  .hero-plate.plate-exhibition,
-  .hero-plate.plate-library,
-  .hero-plate.plate-research {
-    top: auto;
-    right: auto;
-    left: auto;
-    bottom: auto;
-  }
-
-  .grid-overlay {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-col:nth-child(n + 3) {
-    display: none;
-  }
-
   .hero-metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
-  .metric-grid-cell:nth-child(2) {
-    border-right: none;
-  }
-
-  .metric-grid-cell:nth-child(1),
-  .metric-grid-cell:nth-child(2) {
+  .metric-grid-cell.col-1 {
+    grid-column: 1 / 4;
     border-bottom: 1px solid var(--grid-line-color);
+  }
+  .metric-grid-cell.col-2 {
+    grid-column: 4 / 7;
+    border-right: none;
+    border-bottom: 1px solid var(--grid-line-color);
+  }
+  .metric-grid-cell.col-3 {
+    grid-column: 1 / 4;
+  }
+  .metric-grid-cell.col-4 {
+    grid-column: 4 / 7;
+    border-right: none;
   }
 
   .news-press-grid {
@@ -1996,20 +2089,38 @@ body {
   }
 
   .programs-table-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
-  .program-table-cell:nth-child(2n) {
+  .cell-item-1 {
+    grid-column: 1 / 4;
+  }
+  .cell-item-2 {
+    grid-column: 4 / 7;
     border-right: none;
   }
-
-  .program-table-cell:nth-child(n + 7) {
+  .cell-item-3 {
+    grid-column: 1 / 4;
+  }
+  .cell-item-4 {
+    grid-column: 4 / 7;
+    border-right: none;
+  }
+  .cell-item-5 {
+    grid-column: 1 / 4;
+  }
+  .cell-item-6 {
+    grid-column: 4 / 7;
+    border-right: none;
+  }
+  .cell-item-7 {
+    grid-column: 1 / 4;
     border-bottom: none;
   }
-
-  .program-table-cell:nth-child(5),
-  .program-table-cell:nth-child(6) {
-    border-bottom: 1px solid var(--grid-line-color);
+  .cell-item-8 {
+    grid-column: 4 / 7;
+    border-right: none;
+    border-bottom: none;
   }
 
   .research-panoramic-split {
@@ -2032,7 +2143,8 @@ body {
   }
 
   .lecture-ticket-card {
-    border-right: none;
+    grid-column: 1 / -1 !important;
+    border-right: none !important;
     border-bottom: 2px dashed rgba(20, 20, 22, 0.16);
   }
 
@@ -2041,16 +2153,22 @@ body {
   }
 
   .committee-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
-  .committee-cell:nth-child(2n) {
+  .committee-cell:nth-child(1) { grid-column: 1 / 4; }
+  .committee-cell:nth-child(2) {
+    grid-column: 4 / 7;
     border-right: none;
   }
-
-  .committee-cell:nth-child(1),
-  .committee-cell:nth-child(2) {
-    border-bottom: 1px solid var(--grid-line-color);
+  .committee-cell:nth-child(3) {
+    grid-column: 1 / 4;
+    border-top: 1px solid var(--grid-line-color);
+  }
+  .committee-cell:nth-child(4) {
+    grid-column: 4 / 7;
+    border-right: none;
+    border-top: 1px solid var(--grid-line-color);
   }
 
   .admissions-contrast-grid {
@@ -2058,7 +2176,7 @@ body {
   }
 
   .card-dark, .card-bone {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1 !important;
   }
 
   .card-bone {
@@ -2067,30 +2185,45 @@ body {
   }
 
   .admissions-hotline-strip {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
-  .hotline-cell:nth-child(2n) {
-    border-right: none;
-  }
-
-  .hotline-cell:nth-child(1),
-  .hotline-cell:nth-child(2) {
+  .hotline-cell:nth-child(1) {
+    grid-column: 1 / 4;
     border-bottom: 1px solid var(--grid-line-color);
+  }
+  .hotline-cell:nth-child(2) {
+    grid-column: 4 / 7;
+    border-right: none;
+    border-bottom: 1px solid var(--grid-line-color);
+  }
+  .hotline-cell:nth-child(3) { grid-column: 1 / 4; }
+  .hotline-cell:nth-child(4) {
+    grid-column: 4 / 7;
+    border-right: none;
   }
 
   .footer-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 32px 0;
   }
 
-  .footer-col {
+  .footer-col.col-brand { grid-column: 1 / 4; }
+  .footer-col.col-nav {
+    grid-column: 4 / 7;
     border-right: none;
-    padding: 0 16px;
   }
-
-  .footer-col:first-child {
+  .footer-col.col-research {
+    grid-column: 1 / 4;
     padding-left: 0;
+    border-top: 1px solid var(--grid-line-color);
+    padding-top: 24px;
+  }
+  .footer-col.col-admin {
+    grid-column: 4 / 7;
+    border-right: none;
+    border-top: 1px solid var(--grid-line-color);
+    padding-top: 24px;
   }
 }
 
@@ -2187,10 +2320,10 @@ body {
   }
 
   .grid-overlay {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .grid-col:nth-child(n + 2) {
+  .grid-col:nth-child(n + 3) {
     display: none;
   }
 
@@ -2199,6 +2332,7 @@ body {
   }
 
   .metric-grid-cell {
+    grid-column: 1 / -1 !important;
     border-right: none !important;
     border-bottom: 1px solid var(--grid-line-color);
     padding: 18px 0;
@@ -2219,6 +2353,7 @@ body {
   }
 
   .program-table-cell {
+    grid-column: 1 / -1 !important;
     border-right: none !important;
     border-bottom: 1px solid var(--grid-line-color) !important;
     padding: 20px 0;
@@ -2243,6 +2378,7 @@ body {
   }
 
   .committee-cell {
+    grid-column: 1 / -1 !important;
     border-right: none !important;
     border-bottom: 1px solid var(--grid-line-color);
     padding: 16px 0;
@@ -2253,6 +2389,7 @@ body {
   }
 
   .hotline-cell {
+    grid-column: 1 / -1 !important;
     border-right: none !important;
     border-bottom: 1px solid var(--grid-line-color);
     padding: 14px 0;
@@ -2264,6 +2401,7 @@ body {
   }
 
   .footer-col {
+    grid-column: 1 / -1 !important;
     padding: 0 !important;
   }
 }

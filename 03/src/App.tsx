@@ -312,12 +312,11 @@ export default function App() {
 
   return (
     <div className="minimalist-editorial-root">
-      {/* 结构性背景基准四轴发丝网格（全宽100%铺展，响应式列折叠） */}
+      {/* 结构性背景基准十二轴发丝网格（100% 全宽，12 列建筑级精微布局参考系） */}
       <div className="grid-overlay" aria-hidden="true">
-        <div className="grid-col" />
-        <div className="grid-col" />
-        <div className="grid-col" />
-        <div className="grid-col" />
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div key={i} className="grid-col" />
+        ))}
       </div>
 
       {/* 顶部极简学术刊物风格导览（100% 全宽流体） */}
@@ -676,7 +675,7 @@ export default function App() {
             {academicPrograms.map((prog, idx) => (
               <div
                 key={prog.no}
-                className={`program-table-cell ${activeProgramIndex === idx ? "cell-selected" : ""}`}
+                className={`program-table-cell cell-item-${idx + 1} ${activeProgramIndex === idx ? "cell-selected" : ""}`}
                 onClick={() => setActiveProgramIndex(idx)}
               >
                 <div className="cell-top-meta">
