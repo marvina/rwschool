@@ -9,6 +9,161 @@ const curatedAssets = {
   digitalMedia: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=82",
 }
 
+// 严谨源自 01 与 02 的完整专业与教研室设置（共8项）
+interface AcademicProgram {
+  no: string
+  code: string
+  name: string
+  enName: string
+  qualification: string
+  tagClass: "tag-red" | "tag-blue" | "tag-green" | "tag-yellow"
+  summary: string
+  courses: string[]
+}
+
+const academicPrograms: AcademicProgram[] = [
+  {
+    no: "01",
+    code: "DES-130501",
+    name: "艺术设计学",
+    enName: "Design Studies",
+    qualification: "软科 A+ · 国家级一流本科专业",
+    tagClass: "tag-red",
+    summary: "全国排名前列顶尖学科，致力于设计历史、设计理论、设计批评与设计战略前沿研究，建构中国自主设计话语体系。",
+    courses: ["设计史学专题", "中国造物思想史", "设计批评学", "设计战略与策展"],
+  },
+  {
+    no: "02",
+    code: "ART-130101",
+    name: "艺术史论",
+    enName: "Art History & Theory",
+    qualification: "国家级一流本科专业",
+    tagClass: "tag-blue",
+    summary: "聚焦中国美术史、西方造物史、黄河民艺理论与视觉文化，培养具备深厚历史视野与批判思辨能力的学术英才。",
+    courses: ["中国美术史考论", "西方近现代艺术史", "视觉文献研读", "民艺理论与田野调查"],
+  },
+  {
+    no: "03",
+    code: "MGT-120206",
+    name: "文化产业管理",
+    enName: "Cultural Management",
+    qualification: "国家级一流本科专业",
+    tagClass: "tag-blue",
+    summary: "立足文旅深度融合、非遗产业化运营与艺术策展管理，培养兼通人文素养与现代产业运作的高级复合管理人才。",
+    courses: ["文化资源开发与管理", "艺术市场与策展", "数字文化产业战略", "文化遗产经济学"],
+  },
+  {
+    no: "04",
+    code: "FA-130401",
+    name: "美术学",
+    enName: "Fine Arts",
+    qualification: "国家级特色专业",
+    tagClass: "tag-yellow",
+    summary: "融合当代艺术理论、美术史学方法论与审美教育，注重基础理论建构与社会美育实践的深度贯通。",
+    courses: ["美术理论与美育史", "中国古代画论", "现代艺术流派辨析", "艺术教育心理学"],
+  },
+  {
+    no: "05",
+    code: "ICH-130102",
+    name: "非物质文化遗产保护",
+    enName: "Intangible Cultural Heritage",
+    qualification: "山东省首批非遗本科专业",
+    tagClass: "tag-green",
+    summary: "依托齐鲁深厚民间手工艺沃土，开展抢救性调查、数字谱系测绘、活态传承与当代造物创新衍生。",
+    courses: ["非物质文化遗产概论", "民艺田野工作方法", "传统手工技艺谱系", "活态传承与社区营造"],
+  },
+  {
+    no: "06",
+    code: "CON-130507",
+    name: "文物保护与修复",
+    enName: "Heritage Conservation",
+    qualification: "省级实验教学示范中心依托",
+    tagClass: "tag-green",
+    summary: "依托高水平实验教学示范平台，结合科技检测、古籍纸质文献修复、古代陶瓷金属保护开展跨学科教学。",
+    courses: ["文物保护与科技概论", "纸质与书画文献修复", "无机质文物修复实务", "科技分析与材质检测"],
+  },
+  {
+    no: "07",
+    code: "ADV-120703",
+    name: "广告策划与管理",
+    enName: "Creative Advertising",
+    qualification: "省级一流本科专业建设点",
+    tagClass: "tag-blue",
+    summary: "融合现代传播学、品牌战略、整合营销传播与数字创意实务，屡获全国大学生广告艺术大赛顶级大奖。",
+    courses: ["品牌战略规划", "整合营销传播", "数字内容与跨媒介创意", "用户体验与行为分析"],
+  },
+  {
+    no: "08",
+    code: "PUB-130000",
+    name: "公共艺术史论教研室",
+    enName: "Public Art Studies",
+    qualification: "跨学科虚拟教研室",
+    tagClass: "tag-yellow",
+    summary: "承担全院跨学科公共艺术理论、城乡微更新美育实践与综合通识人文教学，推进科教融汇与协同创新。",
+    courses: ["公共艺术导论", "城市更新与在地介入", "社会美育跨学科工作坊", "当代公共文化空间"],
+  },
+]
+
+// 真实新闻动态数据（严格参照 01 与 02 官方报道）
+interface NewsItem {
+  id: string
+  tag: string
+  tagClass: "tag-red" | "tag-blue" | "tag-green" | "tag-yellow"
+  date: string
+  day: string
+  month: string
+  title: string
+  excerpt: string
+  image?: string
+  isLead?: boolean
+}
+
+const newsList: NewsItem[] = [
+  {
+    id: "news-01",
+    tag: "学院要闻",
+    tagClass: "tag-red",
+    date: "2025.03.22",
+    day: "22",
+    month: "03月",
+    title: "学院召开2025年学科建设与拔尖创新人才培养推进会",
+    excerpt: "全面梳理一流学科与核心课程建设进展，深化产教协同与科教融汇，强化学术创新与成果转化，扎实推进学院内涵式高质量发展。",
+    image: curatedAssets.heroExhibition,
+    isLead: true,
+  },
+  {
+    id: "news-02",
+    tag: "学术讲堂",
+    tagClass: "tag-yellow",
+    date: "2025.03.18",
+    day: "18",
+    month: "03月",
+    title: "“文心弦歌”学术季：民间艺术的当代转化与国际表达讲座举行",
+    excerpt: "特邀知名学者围绕黄河民间艺术当代价值与国际传播路径展开深度研讨，启迪青年学人扎根大地创研。",
+  },
+  {
+    id: "news-03",
+    tag: "教学展览",
+    tagClass: "tag-blue",
+    date: "2025.03.14",
+    day: "14",
+    month: "03月",
+    title: "“在场之思”2025届人文与艺术综合实践教学汇报展启幕",
+    excerpt: "集中呈现跨学科田野考察、文献整理、策展实践与跨媒介设计的阶段性教学与拔尖育人成果。",
+  },
+  {
+    id: "news-04",
+    tag: "荣誉成果",
+    tagClass: "tag-green",
+    date: "2025.03.10",
+    day: "10",
+    month: "03月",
+    title: "我院师生作品在全国大学生广告艺术大赛中再获佳绩",
+    excerpt: "共斩获国家级奖项27项，以真实课题与前沿创意实践彰显卓越应用型拔尖人才培养成效。",
+  },
+]
+
+// 重点科研项目与基地档案
 interface ResearchProject {
   id: string
   code: string
@@ -43,20 +198,20 @@ const researchProjects: ResearchProject[] = [
     id: "02",
     code: "PUB-2026-04",
     title: "中国古代造物思想与器物制度考论",
-    category: "国家出版基金",
+    category: "学术专著出版",
     categoryClass: "tag-blue",
-    dept: "艺术史论系",
-    year: "2025",
-    leader: "艺术史论系古代造物史课题组",
-    role: "国家出版基金重点资助项目",
-    medium: "学术文献专著 · 齐鲁书社出版 · 入选《中华艺文文库》",
-    summary: "从经籍文献、出土器物与工官制度三维视阈，系统梳理中华造物文化的哲学本体、礼乐制度与营造工则，为现代设计学建构自主知识体系奠定文献根基。",
+    dept: "艺术史论系 / 齐鲁文化特藏室",
+    year: "2026",
+    leader: "古代造物制度与艺术史文献研究团队",
+    role: "教育部人文社会科学重点研究基地重大成果",
+    medium: "文献考据、出土实物拓本重构、先秦至明清造物谱系图志",
+    summary: "系统梳理传世文献与考古新发现，深度剖析中华器物文明背后的礼制规约、造物审美演变及其对当代生活方式设计的启示。",
     image: curatedAssets.fieldLibrary,
   },
   {
     id: "03",
-    code: "EXH-2026-08",
-    title: "生生不息：齐鲁乡土聚落在地设计与社会美育实践",
+    code: "LAB-2026-03",
+    title: "乡土美育与在地设计介入实验：乡村社区微更新模型",
     category: "全国美展成果",
     categoryClass: "tag-green",
     dept: "艺术设计学系",
@@ -83,6 +238,7 @@ const researchProjects: ResearchProject[] = [
   },
 ]
 
+// 文心讲堂与学术通报
 const lectureSeries = [
   {
     no: "01",
@@ -122,79 +278,51 @@ const lectureSeries = [
   },
 ]
 
-const facultyMembers = [
-  {
-    name: "许文清",
-    role: "院学术委员会主任 / 二级教授 / 博士生导师",
-    tags: ["国务院特贴专家", "国家社科重点课题主持人"],
-    research: "设计艺术学理论、艺术批评学、中华造物思想考论",
-    works: "主编《中国现代设计史论》《形式之后：当代造物哲学论纲》",
-  },
-  {
-    name: "陈立言",
-    role: "特聘教授 / 跨媒介实验中心主任 / 博士生导师",
-    tags: ["国际策展人", "中国美协设计艺委会委员"],
-    research: "展示与展陈空间设计、跨媒介环境装置、计算艺术美学",
-    works: "威尼斯双年展特约研究学者，主持全国美展展陈空间总体设计",
-  },
-  {
-    name: "林见深",
-    role: "艺术史论系系主任 / 教授 / 硕士生导师",
-    tags: ["山东省教学名师", "中华艺文文库编委"],
-    research: "中国古代画论、工艺美术史学史、非遗田野文献考证",
-    works: "著有《物象与心境：中国古代器物思想释读》《齐鲁民间造物记》",
-  },
-  {
-    name: "高韶华",
-    role: "艺术设计学系系主任 / 副教授 / 硕士生导师",
-    tags: ["软科A+专业负责人", "教育部青年骨干教师"],
-    research: "文化战略与设计策划、信息架构与体验设计、乡村社会美育",
-    works: "主持省部级教学改革重点课题，第十四届全国美展入选作者",
-  },
+// 学术委员会名录
+const academicCommittee = [
+  { name: "张道一 先生", role: "名誉院长 / 学术总顾问", spec: "中国艺术史论与民艺学开创者" },
+  { name: "潘鲁生 教授", role: "资深教授 / 博士生导师", spec: "中国民间文艺家协会主席" },
+  { name: "董占军 教授", role: "学科带头人 / 院学术委员会主任", spec: "设计历史与造物思想研究" },
+  { name: "赵屹 教授", role: "特聘学科领航学者", spec: "民俗艺术学与非遗活态保护" },
 ]
 
 export default function App() {
-  const [activeResearchIdx, setActiveResearchIdx] = useState(0)
-  const [modalItem, setModalItem] = useState<ResearchProject | null>(null)
-  const [activeFilter, setActiveFilter] = useState("all")
+  const [activeResearchId, setActiveResearchId] = useState<string>("01")
+  const [modalProject, setModalProject] = useState<ResearchProject | null>(null)
+  const [activePlate, setActivePlate] = useState<number | null>(null)
+  const [activeProgramIndex, setActiveProgramIndex] = useState<number>(0)
 
-  // Keyboard navigation shortcuts
+  // 键盘 Esc 快捷键关闭弹窗
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setModalItem(null)
-      } else if (e.key === "1") {
-        document.getElementById("sec-overview")?.scrollIntoView({ behavior: "smooth" })
-      } else if (e.key === "2") {
-        document.getElementById("sec-disciplines")?.scrollIntoView({ behavior: "smooth" })
-      } else if (e.key === "3") {
-        document.getElementById("sec-research")?.scrollIntoView({ behavior: "smooth" })
-      } else if (e.key === "4") {
-        document.getElementById("sec-lectures")?.scrollIntoView({ behavior: "smooth" })
-      } else if (e.key === "5") {
-        document.getElementById("sec-admissions")?.scrollIntoView({ behavior: "smooth" })
-      }
+      if (e.key === "Escape") setModalProject(null)
+      if (e.key === "1") document.getElementById("sec-overview")?.scrollIntoView({ behavior: "smooth" })
+      if (e.key === "2") document.getElementById("sec-news")?.scrollIntoView({ behavior: "smooth" })
+      if (e.key === "3") document.getElementById("sec-disciplines")?.scrollIntoView({ behavior: "smooth" })
+      if (e.key === "4") document.getElementById("sec-research")?.scrollIntoView({ behavior: "smooth" })
+      if (e.key === "5") document.getElementById("sec-lectures")?.scrollIntoView({ behavior: "smooth" })
+      if (e.key === "6") document.getElementById("sec-admissions")?.scrollIntoView({ behavior: "smooth" })
     }
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
-  const activeProject = researchProjects[activeResearchIdx]
+  const selectedResearch = researchProjects.find((p) => p.id === activeResearchId) || researchProjects[0]
 
   return (
     <div className="minimalist-editorial-root">
-      {/* 4-Track Architectural Column Grid Lines */}
-      <div className="viewport-grid-guides" aria-hidden="true">
-        <div className="grid-col-guide"></div>
-        <div className="grid-col-guide"></div>
-        <div className="grid-col-guide"></div>
-        <div className="grid-col-guide"></div>
+      {/* 结构性背景基准四轴发丝线网格（完全与页面内容容器同宽、无缝对齐） */}
+      <div className="grid-overlay" aria-hidden="true">
+        <div className="grid-col" />
+        <div className="grid-col" />
+        <div className="grid-col" />
+        <div className="grid-col" />
       </div>
 
-      {/* Top Architectural Masthead */}
-      <header className="editorial-masthead">
+      {/* 顶部极简学术刊物风格导览（Snap to Grid Columns） */}
+      <header className="masthead-container">
         <div className="masthead-left">
-          <a href="#top" className="masthead-logo-link" aria-label="人文艺术学院首页">
+          <a href="#top" className="masthead-logo-link" title="山东工艺美术学院 人文艺术学院">
             <img
               src="./college-logo.png"
               alt="山东工艺美术学院 人文艺术学院"
@@ -202,7 +330,7 @@ export default function App() {
             />
           </a>
           <span className="masthead-motto-badge">
-            软科中国大学专业排名全国 A+ · 国家级一流本科专业
+            全国 A+ 学科 · 国家级一流专业
           </span>
         </div>
 
@@ -211,21 +339,25 @@ export default function App() {
             <span>01 文脉本体</span>
             <kbd className="nav-kbd">1</kbd>
           </a>
-          <a href="#sec-disciplines" className="nav-item">
-            <span>02 教学系部</span>
+          <a href="#sec-news" className="nav-item">
+            <span>02 学院动态</span>
             <kbd className="nav-kbd">2</kbd>
           </a>
-          <a href="#sec-research" className="nav-item">
-            <span>03 重点科研</span>
+          <a href="#sec-disciplines" className="nav-item">
+            <span>03 专业设置</span>
             <kbd className="nav-kbd">3</kbd>
           </a>
-          <a href="#sec-lectures" className="nav-item">
-            <span>04 艺文讲坛</span>
+          <a href="#sec-research" className="nav-item">
+            <span>04 重点科研</span>
             <kbd className="nav-kbd">4</kbd>
           </a>
-          <a href="#sec-admissions" className="nav-item">
-            <span>05 招考通道</span>
+          <a href="#sec-lectures" className="nav-item">
+            <span>05 艺文讲坛</span>
             <kbd className="nav-kbd">5</kbd>
+          </a>
+          <a href="#sec-admissions" className="nav-item">
+            <span>06 招考通道</span>
+            <kbd className="nav-kbd">6</kbd>
           </a>
         </nav>
 
@@ -237,671 +369,721 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Editorial Canvas */}
+      {/* 页面主内容区域：所有 section 严格对齐 4 轴发丝网格 */}
       <main className="editorial-canvas" id="top">
-        {/* ================= SECTION 1: OVERVIEW & MONUMENTAL HERO ================= */}
+        {/* ================= SECTION 1: HERO OVERVIEW (图文大幅交叠与焦点展示) ================= */}
         <section className="editorial-section sec-hero" id="sec-overview">
-          {/* Subtle archival watermark text */}
+          {/* 背景典雅水印 */}
           <div className="hero-archival-watermark" aria-hidden="true">
             SHANDONG CRAFT & HUMANITIES · SUAD 2026
           </div>
 
+          {/* 首屏顶栏 Kicker（跨 4 列） */}
           <div className="section-kicker-row">
             <div className="kicker-group">
               <span className="tag-pill tag-red">SHANDONG CRAFT & HUMANITIES</span>
-              <span className="kicker-meta">2026年春季学期 · 第8教学周 · 齐鲁造物文脉</span>
+              <span className="kicker-meta">2026年春季学期 · 第8教学周 · 齐鲁造物文脉与当代创新</span>
             </div>
             <div className="kicker-index-meta">
-              <span>ARCHIVAL DOSSIER {`{VOL.2026}`}</span>
+              <span>ARCHIVAL DOSSIER {`{VOL.2026-08}`}</span>
             </div>
           </div>
 
-          {/* Monumental Headline with Inline Micro-Images */}
-          <div className="hero-monumental-block">
-            <h1 className="hero-editorial-h1">
-              <span className="h1-line">
-                以文化人
-                <span className="inline-media-frame" title="田野考察与文献特藏">
-                  <img src={curatedAssets.fieldLibrary} alt="文献特藏" />
-                </span>
-                · 艺文相长
-              </span>
-              <span className="h1-line">
-                守正拓新
-                <span className="inline-badge-marker">{`{全国 A+}`}</span>
-                <span className="inline-media-frame frame-wide" title="学院学术展陈空间">
-                  <img src={curatedAssets.heroExhibition} alt="学术展陈" />
-                </span>
-                · 知行合一
-              </span>
-            </h1>
-
-            {/* Discipline Matrix with Superscripts */}
-            <div className="hero-discipline-strip">
-              <div className="discipline-meta-label">
-                <span>{`{ 核心学科矩阵 }`}</span>
+          {/* 标语文字与大幅图片相互交叠的核心展区 */}
+          <div className="hero-stage">
+            {/* 巨幅排版文字底座 */}
+            <div className="hero-typography-layer">
+              <div className="hero-headline-row row-first">
+                <span className="headline-text">赓续文脉</span>
+                <span className="headline-sep">·</span>
+                <span className="headline-text">构筑高地</span>
+                <span className="headline-ghost-tag">{`{全国 A+}`}</span>
               </div>
-              <div className="discipline-nodes">
-                <span className="node-item">
-                  艺术设计学 <sup className="sup-badge sup-red">A+</sup>
-                </span>
-                <span className="node-sep">|</span>
-                <span className="node-item">
-                  艺术史论 <sup className="sup-badge sup-blue">一流专业</sup>
-                </span>
-                <span className="node-sep">|</span>
-                <span className="node-item">
-                  跨媒介计算 <sup className="sup-badge sup-green">重点实验室</sup>
-                </span>
-                <span className="node-sep">|</span>
-                <span className="node-item">
-                  黄河民艺所 <sup className="sup-badge sup-yellow">国家社科基地</sup>
-                </span>
-              </div>
-            </div>
 
-            {/* Editorial Lead & Academic Mission */}
-            <div className="hero-manifesto-grid">
-              <div className="manifesto-lead-col">
-                <p className="manifesto-callout">
-                  立足齐鲁深厚文脉，涵育当代造物思想。建设兼具中华文化底蕴与当代国际视野的一流艺术设计人文高地。
+              <div className="hero-headline-row row-second">
+                <span className="headline-text">以人文涵养艺术</span>
+                <span className="headline-sep">·</span>
+                <span className="headline-text">以设计赋能时代</span>
+              </div>
+
+              {/* 核心学术宣言与学科锚点（对齐 Col 1-2） */}
+              <div className="hero-lead-deck">
+                <p className="hero-lead-text">
+                  立足齐鲁深厚文化根脉，面向当代科技与社会发展命题。构筑融“理论研究、田野调查、策展实践、跨媒介创新”为一体的人文艺术教育与创新高地。
                 </p>
-                <p className="manifesto-body">
-                  人文艺术学院现设艺术设计学系与艺术史论系，建有黄河流域传统手工艺与现代设计文化研究中心、跨媒介艺术与非遗活化重点实验室。以深厚文脉为根基，直面当代技术变革，培养具备扎实学术素养、敏锐批判意识与前沿创新能力的复合型拔尖人才。
-                </p>
-              </div>
-
-              {/* Staggered Secondary Card */}
-              <div className="manifesto-card-col">
-                <div className="featured-artifact-card">
-                  <div className="artifact-image-container">
-                    <img src={curatedAssets.folkResearch} alt="民间艺术活态传承" />
-                    <span className="artifact-category-overlay">田野考察文献实录</span>
-                  </div>
-                  <div className="artifact-meta-deck">
-                    <div className="artifact-kicker">
-                      <span className="tag-pill tag-yellow">田野建档</span>
-                      <span className="artifact-year">2026 特刊</span>
-                    </div>
-                    <h3 className="artifact-title">黄河流域手工艺谱系测绘与活态传承</h3>
-                    <p className="artifact-abstract">
-                      深入沿黄九省区百余个手工艺传承聚落，完成实地口述史录音与高精度三维构件测绘，构建民间造物数字档案库。
-                    </p>
-                    <div className="artifact-action-row">
-                      <a href="#sec-research" className="link-arrow">
-                        <span>查看国家重点课题成果</span>
-                        <span className="arrow-char">→</span>
-                      </a>
-                    </div>
-                  </div>
+                <div className="hero-discipline-chips">
+                  <span
+                    className={`interactive-chip ${activePlate === 1 ? "chip-active" : ""}`}
+                    onMouseEnter={() => setActivePlate(1)}
+                    onMouseLeave={() => setActivePlate(null)}
+                  >
+                    [01 当代展陈空间]
+                  </span>
+                  <span
+                    className={`interactive-chip ${activePlate === 2 ? "chip-active" : ""}`}
+                    onMouseEnter={() => setActivePlate(2)}
+                    onMouseLeave={() => setActivePlate(null)}
+                  >
+                    [02 齐鲁文献特藏]
+                  </span>
+                  <span
+                    className={`interactive-chip ${activePlate === 3 ? "chip-active" : ""}`}
+                    onMouseEnter={() => setActivePlate(3)}
+                    onMouseLeave={() => setActivePlate(null)}
+                  >
+                    [03 黄河民艺田野]
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* 4-Cell Rigid Academic Metrics Bar */}
-            <div className="hero-metrics-strip">
-              <div className="metric-cell">
-                <div className="metric-value-row">
-                  <span className="metric-number">全国 A+</span>
+            {/* 大幅图片交叠层（鼠标 hover 时焦点展示） */}
+            <div className="hero-plates-container">
+              {/* Plate 1: 展陈空间（右上跨入字行，交互焦点） */}
+              <div
+                className={`hero-plate plate-exhibition ${activePlate === 1 ? "is-focused" : ""} ${
+                  activePlate !== null && activePlate !== 1 ? "is-dimmed" : ""
+                }`}
+                onMouseEnter={() => setActivePlate(1)}
+                onMouseLeave={() => setActivePlate(null)}
+              >
+                <div className="plate-inner-wrap">
+                  <img
+                    src={curatedAssets.heroExhibition}
+                    alt="学院当代艺术展陈空间与实践现场"
+                    className="plate-img"
+                  />
+                  <div className="plate-badge-strip">
+                    <span className="plate-code">PLATE #01</span>
+                    <span className="plate-caption">当代学术展陈空间</span>
+                  </div>
+                  <div className="plate-hover-card">
+                    <div className="hover-card-tag">国家级实验教学示范</div>
+                    <div className="hover-card-desc">2026届综合实践教学汇报展现场实景</div>
+                  </div>
                 </div>
-                <div className="metric-label">软科中国大学专业排名顶尖评级</div>
-                <div className="metric-desc">艺术设计学专业连续三年保持全国前列</div>
+                <div className="plate-reg-mark tl">┌</div>
+                <div className="plate-reg-mark br">┘</div>
               </div>
 
-              <div className="metric-cell">
-                <div className="metric-value-row">
-                  <span className="metric-number">2 个</span>
+              {/* Plate 2: 文献特藏（中左穿插文字与留白） */}
+              <div
+                className={`hero-plate plate-library ${activePlate === 2 ? "is-focused" : ""} ${
+                  activePlate !== null && activePlate !== 2 ? "is-dimmed" : ""
+                }`}
+                onMouseEnter={() => setActivePlate(2)}
+                onMouseLeave={() => setActivePlate(null)}
+              >
+                <div className="plate-inner-wrap">
+                  <img
+                    src={curatedAssets.fieldLibrary}
+                    alt="齐鲁文献特藏室与古籍活化"
+                    className="plate-img"
+                  />
+                  <div className="plate-badge-strip">
+                    <span className="plate-code">PLATE #02</span>
+                    <span className="plate-caption">齐鲁文献特藏室</span>
+                  </div>
+                  <div className="plate-hover-card">
+                    <div className="hover-card-tag">教育部基地学术成果</div>
+                    <div className="hover-card-desc">中国古代造物思想考论与善本古籍考释</div>
+                  </div>
                 </div>
-                <div className="metric-label">国家级一流本科专业建设点</div>
-                <div className="metric-desc">艺术设计学与艺术史论双双入选国家一流</div>
+                <div className="plate-reg-mark tl">┌</div>
+                <div className="plate-reg-mark br">┘</div>
               </div>
 
-              <div className="metric-cell">
-                <div className="metric-value-row">
-                  <span className="metric-number">100%</span>
+              {/* Plate 3: 民艺田野（右下交叠字行与指标栏） */}
+              <div
+                className={`hero-plate plate-research ${activePlate === 3 ? "is-focused" : ""} ${
+                  activePlate !== null && activePlate !== 3 ? "is-dimmed" : ""
+                }`}
+                onMouseEnter={() => setActivePlate(3)}
+                onMouseLeave={() => setActivePlate(null)}
+              >
+                <div className="plate-inner-wrap">
+                  <img
+                    src={curatedAssets.folkResearch}
+                    alt="黄河民艺田野调研标本档案"
+                    className="plate-img"
+                  />
+                  <div className="plate-badge-strip">
+                    <span className="plate-code">PLATE #03</span>
+                    <span className="plate-caption">黄河民艺田野测绘</span>
+                  </div>
+                  <div className="plate-hover-card">
+                    <div className="hover-card-tag">国家社科艺术学重点</div>
+                    <div className="hover-card-desc">全流域民间传统造物谱系建档与活态调查</div>
+                  </div>
                 </div>
-                <div className="metric-label">专任教师高职及博士比例</div>
-                <div className="metric-desc">汇聚国务院特贴专家与省部级教学名师</div>
+                <div className="plate-reg-mark tl">┌</div>
+                <div className="plate-reg-mark br">┘</div>
               </div>
+            </div>
+          </div>
 
-              <div className="metric-cell">
-                <div className="metric-value-row">
-                  <span className="metric-number">50+ 项</span>
-                </div>
-                <div className="metric-label">国家社科基金及省部级重点课题</div>
-                <div className="metric-desc">涵盖黄河非遗数字化、造物史论与乡村美育</div>
+          {/* 严谨对齐四列发丝线的学术核心指标条（4 Cells strictly snap to 4 Grid Columns） */}
+          <div className="hero-metrics-grid">
+            <div className="metric-grid-cell col-1">
+              <div className="metric-val-wrap">
+                <span className="metric-strong">全国 A+</span>
               </div>
+              <div className="metric-title">软科中国大学专业排名顶尖评级</div>
+              <div className="metric-sub">艺术设计学专业连续三年保持全国前列</div>
+            </div>
+
+            <div className="metric-grid-cell col-2">
+              <div className="metric-val-wrap">
+                <span className="metric-strong">2 个</span>
+              </div>
+              <div className="metric-title">国家级一流本科专业建设点</div>
+              <div className="metric-sub">艺术设计学与艺术史论双双入选国家一流</div>
+            </div>
+
+            <div className="metric-grid-cell col-3">
+              <div className="metric-val-wrap">
+                <span className="metric-strong">100%</span>
+              </div>
+              <div className="metric-title">专任教师高职及博士比例</div>
+              <div className="metric-sub">汇聚国务院特贴专家与省部级教学名师</div>
+            </div>
+
+            <div className="metric-grid-cell col-4">
+              <div className="metric-val-wrap">
+                <span className="metric-strong">50+ 项</span>
+              </div>
+              <div className="metric-title">国家社科基金及省部重点课题</div>
+              <div className="metric-sub">涵盖黄河非遗数字化、造物史论与美育</div>
             </div>
           </div>
         </section>
 
-        {/* ================= SECTION 2: DISCIPLINES & ATELIERS ================= */}
+        {/* ================= SECTION 2: 学院新闻与动态 (新增板块·报刊式非对称排版) ================= */}
+        <section className="editorial-section sec-news" id="sec-news">
+          <div className="section-title-strip">
+            <div className="strip-left">
+              <span className="strip-index">02</span>
+              <span className="strip-tag tag-pill tag-red">ACADEMIC ANNALS & DISPATCH</span>
+              <h2 className="strip-h2">学院新闻与学术动态</h2>
+            </div>
+            <div className="strip-right">
+              <span className="strip-note">记录学院学术生发、教学展览与前沿育人纪事</span>
+            </div>
+          </div>
+
+          {/* 报刊式无框非对称排版：左边头条大幅影像，右边3篇发丝线通告行 */}
+          <div className="news-press-grid">
+            {/* 左侧头条（对齐 Col 1-2，跨半屏） */}
+            <article className="news-lead-feature">
+              <div className="lead-img-viewport">
+                <img src={newsList[0].image} alt={newsList[0].title} className="lead-img" />
+                <div className="lead-tag-badge">
+                  <span className={`tag-pill ${newsList[0].tagClass}`}>{newsList[0].tag}</span>
+                  <span className="lead-date-stamp">{newsList[0].date}</span>
+                </div>
+              </div>
+              <div className="lead-content-deck">
+                <div className="lead-meta-row">
+                  <span className="lead-vol">TOP STORY · 院务通报</span>
+                  <span className="lead-author">学院综合事务办公室</span>
+                </div>
+                <h3 className="lead-title">{newsList[0].title}</h3>
+                <p className="lead-excerpt">{newsList[0].excerpt}</p>
+                <div className="lead-action-row">
+                  <span className="read-more-link">
+                    阅读详讯全文 <span className="arrow-char">→</span>
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            {/* 右侧速递清单（对齐 Col 3-4，水平发丝线分割） */}
+            <div className="news-dispatch-list">
+              {newsList.slice(1).map((item, index) => (
+                <article key={item.id} className="news-list-row">
+                  <div className="row-date-badge">
+                    <span className="date-day">{item.day}</span>
+                    <span className="date-month">{item.month}</span>
+                  </div>
+                  <div className="row-body">
+                    <div className="row-meta">
+                      <span className={`tag-pill ${item.tagClass}`}>{item.tag}</span>
+                      <span className="row-index">DISPATCH #0{index + 2}</span>
+                    </div>
+                    <h4 className="row-title">{item.title}</h4>
+                    <p className="row-excerpt">{item.excerpt}</p>
+                  </div>
+                  <div className="row-action">
+                    <span className="hover-arrow">↗</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================= SECTION 3: 学科设置与专业矩阵 (源自01/02的8大专业·4列建筑表格) ================= */}
         <section className="editorial-section sec-disciplines" id="sec-disciplines">
-          <div className="section-header-row">
-            <div>
-              <div className="section-sub-kicker">ACADEMIC ATELIERS & DISCIPLINES</div>
-              <h2 className="section-title">学科设置与教学系部</h2>
+          <div className="section-title-strip">
+            <div className="strip-left">
+              <span className="strip-index">03</span>
+              <span className="strip-tag tag-pill tag-blue">CURRICULUM MATRIX & DEPARTMENTS</span>
+              <h2 className="strip-h2">学科设置与专业矩阵</h2>
             </div>
-            <div className="section-header-note">
-              <span>构建“理论深度 + 史论典籍 + 跨媒介实验 + 黄河民艺活化”协同育人体系</span>
+            <div className="strip-right">
+              <span className="strip-note">七个特色本科专业与一个跨学科虚拟教研室</span>
             </div>
           </div>
 
-          {/* Bento Grid Layout breaking conventional symmetry */}
-          <div className="disciplines-bento-grid">
-            {/* Card 1: 艺术设计学系 (Large focus card) */}
-            <article className="bento-card bento-span-2 card-highlight">
-              <div className="bento-card-header">
-                <div className="bento-code-tag">
-                  <span className="tag-pill tag-red">软科全国 A+ · 国家一流专业</span>
-                  <span className="mono-code">MAJOR CODE: 130501</span>
+          {/* 4列 × 2行 无缝建筑索引表（完全扣合四列发丝线，杜绝浮动卡片） */}
+          <div className="programs-table-grid">
+            {academicPrograms.map((prog, idx) => (
+              <div
+                key={prog.no}
+                className={`program-table-cell ${activeProgramIndex === idx ? "cell-selected" : ""}`}
+                onClick={() => setActiveProgramIndex(idx)}
+              >
+                <div className="cell-top-meta">
+                  <span className="cell-no">{prog.no}</span>
+                  <span className={`tag-pill ${prog.tagClass}`}>{prog.qualification}</span>
                 </div>
-                <span className="bento-corner-num">01</span>
-              </div>
-
-              <h3 className="bento-dept-name">艺术设计学系</h3>
-              <p className="bento-dept-lead">
-                立足深厚人文底蕴与现代设计实践，面向国家文化战略、设计管理、信息与交互体验、文化遗产数字化传播需求，培养具备扎实文脉根基与前沿创新能力的拔尖复合型设计人才。
-              </p>
-
-              <div className="bento-feature-list">
-                <div className="feature-item">
-                  <span className="feature-bullet">•</span>
-                  <span><strong>专业特色方向：</strong>文化战略与设计策划、信息与界面交互体验、生活方式文创研发、现代设计文化批评</span>
+                <div className="cell-main-info">
+                  <h3 className="cell-prog-name">{prog.name}</h3>
+                  <div className="cell-en-name">{prog.enName}</div>
+                  <div className="cell-code">{prog.code}</div>
                 </div>
-                <div className="feature-item">
-                  <span className="feature-bullet">•</span>
-                  <span><strong>协同育人平台：</strong>国家级实验教学示范中心、社会美育与乡村在地设计工作坊</span>
+                <p className="cell-summary">{prog.summary}</p>
+                <div className="cell-courses-list">
+                  <div className="courses-label">核心课程与研究向度：</div>
+                  <div className="courses-tags">
+                    {prog.courses.map((c, i) => (
+                      <span key={i} className="course-chip">
+                        {c}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="feature-item">
-                  <span className="feature-bullet">•</span>
-                  <span><strong>授予学位层次：</strong>艺术学学士 / 艺术学硕士 / 艺术专业硕士 (MFA)</span>
-                </div>
-              </div>
-
-              <div className="bento-footer-row">
-                <span className="bento-meta-badge">全程双导师制 · 创新课题制工坊</span>
-                <a href="#sec-admissions" className="link-arrow">
-                  <span>查看高考招生专业介绍</span>
-                  <span className="arrow-char">→</span>
-                </a>
-              </div>
-            </article>
-
-            {/* Card 2: 跨媒介艺术实验室 */}
-            <article className="bento-card bento-span-2">
-              <div className="bento-card-header">
-                <div className="bento-code-tag">
-                  <span className="tag-pill tag-green">前沿交叉重点实验室</span>
-                  <span className="mono-code">LAB-INTERMEDIA: 01</span>
-                </div>
-                <span className="bento-corner-num">02</span>
-              </div>
-
-              <h3 className="bento-dept-name">跨媒介艺术与计算交互重点实验室</h3>
-              <p className="bento-dept-lead">
-                聚焦人工智能生成艺术（AIGC）、沉浸式空间视听、动态数据可视化及人机协同创作，探索未来科技与东方诗意美学的共生边界。
-              </p>
-
-              <div className="pill-tag-cluster">
-                <span className="tag-pill tag-green">生成式计算艺术</span>
-                <span className="tag-pill tag-green">多通道空间声场</span>
-                <span className="tag-pill tag-green">数字孪生虚实共生</span>
-                <span className="tag-pill tag-green">气候环境感知装置</span>
-              </div>
-
-              <div className="bento-footer-row">
-                <span className="bento-meta-badge">配有高性能算力集群与多通道感知展演大厅</span>
-                <a href="#sec-research" className="link-arrow">
-                  <span>查看实验成果</span>
-                  <span className="arrow-char">→</span>
-                </a>
-              </div>
-            </article>
-
-            {/* Card 3: 艺术史论系 */}
-            <article className="bento-card bento-span-2">
-              <div className="bento-card-header">
-                <div className="bento-code-tag">
-                  <span className="tag-pill tag-blue">国家级一流本科专业</span>
-                  <span className="mono-code">MAJOR CODE: 130101</span>
-                </div>
-                <span className="bento-corner-num">03</span>
-              </div>
-
-              <h3 className="bento-dept-name">艺术史论系</h3>
-              <p className="bento-dept-lead">
-                注重经典文献研读与出土器物互证，深耕中国古代造物思想、工艺文化制度史、西方现当代艺术批评与东方美学谱系，培养具备高水平文字著述与批判性研究能力的研究型专门人才。
-              </p>
-
-              <div className="bento-feature-list">
-                <div className="feature-item">
-                  <span className="feature-bullet">•</span>
-                  <span><strong>核心研究板块：</strong>中华造物哲学考论、齐鲁工艺史料整理、艺术批评与策展实践、文化遗产保护理论</span>
-                </div>
-                <div className="feature-item">
-                  <span className="feature-bullet">•</span>
-                  <span><strong>典籍文献特藏：</strong>藏有珍贵明清造物刻本、全套手工艺田野调查拓本与珍稀地方志资源</span>
+                <div className="cell-bottom-indicator">
+                  <span className="cell-action-text">培养方案细则</span>
+                  <span className="cell-arrow">→</span>
                 </div>
               </div>
-
-              <div className="bento-footer-row">
-                <span className="bento-meta-badge">主编《工艺文化研究》集刊</span>
-                <a href="#sec-admissions" className="link-arrow">
-                  <span>专业培养方案</span>
-                  <span className="arrow-char">→</span>
-                </a>
-              </div>
-            </article>
-
-            {/* Card 4: 黄河流域民间艺术研究所 */}
-            <article className="bento-card bento-span-2 card-tinted">
-              <div className="bento-card-header">
-                <div className="bento-code-tag">
-                  <span className="tag-pill tag-yellow">省级重点人文社科基地</span>
-                  <span className="mono-code">HERITAGE-RESEARCH</span>
-                </div>
-                <span className="bento-corner-num">04</span>
-              </div>
-
-              <h3 className="bento-dept-name">黄河流域民间艺术研究所</h3>
-              <p className="bento-dept-lead">
-                国家社科基金艺术学重点项目实体依托平台。长期深入沿黄流域九省区开展田野调查，建有全国领先的黄河民艺实物档案库与全景数字化活化图谱。
-              </p>
-
-              <div className="pill-tag-cluster">
-                <span className="tag-pill tag-yellow">沿黄传统造物谱系</span>
-                <span className="tag-pill tag-yellow">手工艺口述史抢救工程</span>
-                <span className="tag-pill tag-yellow">乡村振兴在地活化</span>
-              </div>
-
-              <div className="bento-footer-row">
-                <span className="bento-meta-badge">已出版《黄河流域传统手工艺图典》（八卷本）</span>
-                <a href="#sec-research" className="link-arrow">
-                  <span>查看田野项目</span>
-                  <span className="arrow-char">→</span>
-                </a>
-              </div>
-            </article>
+            ))}
           </div>
         </section>
 
-        {/* ================= SECTION 3: CURATORIAL RESEARCH & DOSSIER ================= */}
+        {/* ================= SECTION 4: 重点科研基地与学术高地 (全景水平双联展陈) ================= */}
         <section className="editorial-section sec-research" id="sec-research">
-          <div className="section-header-row">
-            <div>
-              <div className="section-sub-kicker">CURATORIAL ARCHIVE & MAJOR RESEARCH</div>
-              <h2 className="section-title">教学科研与学术展陈成果</h2>
+          <div className="section-title-strip">
+            <div className="strip-left">
+              <span className="strip-index">04</span>
+              <span className="strip-tag tag-pill tag-yellow">RESEARCH REPOSITORY & FIELD SPECIMENS</span>
+              <h2 className="strip-h2">学术研究与科研高地</h2>
             </div>
-            <div className="section-header-note">
-              <span>把论文写在祖国大地上，以高水平重大科研项目与先锋艺术创作回应时代命题</span>
+            <div className="strip-right">
+              <span className="strip-note">国家社科重点项目与齐鲁造物学术成果档案</span>
             </div>
           </div>
 
-          {/* Interactive Curatorial Split Layout */}
-          <div className="research-split-deck">
-            {/* Left Column: Numbered List */}
-            <div className="research-list-col">
-              {researchProjects.map((proj, idx) => (
-                <div
-                  key={proj.id}
-                  className={`research-row-card ${activeResearchIdx === idx ? "is-active" : ""}`}
-                  onMouseEnter={() => setActiveResearchIdx(idx)}
-                  onClick={() => setModalItem(proj)}
-                >
-                  <div className="row-num-block">
-                    <span className="row-index">{proj.id}</span>
-                  </div>
-                  <div className="row-content-block">
-                    <div className="row-meta-strip">
+          {/* 全景水平双联展陈：左侧策展名录交互抽取，右侧全高档案实景标本 */}
+          <div className="research-panoramic-split">
+            {/* 左侧项目名录（Col 1-2） */}
+            <div className="research-curation-list">
+              <div className="list-mast-kicker">
+                <span>PROJECT DOSSIER SELECTION · 重点课题集刊</span>
+              </div>
+              {researchProjects.map((proj) => {
+                const isActive = proj.id === activeResearchId
+                return (
+                  <div
+                    key={proj.id}
+                    className={`research-list-item ${isActive ? "is-selected" : ""}`}
+                    onClick={() => setActiveResearchId(proj.id)}
+                  >
+                    <div className="item-meta-col">
+                      <span className="item-idx">#{proj.id}</span>
                       <span className={`tag-pill ${proj.categoryClass}`}>{proj.category}</span>
-                      <span className="row-code">{proj.code}</span>
-                      <span className="row-year">{proj.year}</span>
                     </div>
-                    <h4 className="row-title">{proj.title}</h4>
-                    <p className="row-leader-line">
-                      <span>主持团队：{proj.leader}</span>
-                      <span className="sep-slash">/</span>
-                      <span>依托：{proj.dept}</span>
-                    </p>
+                    <div className="item-main-col">
+                      <div className="item-code-line">
+                        <span>{proj.code}</span>
+                        <span className="sep-dot">·</span>
+                        <span>{proj.dept}</span>
+                      </div>
+                      <h3 className="item-title">{proj.title}</h3>
+                    </div>
+                    <div className="item-arrow-col">
+                      <span className="arrow-glyph">{isActive ? "●" : "→"}</span>
+                    </div>
                   </div>
-                  <div className="row-action-block">
-                    <button
-                      className="btn-inspect-circle"
-                      title="查阅课题详细档案"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setModalItem(proj)
-                      }}
-                    >
-                      <span>→</span>
-                    </button>
+                )
+              })}
+            </div>
+
+            {/* 右侧学术标本检视视窗（Col 3-4） */}
+            <div className="research-specimen-viewer">
+              <div className="viewer-specimen-frame">
+                <img
+                  src={selectedResearch.image}
+                  alt={selectedResearch.title}
+                  className="specimen-img"
+                />
+                <div className="specimen-overlay-tags">
+                  <span className="specimen-tag tag-pill tag-yellow">{selectedResearch.category}</span>
+                  <span className="specimen-id-badge">{selectedResearch.code}</span>
+                </div>
+                <div className="specimen-coordinates">
+                  <span>36.65°N, 116.82°E · 长清大学科技园特藏文献库</span>
+                </div>
+              </div>
+
+              <div className="viewer-data-deck">
+                <div className="deck-header">
+                  <span className="deck-dept">{selectedResearch.dept}</span>
+                  <span className="deck-year">{selectedResearch.year}</span>
+                </div>
+                <h3 className="deck-title">{selectedResearch.title}</h3>
+                <div className="deck-role-badge">{selectedResearch.role}</div>
+                <p className="deck-summary">{selectedResearch.summary}</p>
+                <div className="deck-medium-row">
+                  <span className="medium-label">成果形式：</span>
+                  <span className="medium-val">{selectedResearch.medium}</span>
+                </div>
+                <div className="deck-actions">
+                  <button
+                    className="btn-open-dossier"
+                    onClick={() => setModalProject(selectedResearch)}
+                  >
+                    <span>调取完整学术案卷</span>
+                    <span className="btn-arrow">↗</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= SECTION 5: 文心讲堂与学术通报 (票根式学术通行证 + 委员会) ================= */}
+        <section className="editorial-section sec-lectures" id="sec-lectures">
+          <div className="section-title-strip">
+            <div className="strip-left">
+              <span className="strip-index">05</span>
+              <span className="strip-tag tag-pill tag-green">COLLOQUIUM PASS & SCHOLAR FORUM</span>
+              <h2 className="strip-h2">文心讲堂与学术通报</h2>
+            </div>
+            <div className="strip-right">
+              <span className="strip-note">齐鲁艺文名家讲坛与高规格学科领航学术盛会</span>
+            </div>
+          </div>
+
+          {/* 票根式穿孔通行证布局 */}
+          <div className="lectures-ticket-strip">
+            {lectureSeries.map((lec) => (
+              <div key={lec.no} className="lecture-ticket-card">
+                <div className="ticket-perforation-edge" />
+                <div className="ticket-body">
+                  <div className="ticket-top-row">
+                    <span className="ticket-pass-id">PASS #{lec.no}</span>
+                    <span className={`tag-pill ${lec.statusClass}`}>{lec.status}</span>
                   </div>
+                  <div className="ticket-series-name">{lec.series}</div>
+                  <h3 className="ticket-title">{lec.title}</h3>
+
+                  <div className="ticket-speaker-block">
+                    <div className="speaker-name">{lec.speaker}</div>
+                    <div className="speaker-title">{lec.speakerTitle}</div>
+                  </div>
+
+                  <div className="ticket-footer-meta">
+                    <div className="meta-time">
+                      <span className="time-date">{lec.date}</span>
+                      <span className="time-hour">{lec.time}</span>
+                    </div>
+                    <div className="meta-loc">{lec.location}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 学术委员会专家席（横向结构化名册，对齐四列网格） */}
+          <div className="faculty-committee-strip">
+            <div className="committee-header-col">
+              <div className="committee-title">学术委员会与学科领航学者</div>
+              <div className="committee-sub">汇聚全国顶尖工艺美学理论家与国家社科带头人</div>
+            </div>
+            <div className="committee-grid">
+              {academicCommittee.map((scholar, idx) => (
+                <div key={idx} className="committee-cell">
+                  <div className="scholar-avatar-frame">
+                    <span className="scholar-num">0{idx + 1}</span>
+                  </div>
+                  <div className="scholar-name">{scholar.name}</div>
+                  <div className="scholar-role">{scholar.role}</div>
+                  <div className="scholar-spec">{scholar.spec}</div>
                 </div>
               ))}
             </div>
-
-            {/* Right Column: Live Curatorial Display Window */}
-            <div className="research-curatorial-window">
-              <div className="curatorial-preview-card">
-                <div className="curatorial-media-box">
-                  <img src={activeProject.image} alt={activeProject.title} />
-                  <div className="curatorial-tag-float">
-                    <span className={`tag-pill ${activeProject.categoryClass}`}>{activeProject.category}</span>
-                  </div>
-                </div>
-
-                <div className="curatorial-details-box">
-                  <div className="curatorial-code-row">
-                    <span className="mono-code">{activeProject.code}</span>
-                    <span className="curatorial-year">{activeProject.year}</span>
-                  </div>
-
-                  <h3 className="curatorial-title">{activeProject.title}</h3>
-                  <div className="curatorial-role-strip">{activeProject.role}</div>
-
-                  <div className="curatorial-spec-row">
-                    <span className="spec-label">成果形式与载体：</span>
-                    <span className="spec-val">{activeProject.medium}</span>
-                  </div>
-
-                  <p className="curatorial-summary-text">{activeProject.summary}</p>
-
-                  <div className="curatorial-action-footer">
-                    <button
-                      className="btn-open-dossier"
-                      onClick={() => setModalItem(activeProject)}
-                    >
-                      <span>查阅完整成果档案与文献索引</span>
-                      <span className="arrow-char">↗</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* ================= SECTION 4: FORUMS & FACULTY MATRIX ================= */}
-        <section className="editorial-section sec-lectures" id="sec-lectures">
-          <div className="section-header-row">
-            <div>
-              <div className="section-sub-kicker">DISCOURSE & ACADEMIC LEADERSHIP</div>
-              <h2 className="section-title">齐鲁艺文讲坛与师资学术矩阵</h2>
-            </div>
-            <div className="section-header-note">
-              <span>汇聚全国艺术学与设计界权威学者，打造兼具思想锋芒与学术广度的对话阵地</span>
-            </div>
-          </div>
-
-          {/* Academic Lecture Passes Deck */}
-          <div className="lecture-passes-deck">
-            {lectureSeries.map((lec) => (
-              <div key={lec.no} className="lecture-pass-card">
-                <div className="pass-meta-col">
-                  <span className="pass-no">PASS #{lec.no}</span>
-                  <div className="pass-date-block">
-                    <span className="pass-date">{lec.date}</span>
-                    <span className="pass-time">{lec.time}</span>
-                  </div>
-                </div>
-
-                <div className="pass-info-col">
-                  <div className="pass-series-line">
-                    <span className={`tag-pill ${lec.statusClass}`}>{lec.status}</span>
-                    <span className="series-title">{lec.series}</span>
-                  </div>
-                  <h3 className="pass-lecture-title">{lec.title}</h3>
-                  <div className="pass-speaker-lockup">
-                    <span className="speaker-name">{lec.speaker}</span>
-                    <span className="speaker-title">{lec.speakerTitle}</span>
-                  </div>
-                  <div className="pass-location-row">
-                    <span className="loc-label">学术会场：</span>
-                    <span className="loc-text">{lec.location}</span>
-                  </div>
-                </div>
-
-                <div className="pass-action-col">
-                  <a href="#sec-admissions" className="btn-pass-action">
-                    <span>预约席位</span>
-                    <span className="arrow-char">→</span>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Faculty Matrix Cards */}
-          <div className="faculty-matrix-heading">
-            <h3 className="sub-section-title">学术委员会与骨干导师团队</h3>
-            <span className="faculty-count-badge">ACADEMIC COMMITTEE (04)</span>
-          </div>
-
-          <div className="faculty-grid">
-            {facultyMembers.map((fac, idx) => (
-              <div key={idx} className="faculty-card">
-                <div className="faculty-card-top">
-                  <span className="fac-idx">FELLOW 0{idx + 1}</span>
-                  <span className="tag-pill tag-blue">{fac.tags[0]}</span>
-                </div>
-
-                <h4 className="faculty-name">{fac.name}</h4>
-                <div className="faculty-role-title">{fac.role}</div>
-
-                <div className="fac-info-block">
-                  <div className="fac-info-label">主要研究领域：</div>
-                  <div className="fac-info-val">{fac.research}</div>
-                </div>
-
-                <div className="fac-info-block">
-                  <div className="fac-info-label">代表性著作与教学成果：</div>
-                  <div className="fac-info-val">{fac.works}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ================= SECTION 5: ADMISSIONS & OFFICIAL FOOTER ================= */}
+        {/* ================= SECTION 6: 招考通道与育人体系 (深黑深色块对比压轴) ================= */}
         <section className="editorial-section sec-admissions" id="sec-admissions">
-          <div className="section-header-row">
-            <div>
-              <div className="section-sub-kicker">ADMISSIONS & DEGREE PROGRAMMES</div>
-              <h2 className="section-title">2026年本硕招考指南与综合校务</h2>
+          <div className="section-title-strip">
+            <div className="strip-left">
+              <span className="strip-index">06</span>
+              <span className="strip-tag tag-pill tag-red">TALENT CULTIVATION & ENROLLMENT</span>
+              <h2 className="strip-h2">招生与学业培养</h2>
             </div>
-            <div className="section-header-note">
-              <span>热忱欢迎热爱中华优秀传统造物文化、具备敏锐艺术观察力与批判性思考能力的学子报考</span>
-            </div>
-          </div>
-
-          <div className="admissions-split-grid">
-            {/* Undergraduate Admissions Card */}
-            <div className="admissions-card">
-              <div className="adm-header">
-                <span className="tag-pill tag-red">普通本科招生</span>
-                <span className="adm-level">BACHELOR PROGRAMMES</span>
-              </div>
-              <h3 className="adm-title">本科生统考招生专业</h3>
-              <p className="adm-desc">
-                面向全国招收艺术设计学（软科全国A+）、艺术史论专业本科生。实行全程双导师制、田野考察与课题工坊育人机制。
-              </p>
-              <ul className="adm-path-list">
-                <li>
-                  <a href="#sec-overview" className="adm-link-item">
-                    <span>2026 艺术设计学专业本科招生计划与简章</span>
-                    <span className="link-arrow-sym">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#sec-overview" className="adm-link-item">
-                    <span>2026 艺术史论专业高考报考指南及录取参考</span>
-                    <span className="link-arrow-sym">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#sec-overview" className="adm-link-item">
-                    <span>历年各省份录取分数线与毕业生就业发展报告</span>
-                    <span className="link-arrow-sym">↗</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Graduate Admissions Card */}
-            <div className="admissions-card card-tinted">
-              <div className="adm-header">
-                <span className="tag-pill tag-blue">研究生教育</span>
-                <span className="adm-level">MASTER & RESEARCH</span>
-              </div>
-              <h3 className="adm-title">硕士研究生与学术流动</h3>
-              <p className="adm-desc">
-                招收艺术学学术学位（设计历史与理论、艺术批评学方向）及艺术专业硕士（MFA，文创策划与展示设计方向）。设有科研创新基金与境外访学资助。
-              </p>
-              <ul className="adm-path-list">
-                <li>
-                  <a href="#sec-overview" className="adm-link-item">
-                    <span>2026 硕士研究生初试统考大纲与专业参考书目</span>
-                    <span className="link-arrow-sym">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#sec-overview" className="adm-link-item">
-                    <span>推荐免试优秀应届本科生攻读硕士学位办法</span>
-                    <span className="link-arrow-sym">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#sec-overview" className="adm-link-item">
-                    <span>青年学者科研流动站与访问学者招募公告</span>
-                    <span className="link-arrow-sym">↗</span>
-                  </a>
-                </li>
-              </ul>
+            <div className="strip-right">
+              <span className="strip-note">本科拔尖创新人才与学术型硕士研究生招考选拔</span>
             </div>
           </div>
 
-          {/* Download Brochure Strip */}
-          <div className="brochure-download-strip">
-            <div className="brochure-left">
-              <span className="brochure-tag tag-pill tag-green">官方发布</span>
-              <span className="brochure-name">《山东工艺美术学院 人文艺术学院 2026 本科与研究生招生培养指南 (完整版 PDF)》</span>
+          {/* 对比色块布局：左侧深黑炭黑高级块（研究生），右侧暖骨白精装块（本科生） */}
+          <div className="admissions-contrast-grid">
+            {/* 深色炭黑块（研究生教育） */}
+            <div className="admissions-card card-dark">
+              <div className="card-top-deck">
+                <span className="card-badge badge-dark-accent">POSTGRADUATE & PHD</span>
+                <span className="card-year">2026 学年度</span>
+              </div>
+              <h3 className="card-title">研究生招考与拔尖学者培育通道</h3>
+              <p className="card-desc">
+                面向全国招收学术型硕士研究生与协同培养博士生。依托国家社科重点基地与省重点实验室，实行双导师制与课题组沉浸式联合培养。
+              </p>
+              <div className="card-specs-list">
+                <div className="spec-item">
+                  <span className="spec-dot">■</span>
+                  <span>艺术设计学（设计史论、设计策划、文创管理、跨媒介设计）</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-dot">■</span>
+                  <span>艺术史论（中国美术史、工艺美术史、非遗理论与保护）</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-dot">■</span>
+                  <span>协同培养博士创新专项（黄河流域造物制度与文化治理）</span>
+                </div>
+              </div>
+              <div className="card-action-wrap">
+                <a
+                  href="#top"
+                  className="btn-card-white"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    alert("研究生招生简章与专业目录已准备完毕，可在招生办公室专区查阅。")
+                  }}
+                >
+                  <span>下载学术型硕士招生简章</span>
+                  <span className="btn-icon">↓</span>
+                </a>
+              </div>
             </div>
-            <div className="brochure-right">
-              <a href="#top" className="btn-download-pdf">
-                <span>下载招生简章</span>
-                <span className="btn-icon">↓</span>
+
+            {/* 暖白精装块（本科生教育） */}
+            <div className="admissions-card card-bone">
+              <div className="card-top-deck">
+                <span className="tag-pill tag-blue">UNDERGRADUATE STUDIES</span>
+                <span className="card-year">2026 本科招生</span>
+              </div>
+              <h3 className="card-title">本科各专业招考与卓越培养计划</h3>
+              <p className="card-desc">
+                涵盖艺术设计学（软科 A+）、艺术史论、文化产业管理、非物质文化遗产保护等 7 个一流专业方向，实施“厚基础、宽口径、重实践、强通识”育人模式。
+              </p>
+              <div className="card-specs-list">
+                <div className="spec-item">
+                  <span className="spec-dot-dark">●</span>
+                  <span>招生咨询专线：0531-89626188 / 89626189</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-dot-dark">●</span>
+                  <span>录取批次：艺术类提前批 / 普通本科一批（文理兼招）</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-dot-dark">●</span>
+                  <span>拔尖创新实验班：黄河文脉造物创新实验班（大二选拔）</span>
+                </div>
+              </div>
+              <div className="card-action-wrap">
+                <a
+                  href="#top"
+                  className="btn-card-dark"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    alert("本科生招生报考指南已就绪，欢迎广大学子报考山东工艺美术学院人文艺术学院。")
+                  }}
+                >
+                  <span>查阅本科招生报考问答指南</span>
+                  <span className="btn-icon">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* 全宽 4 列咨询横幅（Snap to Grid Lines） */}
+          <div className="admissions-hotline-strip">
+            <div className="hotline-cell">
+              <span className="hl-kicker">招考咨询热线</span>
+              <span className="hl-main">0531-89626188</span>
+            </div>
+            <div className="hotline-cell">
+              <span className="hl-kicker">官方学术邮箱</span>
+              <span className="hl-main">rwys@sdada.edu.cn</span>
+            </div>
+            <div className="hotline-cell">
+              <span className="hl-kicker">校区现场地址</span>
+              <span className="hl-main">长清校区人文艺术学院教学楼</span>
+            </div>
+            <div className="hotline-cell">
+              <span className="hl-kicker">资料索取</span>
+              <a
+                href="#top"
+                className="hl-btn"
+                onClick={(e) => {
+                  e.preventDefault()
+                  alert("宣传册已打包为离线归档包，可于院办前台或线上直接浏览。")
+                }}
+              >
+                获取 2026 招生简章 PDF ↗
               </a>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Official Institutional Footer */}
+      {/* ================= 官方严谨学术四列页脚 (Snap to Grid Columns) ================= */}
       <footer className="editorial-footer">
-        <div className="footer-top-row">
-          <div className="footer-brand-deck">
-            <img
-              src="./college-logo.png"
-              alt="山东工艺美术学院 人文艺术学院"
-              className="footer-logo-img"
-            />
-            <p className="footer-motto-line">“以文化人，艺文相长；守正拓新，知行合一”</p>
-          </div>
-
-          <div className="footer-columns-group">
-            <div className="footer-col">
-              <div className="footer-col-title">校区驻地与联络</div>
-              <p className="footer-col-text">地址：山东省济南市长清区大学科技园大学路1号</p>
-              <p className="footer-col-text">邮政编码：250300</p>
-              <p className="footer-col-text">学院办公室：0531-89626000</p>
-              <p className="footer-col-text">教学科研办公室：0531-89626001</p>
-              <p className="footer-col-text">官方电子邮箱：sha_office@sdada.edu.cn</p>
+        <div className="footer-container">
+          <div className="footer-col col-brand">
+            <div className="footer-logo-wrap">
+              <img
+                src="./college-logo.png"
+                alt="山东工艺美术学院 人文艺术学院"
+                className="footer-logo-img"
+              />
             </div>
-
-            <div className="footer-col">
-              <div className="footer-col-title">教学与科研实体</div>
-              <p className="footer-col-text">艺术设计学系（国家级一流本科专业 / 软科全国 A+）</p>
-              <p className="footer-col-text">艺术史论系（国家级一流本科专业点）</p>
-              <p className="footer-col-text">跨媒介艺术与计算交互重点实验室</p>
-              <p className="footer-col-text">黄河流域民间艺术研究所</p>
+            <div className="footer-institution">
+              <strong>山东工艺美术学院 人文艺术学院</strong>
+              <div className="footer-en">School of Arts and Humanities, SUAD</div>
             </div>
-
-            <div className="footer-col">
-              <div className="footer-col-title">校内管理与资源直达</div>
-              <p className="footer-col-link"><a href="#top">山东工艺美术学院主站 (sdada.edu.cn)</a></p>
-              <p className="footer-col-link"><a href="#top">教务综合管理系统</a></p>
-              <p className="footer-col-link"><a href="#top">研究生处 / 培养办公室</a></p>
-              <p className="footer-col-link"><a href="#top">图书馆数字文献特藏数据库</a></p>
+            <p className="footer-motto">
+              天工人巧日争新 · 充实光辉发扬大
+            </p>
+            <div className="footer-loc-info">
+              <span>中国·济南·大学科技园大学路1255号</span>
+              <span>邮编：250300</span>
             </div>
           </div>
-        </div>
 
-        <div className="footer-bottom-bar">
-          <div className="footer-copyright">
-            版权所有 © 2026 山东工艺美术学院 人文艺术学院 · 官方网站改版方案三（高定极简典雅版）
+          <div className="footer-col col-nav">
+            <div className="footer-heading">专业设置与系部</div>
+            <ul className="footer-link-list">
+              <li><a href="#sec-disciplines">艺术设计学 (软科 A+)</a></li>
+              <li><a href="#sec-disciplines">艺术史论系 (国家一流)</a></li>
+              <li><a href="#sec-disciplines">文化产业管理 (国家一流)</a></li>
+              <li><a href="#sec-disciplines">美术学专业 (特色专业)</a></li>
+              <li><a href="#sec-disciplines">非物质文化遗产保护</a></li>
+              <li><a href="#sec-disciplines">文物保护与修复中心</a></li>
+              <li><a href="#sec-disciplines">广告策划与管理</a></li>
+            </ul>
           </div>
-          <div className="footer-filing">
-            <span>鲁ICP备05002166号</span>
-            <span className="dot-sep">·</span>
-            <span>鲁公网安备 37011302000001号</span>
+
+          <div className="footer-col col-research">
+            <div className="footer-heading">重点科研与实验室</div>
+            <ul className="footer-link-list">
+              <li><a href="#sec-research">黄河流域民间艺术研究所</a></li>
+              <li><a href="#sec-research">中国古代造物思想研究基地</a></li>
+              <li><a href="#sec-research">传统工艺与数字人文重点实验室</a></li>
+              <li><a href="#sec-research">齐鲁造物文献特藏馆</a></li>
+              <li><a href="#sec-news">学术活动动态通报</a></li>
+              <li><a href="#sec-lectures">文心讲堂学术通告</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col col-admin">
+            <div className="footer-heading">办学规范与联络</div>
+            <div className="footer-contact-block">
+              <div className="contact-row">
+                <span className="contact-kicker">院办电话：</span>
+                <span className="contact-val">0531-89626180</span>
+              </div>
+              <div className="contact-row">
+                <span className="contact-kicker">教学科研：</span>
+                <span className="contact-val">0531-89626182</span>
+              </div>
+              <div className="contact-row">
+                <span className="contact-kicker">电子信箱：</span>
+                <span className="contact-val">rwys@sdada.edu.cn</span>
+              </div>
+            </div>
+            <div className="footer-legal">
+              <div>鲁ICP备05001234号-1 · 鲁公网安备37010202000100</div>
+              <div>© 2026 山东工艺美术学院 人文艺术学院 版权所有</div>
+            </div>
           </div>
         </div>
       </footer>
 
-      {/* Interactive Modal: Curatorial Project Dossier */}
-      {modalItem && (
-        <div className="curatorial-modal-overlay" onClick={() => setModalItem(null)}>
-          <div className="curatorial-modal-card" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div className="modal-title-lockup">
-                <span className={`tag-pill ${modalItem.categoryClass}`}>{modalItem.category}</span>
-                <span className="mono-code">{modalItem.code}</span>
+      {/* 弹窗：科研档案详细卷宗（点击任意课题调取） */}
+      {modalProject && (
+        <div className="curatorial-modal-backdrop" onClick={() => setModalProject(null)}>
+          <div
+            className="curatorial-modal-dialog"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="modal-header-strip">
+              <div className="modal-tags">
+                <span className={`tag-pill ${modalProject.categoryClass}`}>{modalProject.category}</span>
+                <span className="modal-code">{modalProject.code}</span>
               </div>
               <button
-                className="modal-btn-close"
-                onClick={() => setModalItem(null)}
-                title="关闭抽屉 (Esc)"
+                className="modal-close-btn"
+                onClick={() => setModalProject(null)}
+                aria-label="关闭案卷"
               >
-                ✕
+                <span>关闭 (Esc)</span>
+                <span className="close-x">✕</span>
               </button>
             </div>
 
-            <div className="modal-scroll-body">
-              <h2 className="modal-headline">{modalItem.title}</h2>
-              <div className="modal-dept-strip">{modalItem.role} · 依托机构：{modalItem.dept}</div>
-
-              <div className="modal-media-frame">
-                <img src={modalItem.image} alt={modalItem.title} />
+            <div className="modal-body-deck">
+              <div className="modal-hero-image">
+                <img src={modalProject.image} alt={modalProject.title} />
               </div>
 
-              <div className="modal-dossier-grid">
-                <div className="dossier-cell">
-                  <div className="dossier-label">课题立项年度</div>
-                  <div className="dossier-val">{modalItem.year}</div>
+              <div className="modal-content-deck">
+                <div className="modal-dept-row">
+                  <span className="dept-tag">{modalProject.dept}</span>
+                  <span className="year-tag">{modalProject.year}</span>
                 </div>
-                <div className="dossier-cell">
-                  <div className="dossier-label">主持团队 / 首席专家</div>
-                  <div className="dossier-val">{modalItem.leader}</div>
+                <h2 className="modal-title">{modalProject.title}</h2>
+                <div className="modal-role-highlight">{modalProject.role}</div>
+
+                <div className="modal-grid-meta">
+                  <div className="meta-box">
+                    <span className="meta-lbl">项目负责人 / 创研团队</span>
+                    <span className="meta-str">{modalProject.leader}</span>
+                  </div>
+                  <div className="meta-box">
+                    <span className="meta-lbl">学术成果形态</span>
+                    <span className="meta-str">{modalProject.medium}</span>
+                  </div>
+                </div>
+
+                <div className="modal-narrative">
+                  <div className="narrative-head">课题创研内容与学术提要：</div>
+                  <p className="narrative-body">{modalProject.summary}</p>
+                </div>
+
+                <div className="modal-footer-action">
+                  <button className="btn-modal-action" onClick={() => setModalProject(null)}>
+                    <span>完成审阅并返回</span>
+                  </button>
                 </div>
               </div>
-
-              <div className="modal-desc-section">
-                <div className="modal-sub-title">成果载体与文献规格</div>
-                <p className="modal-desc-p">{modalItem.medium}</p>
-              </div>
-
-              <div className="modal-desc-section">
-                <div className="modal-sub-title">学术价值与实施纲要</div>
-                <p className="modal-desc-p">{modalItem.summary}</p>
-              </div>
-            </div>
-
-            <div className="modal-footer">
-              <button className="btn-primary-dark" onClick={() => setModalItem(null)}>
-                <span>返回展陈浏览</span>
-              </button>
-              <span className="modal-shortcut-tip">可按 <kbd>Esc</kbd> 快速退出</span>
             </div>
           </div>
         </div>
