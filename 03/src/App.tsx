@@ -9,7 +9,7 @@ const curatedAssets = {
   digitalMedia: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=82",
 }
 
-// 严谨源自 01 与 02 的完整专业与教研室设置（共8项）
+// 严谨源自 01 与 02 的完整专业与教研室设置（共8项，真实无虚构）
 interface AcademicProgram {
   no: string
   code: string
@@ -220,7 +220,7 @@ const academicPrograms: AcademicProgram[] = [
   },
 ]
 
-// 真实新闻动态数据（严格参照 01 与 02 官方报道）
+// 真实新闻动态数据
 interface NewsItem {
   id: string
   tag: string
@@ -427,7 +427,7 @@ const lectureSeries = [
   },
 ]
 
-// 学术委员会名录（两级分层学术梯队）
+// 学术委员会名录
 const academicLeadersTier1 = [
   {
     num: "01",
@@ -494,6 +494,7 @@ export default function App() {
   const [activeResearchId, setActiveResearchId] = useState<string>("01")
   const [modalProject, setModalProject] = useState<ResearchProject | null>(null)
   const [activePlate, setActivePlate] = useState<number | null>(null)
+  const [selectedDisciplineIndex, setSelectedDisciplineIndex] = useState<number>(0)
   const [activeProgramModal, setActiveProgramModal] = useState<AcademicProgram | null>(null)
   const [activeCourseExplainer, setActiveCourseExplainer] = useState<string | null>("中国造物思想史")
   const [researchTab, setResearchTab] = useState<"specimen" | "metrics" | "map">("specimen")
@@ -517,7 +518,7 @@ export default function App() {
         setModalProject(null)
         setActiveProgramModal(null)
       }
-      if (e.key === "1") document.getElementById("sec-overview")?.scrollIntoView({ behavior: "smooth" })
+      if (e.key === "1") document.getElementById("sec-hero")?.scrollIntoView({ behavior: "smooth" })
       if (e.key === "2") document.getElementById("sec-news")?.scrollIntoView({ behavior: "smooth" })
       if (e.key === "3") document.getElementById("sec-disciplines")?.scrollIntoView({ behavior: "smooth" })
       if (e.key === "4") document.getElementById("sec-research")?.scrollIntoView({ behavior: "smooth" })
@@ -528,877 +529,680 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  const currentProgram = academicPrograms[selectedDisciplineIndex] || academicPrograms[0]
   const selectedResearch = researchProjects.find((p) => p.id === activeResearchId) || researchProjects[0]
 
   return (
     <div className="minimalist-editorial-root">
-      {/* 结构性背景基准十二轴发丝网格（100% 全宽，12 列建筑级精微布局参考系） */}
+      {/* 结构性背景基准十二轴发丝网格（100% 全宽，12 列建筑精微参考系，唯一保留的骨架） */}
       <div className="grid-overlay" aria-hidden="true">
         {Array.from({ length: 12 }).map((_, i) => (
           <div key={i} className="grid-col" />
         ))}
       </div>
 
-      {/* 顶部极简学术刊物风格导览（100% 全宽流体） */}
-      <header className="masthead-container">
-        <div className="masthead-left">
-          <a href="#top" className="masthead-logo-link" title="山东工艺美术学院 人文艺术学院">
-            <img
-              src="./college-logo.png"
-              alt="山东工艺美术学院 人文艺术学院"
-              className="masthead-logo-img"
-            />
-          </a>
-          <span className="masthead-motto-badge">
-            全国 A+ 学科 · 国家级一流专业
-          </span>
-        </div>
+      {/* ================= 1. 浮动建筑式顶栏导览 (置于十二列网格轴线上) ================= */}
+      <header className="arch-masthead">
+        <div className="masthead-grid-wrap">
+          <div className="masthead-brand-col">
+            <a href="#top" className="masthead-logo-link" title="山东工艺美术学院 人文艺术学院">
+              <img
+                src="./college-logo.png"
+                alt="山东工艺美术学院 人文艺术学院"
+                className="masthead-logo-img"
+              />
+            </a>
+            <span className="masthead-motto-tag">
+              全国 A+ 学科 · 国家级一流专业
+            </span>
+          </div>
 
-        <nav className={`masthead-nav ${mobileMenuOpen ? "is-open" : ""}`}>
-          <a
-            href="#sec-overview"
-            className="nav-item"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>01 文脉本体</span>
-            <kbd className="nav-kbd">1</kbd>
-          </a>
-          <a
-            href="#sec-news"
-            className="nav-item"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>02 学院动态</span>
-            <kbd className="nav-kbd">2</kbd>
-          </a>
-          <a
-            href="#sec-disciplines"
-            className="nav-item"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>03 专业设置</span>
-            <kbd className="nav-kbd">3</kbd>
-          </a>
-          <a
-            href="#sec-research"
-            className="nav-item"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>04 重点科研</span>
-            <kbd className="nav-kbd">4</kbd>
-          </a>
-          <a
-            href="#sec-lectures"
-            className="nav-item"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>05 艺文讲坛</span>
-            <kbd className="nav-kbd">5</kbd>
-          </a>
-          <a
-            href="#sec-admissions"
-            className="nav-item"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <span>06 招考通道</span>
-            <kbd className="nav-kbd">6</kbd>
-          </a>
-        </nav>
+          <div className="masthead-telemetry-col">
+            <span className="telemetry-dot" />
+            <span className="telemetry-text">JINAN 36.65°N · 2026 SPRING · VOL.08</span>
+          </div>
 
-        <div className="masthead-right">
-          <a href="#sec-admissions" className="btn-primary-dark">
-            <span>2026 招考指南</span>
-            <span className="btn-icon">↗</span>
-          </a>
-          <button
-            className="btn-mobile-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="切换导览菜单"
-          >
-            {mobileMenuOpen ? "✕" : "☰"}
-          </button>
+          <nav className={`masthead-nav-col ${mobileMenuOpen ? "is-open" : ""}`}>
+            <a href="#sec-hero" className="nav-anchor" onClick={() => setMobileMenuOpen(false)}>
+              <span className="nav-num">01</span>
+              <span className="nav-label">文脉空间</span>
+            </a>
+            <a href="#sec-news" className="nav-anchor" onClick={() => setMobileMenuOpen(false)}>
+              <span className="nav-num">02</span>
+              <span className="nav-label">学术纪事</span>
+            </a>
+            <a href="#sec-disciplines" className="nav-anchor" onClick={() => setMobileMenuOpen(false)}>
+              <span className="nav-num">03</span>
+              <span className="nav-label">专业拓扑</span>
+            </a>
+            <a href="#sec-research" className="nav-anchor" onClick={() => setMobileMenuOpen(false)}>
+              <span className="nav-num">04</span>
+              <span className="nav-label">科研案卷</span>
+            </a>
+            <a href="#sec-lectures" className="nav-anchor" onClick={() => setMobileMenuOpen(false)}>
+              <span className="nav-num">05</span>
+              <span className="nav-label">文心讲堂</span>
+            </a>
+            <a href="#sec-admissions" className="nav-anchor" onClick={() => setMobileMenuOpen(false)}>
+              <span className="nav-num">06</span>
+              <span className="nav-label">招考通道</span>
+            </a>
+          </nav>
+
+          <div className="masthead-action-col">
+            <a href="#sec-admissions" className="btn-arch-action">
+              <span>2026 招考指南</span>
+              <span className="btn-icon">↗</span>
+            </a>
+            <button
+              className="btn-mobile-toggle"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="切换导览菜单"
+            >
+              {mobileMenuOpen ? "✕" : "☰"}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* 页面主内容区域：100% 满宽，局部层次非对称律动 */}
+      {/* ================= 页面主画布：完全重构的内容空间 ================= */}
       <main className="editorial-canvas" id="top">
-        {/* ================= SECTION 1: HERO OVERVIEW ================= */}
-        <section className="editorial-section sec-hero" id="sec-overview">
-          {/* 背景典雅水印 */}
+        {/* ================= 2. HERO: 空间排版与悬浮典藏画卷 (完全颠覆文字框) ================= */}
+        <section className="arch-hero-stage" id="sec-hero">
+          {/* 背景典藏水印 */}
           <div className="hero-archival-watermark" aria-hidden="true">
             SHANDONG CRAFT & HUMANITIES · SUAD 2026
           </div>
 
-          {/* 首屏顶栏 Kicker */}
-          <div className="section-kicker-row">
-            <div className="kicker-group">
-              <span className="tag-pill tag-red">SHANDONG CRAFT & HUMANITIES</span>
-              <span className="kicker-meta">2026年春季学期 · 第8教学周 · 齐鲁造物文脉与当代创新</span>
+          {/* 顶栏学术定位横轴 */}
+          <div className="hero-academic-axis">
+            <div className="axis-item axis-left">
+              <span className="axis-index-pill">SECTION 01</span>
+              <span className="axis-title-text">齐鲁造物文脉与当代创新教育高地</span>
             </div>
-            <div className="kicker-index-meta">
-              <span>ARCHIVAL DOSSIER {`{VOL.2026-08}`}</span>
+            <div className="axis-item axis-right">
+              <span className="axis-meta-mono">ARCHIVAL DOSSIER {`{VOL.2026-08}`}</span>
             </div>
           </div>
 
-          {/* 标语文字与大幅图片自适应舞台（7:5 比例黄金对偶） */}
-          <div className="hero-stage">
-            {/* 巨幅排版文字区（占 1-7 列） */}
-            <div className="hero-typography-layer">
-              <div className="hero-headline-row row-first">
-                <span className="headline-text">赓续文脉</span>
-                <span className="headline-sep">·</span>
-                <span className="headline-text">构筑高地</span>
-                <span className="headline-ghost-tag">{`{全国 A+}`}</span>
+          {/* 巨幅空间排版层：文字作为建筑体直接依附网格，不被容器拘束 */}
+          <div className="hero-monumental-typography">
+            <div className="monumental-row row-1">
+              <h1 className="hero-primary-h1">
+                <span className="char-serif">赓续文脉</span>
+                <span className="char-symbol">·</span>
+                <span className="char-serif">构筑高地</span>
+              </h1>
+              <div className="hero-floating-rank-badge">
+                <span className="badge-rank-text">全国 A+ 学科</span>
+                <span className="badge-sub-text">软科顶尖评级</span>
               </div>
+            </div>
 
-              <div className="hero-headline-row row-second">
-                <span className="headline-text">以人文涵养艺术</span>
-                <span className="headline-sep">·</span>
-                <span className="headline-text">以设计赋能时代</span>
-              </div>
+            <div className="monumental-row row-2">
+              <h2 className="hero-secondary-h2">
+                <span className="char-serif">以人文涵养艺术</span>
+                <span className="char-symbol">·</span>
+                <span className="char-serif">以设计赋能时代</span>
+              </h2>
+            </div>
+          </div>
 
-              {/* 核心学术宣言与学科锚点 */}
-              <div className="hero-lead-deck">
-                <p className="hero-lead-text">
-                  立足齐鲁深厚文化根脉，面向当代科技与社会发展命题。构筑融“理论研究、田野调查、策展实践、跨媒介创新”为一体的人文艺术教育与创新高地。
-                </p>
-                <div className="hero-discipline-chips">
-                  <span
-                    className={`interactive-chip ${activePlate === 1 ? "chip-active" : ""}`}
-                    onMouseEnter={() => setActivePlate(1)}
-                    onMouseLeave={() => setActivePlate(null)}
-                    onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
-                  >
-                    [01 当代展陈空间]
-                  </span>
-                  <span
-                    className={`interactive-chip ${activePlate === 2 ? "chip-active" : ""}`}
-                    onMouseEnter={() => setActivePlate(2)}
-                    onMouseLeave={() => setActivePlate(null)}
-                    onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
-                  >
-                    [02 齐鲁文献特藏]
-                  </span>
-                  <span
-                    className={`interactive-chip ${activePlate === 3 ? "chip-active" : ""}`}
-                    onMouseEnter={() => setActivePlate(3)}
-                    onMouseLeave={() => setActivePlate(null)}
-                    onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
-                  >
-                    [03 黄河民艺田野]
-                  </span>
+          {/* 空间非对称蒙太奇：多尺度画幅直接在网格列间穿插流动 */}
+          <div className="hero-spatial-gallery">
+            {/* 画幅 1: 当代艺术展陈空间 (宽画幅，占第 5 至 12 列) */}
+            <div
+              className={`spatial-plate plate-wide ${activePlate === 1 ? "is-focused" : ""}`}
+              onMouseEnter={() => setActivePlate(1)}
+              onMouseLeave={() => setActivePlate(null)}
+              onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
+            >
+              <div className="plate-img-viewport">
+                <img
+                  src={curatedAssets.heroExhibition}
+                  alt="学院当代艺术展陈空间与实践现场"
+                  className="spatial-img"
+                />
+                <div className="plate-hud-strip">
+                  <div className="hud-code">PLATE #01 · CONTEMPORARY EXHIBITION HALL</div>
+                  <div className="hud-title">国家级实验教学示范中心 · 现场实景</div>
                 </div>
               </div>
             </div>
 
-            {/* 大幅画幅层（占 8-12 列，41.7%） */}
-            <div className="hero-plates-container">
-              {/* Plate 1: 展陈空间 */}
-              <div
-                className={`hero-plate plate-exhibition ${activePlate === 1 ? "is-focused" : ""} ${
-                  activePlate !== null && activePlate !== 1 ? "is-dimmed" : ""
-                }`}
-                onMouseEnter={() => setActivePlate(1)}
-                onMouseLeave={() => setActivePlate(null)}
+            {/* 画幅 2: 齐鲁文献特藏室 (竖画幅，占第 1 至 4 列，下沉穿插) */}
+            <div
+              className={`spatial-plate plate-tall ${activePlate === 2 ? "is-focused" : ""}`}
+              onMouseEnter={() => setActivePlate(2)}
+              onMouseLeave={() => setActivePlate(null)}
+              onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
+            >
+              <div className="plate-img-viewport">
+                <img
+                  src={curatedAssets.fieldLibrary}
+                  alt="齐鲁文献特藏室与古籍善本"
+                  className="spatial-img"
+                />
+                <div className="plate-hud-strip">
+                  <div className="hud-code">PLATE #02 · ARCHIVAL FOLIO</div>
+                  <div className="hud-title">齐鲁造物文献特藏室</div>
+                </div>
+              </div>
+            </div>
+
+            {/* 画幅 3: 黄河民艺田野测绘 (精细考察，跨立在第 7 至 11 列) */}
+            <div
+              className={`spatial-plate plate-field ${activePlate === 3 ? "is-focused" : ""}`}
+              onMouseEnter={() => setActivePlate(3)}
+              onMouseLeave={() => setActivePlate(null)}
+              onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
+            >
+              <div className="plate-img-viewport">
+                <img
+                  src={curatedAssets.folkResearch}
+                  alt="黄河民艺田野调研标本档案"
+                  className="spatial-img"
+                />
+                <div className="plate-hud-strip">
+                  <div className="hud-code">PLATE #03 · FIELD SURVEY SPECIMEN</div>
+                  <div className="hud-title">黄河流域民间艺术抢救性测绘</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 学术宣言阐述与交互锚点 (占第 1 至 6 列) */}
+          <div className="hero-manifesto-dock">
+            <p className="manifesto-paragraph">
+              立足齐鲁深厚文化根脉，面向当代科技与社会发展命题。构筑融“理论研究、田野调查、策展实践、跨媒介创新”为一体的人文艺术教育与创新高地。
+            </p>
+            <div className="hero-plate-selector-pills">
+              <span
+                className={`selector-pill ${activePlate === 1 ? "is-active" : ""}`}
                 onClick={() => setActivePlate(activePlate === 1 ? null : 1)}
               >
-                <div className="plate-inner-wrap">
-                  <img
-                    src={curatedAssets.heroExhibition}
-                    alt="学院当代艺术展陈空间与实践现场"
-                    className="plate-img"
-                  />
-                  <div className="plate-badge-strip">
-                    <span className="plate-code">PLATE #01</span>
-                    <span className="plate-caption">当代学术展陈空间</span>
-                  </div>
-                  <div className="plate-hover-card">
-                    <div className="hover-card-tag">国家级实验教学示范</div>
-                    <div className="hover-card-desc">2026届综合实践教学汇报展现场实景</div>
-                  </div>
-                </div>
-                <div className="plate-reg-mark tl">┌</div>
-                <div className="plate-reg-mark br">┘</div>
-              </div>
-
-              {/* Plate 2: 文献特藏 */}
-              <div
-                className={`hero-plate plate-library ${activePlate === 2 ? "is-focused" : ""} ${
-                  activePlate !== null && activePlate !== 2 ? "is-dimmed" : ""
-                }`}
-                onMouseEnter={() => setActivePlate(2)}
-                onMouseLeave={() => setActivePlate(null)}
+                [ 01 当代展陈空间 ]
+              </span>
+              <span
+                className={`selector-pill ${activePlate === 2 ? "is-active" : ""}`}
                 onClick={() => setActivePlate(activePlate === 2 ? null : 2)}
               >
-                <div className="plate-inner-wrap">
-                  <img
-                    src={curatedAssets.fieldLibrary}
-                    alt="齐鲁文献特藏室与古籍活化"
-                    className="plate-img"
-                  />
-                  <div className="plate-badge-strip">
-                    <span className="plate-code">PLATE #02</span>
-                    <span className="plate-caption">齐鲁文献特藏室</span>
-                  </div>
-                  <div className="plate-hover-card">
-                    <div className="hover-card-tag">教育部基地学术成果</div>
-                    <div className="hover-card-desc">中国古代造物思想考论与善本古籍考释</div>
-                  </div>
-                </div>
-                <div className="plate-reg-mark tl">┌</div>
-                <div className="plate-reg-mark br">┘</div>
-              </div>
-
-              {/* Plate 3: 民艺田野 */}
-              <div
-                className={`hero-plate plate-research ${activePlate === 3 ? "is-focused" : ""} ${
-                  activePlate !== null && activePlate !== 3 ? "is-dimmed" : ""
-                }`}
-                onMouseEnter={() => setActivePlate(3)}
-                onMouseLeave={() => setActivePlate(null)}
+                [ 02 齐鲁文献特藏 ]
+              </span>
+              <span
+                className={`selector-pill ${activePlate === 3 ? "is-active" : ""}`}
                 onClick={() => setActivePlate(activePlate === 3 ? null : 3)}
               >
-                <div className="plate-inner-wrap">
-                  <img
-                    src={curatedAssets.folkResearch}
-                    alt="黄河民艺田野调研标本档案"
-                    className="plate-img"
-                  />
-                  <div className="plate-badge-strip">
-                    <span className="plate-code">PLATE #03</span>
-                    <span className="plate-caption">黄河民艺田野测绘</span>
-                  </div>
-                  <div className="plate-hover-card">
-                    <div className="hover-card-tag">国家社科艺术学重点</div>
-                    <div className="hover-card-desc">全流域民间传统造物谱系建档与活态调查</div>
-                  </div>
-                </div>
-                <div className="plate-reg-mark tl">┌</div>
-                <div className="plate-reg-mark br">┘</div>
-              </div>
+                [ 03 黄河民艺田野 ]
+              </span>
             </div>
           </div>
 
-          {/* 局部变化一：主次分明的数据指标矩阵（4:2:3:3 韵律，打破死板四等分） */}
-          <div className="hero-metrics-grid">
-            {/* 顶尖主锚点（占 1-4 列，有温润纸墨质感与持续领跑徽标） */}
-            <div className="metric-grid-cell metric-lead-cell">
-              <div className="metric-pill-header">
-                <span className="metric-rank-badge">★ RANKING #01</span>
-                <span className="live-lead-indicator">
-                  <span className="pulse-dot" />
-                  持续三年领跑
-                </span>
-              </div>
-              <div className="metric-val-wrap">
-                <span className="metric-strong highlight-num">全国 A+</span>
-              </div>
-              <div className="metric-title">软科中国大学专业排名顶尖学科</div>
-              <div className="metric-sub">
-                艺术设计学专业蝉联全国最高评级，建构中国特色自主学术体系。
-              </div>
+          {/* 网格坐标锚定数据层 (完全打破“盒子”，数据直接落脚于第 1/4/7/10 轴线) */}
+          <div className="hero-grounded-metrics">
+            <div className="grounded-metric-col col-a-plus">
+              <div className="metric-axis-meta">COORDINATE 01 · RANKING #01</div>
+              <div className="metric-large-val">全国 A+</div>
+              <div className="metric-desc-title">软科中国大学专业排名顶尖评级</div>
+              <div className="metric-desc-sub">艺术设计学专业连续三年保持全国前列，建构中国特色自主学术体系。</div>
             </div>
 
-            {/* 结构柱指标（占 5-6 列，纵向紧凑立柱） */}
-            <div className="metric-grid-cell metric-compact-pillar">
-              <div className="metric-top-num-stack">
-                <span className="metric-strong">2</span>
-                <span className="metric-unit-text">个</span>
+            <div className="grounded-metric-col col-national">
+              <div className="metric-axis-meta">COORDINATE 02 · NATIONAL FIRST-CLASS</div>
+              <div className="metric-large-val">
+                2 <span className="val-unit">个</span>
               </div>
-              <div className="metric-stacked-tags">
-                <span className="tag-pill tag-blue">国家一流专业</span>
-              </div>
-              <div className="metric-pillar-text">
-                艺术设计学 & 艺术史论双双入选国家级一流建设点
-              </div>
+              <div className="metric-desc-title">国家级一流本科专业建设点</div>
+              <div className="metric-desc-sub">艺术设计学与艺术史论双双入选国家一流，构筑全省唯一双国家一流理论阵地。</div>
             </div>
 
-            {/* 师资实力指标（占 7-9 列，含微型进度标尺刻度） */}
-            <div className="metric-grid-cell metric-faculty-meter">
-              <div className="metric-val-wrap">
-                <span className="metric-strong">100%</span>
-              </div>
-              <div className="metric-mini-meter" title="全员博士及高级职称">
-                <div className="meter-fill" style={{ width: "100%" }} />
-              </div>
-              <div className="metric-title">专任教师高职及博士比例</div>
-              <div className="metric-sub">
-                汇聚国务院特贴专家、全国美展评委与省部级教学名师团队。
-              </div>
+            <div className="grounded-metric-col col-faculty">
+              <div className="metric-axis-meta">COORDINATE 03 · FACULTY PROPORTION</div>
+              <div className="metric-large-val">100%</div>
+              <div className="metric-desc-title">专任教师高职及博士比例</div>
+              <div className="metric-desc-sub">汇聚国务院特贴专家、全国美展评委与省部级教学名师团队。</div>
             </div>
 
-            {/* 科研集群指标（占 10-12 列，含多维度课题标签簇） */}
-            <div className="metric-grid-cell metric-research-cluster">
-              <div className="metric-val-wrap">
-                <span className="metric-strong">50+ 项</span>
+            <div className="grounded-metric-col col-research">
+              <div className="metric-axis-meta">COORDINATE 04 · MAJOR PROJECTS</div>
+              <div className="metric-large-val">
+                50+ <span className="val-unit">项</span>
               </div>
-              <div className="metric-title">国家及省部重点科研成果</div>
-              <div className="metric-tag-cluster">
-                <span className="micro-tag">社科重点 12项</span>
-                <span className="micro-tag">教育部基地 18项</span>
-                <span className="micro-tag">省部级 20+项</span>
-              </div>
+              <div className="metric-desc-title">国家社科及省部重点课题</div>
+              <div className="metric-desc-sub">涵盖黄河流域民间手工艺数字化、古代造物制度考论与社会美育实践。</div>
             </div>
           </div>
         </section>
 
-        {/* ================= SECTION 2: 学院新闻与动态 (局部形态差异化) ================= */}
-        <section className="editorial-section sec-news" id="sec-news">
-          <div className="section-title-strip">
-            <div className="strip-left">
-              <span className="strip-index">02</span>
-              <span className="strip-tag tag-pill tag-red">ACADEMIC ANNALS & DISPATCH</span>
-              <h2 className="strip-h2">学院新闻与学术动态</h2>
+        {/* ================= 3. SECTION 02: 学术纪事与现场视像 (报刊画册式非对称版面) ================= */}
+        <section className="arch-section sec-news-chronicle" id="sec-news">
+          <div className="arch-section-header">
+            <div className="header-index-block">
+              <span className="sec-num-large">02</span>
+              <div className="sec-title-wrap">
+                <span className="sec-tag-pill">ACADEMIC CHRONICLE & DISPATCH</span>
+                <h2 className="sec-heading-serif">学院新闻与学术动态</h2>
+              </div>
             </div>
-            <div className="strip-right">
-              <span className="strip-note">记录学院学术生发、教学展览与前沿育人纪事</span>
+            <div className="header-meta-block">
+              <span>记录学院学术生发、教学展览与前沿育人纪事</span>
             </div>
           </div>
 
-          <div className="news-press-grid">
-            {/* 左侧头条（占 1 至 7 列，58.3% 宽幅） */}
-            <article className="news-lead-feature">
-              <div className="lead-img-viewport">
-                <img src={newsList[0].image} alt={newsList[0].title} className="lead-img" />
-                <div className="lead-tag-badge">
-                  <span className={`tag-pill ${newsList[0].tagClass}`}>{newsList[0].tag}</span>
-                  <span className="lead-date-stamp">{newsList[0].date}</span>
+          <div className="news-chronicle-spread">
+            {/* 左侧宽幅学术特写 (占第 1 至 8 列) */}
+            <article className="lead-chronicle-feature">
+              <div className="feature-panoramic-img-wrap">
+                <img
+                  src={newsList[0].image}
+                  alt={newsList[0].title}
+                  className="chronicle-lead-img"
+                />
+                <div className="feature-date-badge">
+                  <span className="badge-tag">学院要闻</span>
+                  <span className="badge-date">{newsList[0].date}</span>
                 </div>
               </div>
-              <div className="lead-content-deck">
-                <div className="lead-meta-row">
-                  <span className="lead-vol">TOP STORY · 院务通报</span>
-                  <span className="lead-author">学院综合事务办公室</span>
+              <div className="feature-body-deck">
+                <div className="feature-meta-line">
+                  <span>TOP STORY · 院务通报</span>
+                  <span className="sep-slash">/</span>
+                  <span>学院综合事务办公室</span>
                 </div>
-                <h3 className="lead-title">{newsList[0].title}</h3>
-                <p className="lead-excerpt">{newsList[0].excerpt}</p>
-                {/* 局部变化：引言引文带与微型视景连线 */}
-                <div className="lead-quote-strip">
-                  <span className="quote-mark">“</span>
-                  <span className="quote-text">{newsList[0].quote}</span>
-                </div>
-                <div className="lead-action-row">
-                  <span className="read-more-link">
-                    阅读详讯全文 <span className="arrow-char">→</span>
-                  </span>
+                <h3 className="feature-headline">{newsList[0].title}</h3>
+                <p className="feature-summary">{newsList[0].excerpt}</p>
+                <blockquote className="feature-pull-quote">
+                  <span className="quote-glyph">“</span>
+                  <span className="quote-content">{newsList[0].quote}</span>
+                </blockquote>
+                <div className="feature-action-link">
+                  <span>阅读详讯全文</span>
+                  <span className="action-arrow">→</span>
                 </div>
               </div>
             </article>
 
-            {/* 右侧速递清单（占 8 至 12 列，三种完全不同的卡片微形态） */}
-            <div className="news-dispatch-list">
-              {/* Dispatch 1: 学术讲堂（特别讲座带，微黄色柔和底色） */}
-              <article className="news-list-row row-lecture-tinted">
-                <div className="row-date-badge">
-                  <span className="date-day">{newsList[1].day}</span>
-                  <span className="date-month">{newsList[1].month}</span>
+            {/* 右侧纵向速递时间轴 (占第 9 至 12 列，三个完全不同的质感卡片) */}
+            <div className="dispatch-vertical-rail">
+              {/* Dispatch 1: 学术讲堂 */}
+              <article className="dispatch-entry entry-colloquium">
+                <div className="entry-header-row">
+                  <span className="entry-tag-yellow">学术讲堂</span>
+                  <span className="entry-speaker-pill">{newsList[1].speaker}</span>
+                  <span className="entry-date">{newsList[1].day} {newsList[1].month}</span>
                 </div>
-                <div className="row-body">
-                  <div className="row-meta">
-                    <span className="tag-pill tag-yellow">{newsList[1].tag}</span>
-                    <span className="speaker-inline-pill">{newsList[1].speaker}</span>
-                  </div>
-                  <h4 className="row-title">{newsList[1].title}</h4>
-                  <p className="row-excerpt">{newsList[1].excerpt}</p>
-                </div>
-                <div className="row-action">
-                  <span className="hover-arrow">↗</span>
-                </div>
+                <h4 className="entry-title">{newsList[1].title}</h4>
+                <p className="entry-excerpt">{newsList[1].excerpt}</p>
+                <div className="entry-footer-arrow">↗</div>
               </article>
 
-              {/* Dispatch 2: 教学展览（带微缩画幅视窗，图文融合） */}
-              <article className="news-list-row row-exhibition-card">
-                <div className="row-date-badge">
-                  <span className="date-day">{newsList[2].day}</span>
-                  <span className="date-month">{newsList[2].month}</span>
+              {/* Dispatch 2: 教学展览 */}
+              <article className="dispatch-entry entry-exhibition">
+                <div className="entry-header-row">
+                  <span className="entry-tag-blue">教学展览</span>
+                  <span className="entry-date">{newsList[2].day} {newsList[2].month}</span>
                 </div>
-                <div className="row-body">
-                  <div className="row-meta">
-                    <span className="tag-pill tag-blue">{newsList[2].tag}</span>
-                    <span className="row-index">DISPATCH #03 · 展讯</span>
-                  </div>
-                  <h4 className="row-title">{newsList[2].title}</h4>
-                  <div className="row-thumb-deck">
-                    <img
-                      src={curatedAssets.fieldLibrary}
-                      alt="教学展览缩略图"
-                      className="row-mini-thumb"
-                    />
-                    <p className="row-excerpt-clamp">{newsList[2].excerpt}</p>
-                  </div>
+                <h4 className="entry-title">{newsList[2].title}</h4>
+                <div className="entry-thumb-deck">
+                  <img
+                    src={curatedAssets.fieldLibrary}
+                    alt="教学展览现场"
+                    className="entry-mini-thumbnail"
+                  />
+                  <p className="entry-excerpt-short">{newsList[2].excerpt}</p>
                 </div>
-                <div className="row-action">
-                  <span className="hover-arrow">↗</span>
-                </div>
+                <div className="entry-footer-arrow">↗</div>
               </article>
 
-              {/* Dispatch 3: 荣誉成果（国家级大奖数据指标徽标） */}
-              <article className="news-list-row row-honor-stat">
-                <div className="row-date-badge">
-                  <span className="date-day">{newsList[3].day}</span>
-                  <span className="date-month">{newsList[3].month}</span>
+              {/* Dispatch 3: 荣誉成果 */}
+              <article className="dispatch-entry entry-honor">
+                <div className="entry-header-row">
+                  <span className="entry-tag-green">荣誉成果</span>
+                  <span className="honor-medal-badge">{newsList[3].badgeStat}</span>
+                  <span className="entry-date">{newsList[3].day} {newsList[3].month}</span>
                 </div>
-                <div className="row-body">
-                  <div className="row-meta">
-                    <span className="tag-pill tag-green">{newsList[3].tag}</span>
-                    <span className="honor-pill-gold">{newsList[3].badgeStat}</span>
-                  </div>
-                  <h4 className="row-title">{newsList[3].title}</h4>
-                  <p className="row-excerpt">{newsList[3].excerpt}</p>
-                </div>
-                <div className="row-action">
-                  <span className="hover-arrow">↗</span>
-                </div>
+                <h4 className="entry-title">{newsList[3].title}</h4>
+                <p className="entry-excerpt">{newsList[3].excerpt}</p>
+                <div className="entry-footer-arrow">↗</div>
               </article>
             </div>
           </div>
         </section>
 
-        {/* ================= SECTION 3: 学科设置与专业矩阵 (Bento 非对称矩阵与交互抽屉) ================= */}
-        <section className="editorial-section sec-disciplines" id="sec-disciplines">
-          <div className="section-title-strip">
-            <div className="strip-left">
-              <span className="strip-index">03</span>
-              <span className="strip-tag tag-pill tag-blue">CURRICULUM MATRIX & DEPARTMENTS</span>
-              <h2 className="strip-h2">学科设置与专业矩阵</h2>
+        {/* ================= 4. SECTION 03: 专业拓扑与学术矩阵 (彻底抛弃8个死板文字框，改用交互式大案卷展台) ================= */}
+        <section className="arch-section sec-discipline-topology" id="sec-disciplines">
+          <div className="arch-section-header">
+            <div className="header-index-block">
+              <span className="sec-num-large">03</span>
+              <div className="sec-title-wrap">
+                <span className="sec-tag-pill">CURRICULUM MATRIX & TOPOLOGY</span>
+                <h2 className="sec-heading-serif">学科设置与专业矩阵</h2>
+              </div>
             </div>
-            <div className="strip-right">
-              <span className="strip-note">七个特色本科专业与一个跨学科虚拟教研室</span>
+            <div className="header-meta-block">
+              <span>七个特色本科专业与一个跨学科虚拟教研室（全真学术设置）</span>
             </div>
           </div>
 
-          <div className="programs-table-grid bento-disciplines-grid">
-            {/* 旗舰主卡片 01: 艺术设计学（占 1 至 7 列，7列主场） */}
-            <div
-              className="program-table-cell bento-hero-program"
-              onClick={() => setActiveProgramModal(academicPrograms[0])}
-            >
-              <div className="cell-top-meta">
-                <div className="cell-no-wrap">
-                  <span className="cell-no">01</span>
-                  <span className="flagship-label">★ 学院首位核心旗舰学科</span>
-                </div>
-                <span className="tag-pill tag-red">软科 A+ · 国家级一流本科</span>
+          {/* 交互式专业拓扑展台：左侧学术系部轨道 + 右侧核心培养大案卷画布 */}
+          <div className="discipline-interactive-stage">
+            {/* 左侧专业系部导轨 (占第 1 至 4 列) */}
+            <div className="discipline-directory-rail">
+              <div className="rail-mast-label">
+                <span>ACADEMIC DEPARTMENTS LIST · 8大专业名录</span>
               </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[0].name}</h3>
-                <div className="cell-en-name">{academicPrograms[0].enName}</div>
-                <div className="cell-degree-meta">
-                  <span>{academicPrograms[0].degree}</span>
-                  <span className="sep-divider">/</span>
-                  <span>{academicPrograms[0].duration}</span>
-                  <span className="sep-divider">/</span>
-                  <span className="code-text">{academicPrograms[0].code}</span>
-                </div>
+              <div className="rail-programs-list">
+                {academicPrograms.map((prog, idx) => {
+                  const isSelected = selectedDisciplineIndex === idx
+                  return (
+                    <button
+                      key={prog.no}
+                      className={`rail-program-item ${isSelected ? "is-selected" : ""}`}
+                      onClick={() => setSelectedDisciplineIndex(idx)}
+                    >
+                      <div className="item-num-wrap">
+                        <span className="rail-no">{prog.no}</span>
+                        <span className="rail-code">{prog.code}</span>
+                      </div>
+                      <div className="item-title-wrap">
+                        <span className="rail-name">{prog.name}</span>
+                        <span className="rail-en">{prog.enName}</span>
+                      </div>
+                      <div className="rail-indicator-icon">
+                        {isSelected ? "●" : "→"}
+                      </div>
+                    </button>
+                  )
+                })}
               </div>
-              <p className="cell-summary">{academicPrograms[0].summary}</p>
+            </div>
 
-              {/* 局部变化：可交互试听课程胶囊 */}
-              <div className="bento-courses-interactive" onClick={(e) => e.stopPropagation()}>
-                <div className="courses-interactive-label">
-                  点击查看代表性课程体系：
+            {/* 右侧核心培养大案卷画布 (占第 5 至 12 列) */}
+            <div className="discipline-dossier-canvas">
+              {/* 背景学术水印 */}
+              <div className="dossier-watermark-seal" aria-hidden="true">
+                齊魯學派
+              </div>
+
+              <div className="dossier-top-bar">
+                <div className="dossier-badge-cluster">
+                  <span className={`tag-pill ${currentProgram.tagClass}`}>
+                    {currentProgram.qualification}
+                  </span>
+                  <span className="dossier-meta-pill">{currentProgram.degree}</span>
+                  <span className="dossier-meta-pill">{currentProgram.duration}</span>
                 </div>
-                <div className="interactive-course-pill-deck">
-                  {academicPrograms[0].courses.map((c, i) => (
+                <div className="dossier-code-stamp">
+                  <span>CURRICULUM CODE: {currentProgram.code}</span>
+                </div>
+              </div>
+
+              <div className="dossier-headline-deck">
+                <h3 className="dossier-prog-title">{currentProgram.name}</h3>
+                <div className="dossier-prog-en">{currentProgram.enName}</div>
+                <p className="dossier-summary-lead">{currentProgram.summary}</p>
+              </div>
+
+              {/* 核心课程试听与交互卡片 */}
+              <div className="dossier-interactive-curriculum">
+                <div className="curriculum-bar-header">
+                  <span className="bar-label">代表性专业核心课程体系（点击研读课业向度）：</span>
+                </div>
+                <div className="curriculum-pill-row">
+                  {currentProgram.courses.map((course, i) => (
                     <button
                       key={i}
-                      className={`course-pill-btn ${activeCourseExplainer === c ? "is-active" : ""}`}
-                      onClick={() => setActiveCourseExplainer(c)}
+                      className={`curriculum-pill-btn ${activeCourseExplainer === course ? "is-active" : ""}`}
+                      onClick={() => setActiveCourseExplainer(course)}
                     >
-                      {c}
+                      {course}
                     </button>
                   ))}
                 </div>
                 {activeCourseExplainer && (
-                  <div className="course-explainer-box">
+                  <div className="curriculum-explainer-deck">
                     <span className="explainer-bullet">▸</span>
-                    <span className="explainer-content">
-                      {activeCourseExplainer === "设计史学专题" && "探讨从古典手工艺造物向现代工业与信息设计演进的历史逻辑与理论批评范式。"}
-                      {activeCourseExplainer === "中国造物思想史" && "梳理先秦诸子天工开物思想、考工记制器规约与东方造物美学对当代可持续设计的启示。"}
-                      {activeCourseExplainer === "设计批评学" && "建构基于中国本土语境的设计批评标准，培养批判性思维与前沿文化策展话语。"}
-                      {activeCourseExplainer === "设计战略与策展" && "深度结合文博展陈实战、文旅文创产业运营与跨学科协同设计工作坊。"}
+                    <span className="explainer-text">
+                      {activeCourseExplainer === "中国造物思想史"
+                        ? "系统梳理先秦诸子天工开物思想、考工记制器规约与东方造物美学对当代可持续设计的启示。"
+                        : activeCourseExplainer === "设计史学专题"
+                        ? "探讨从古典手工艺造物向现代工业与信息设计演进的历史逻辑与理论批评范式。"
+                        : activeCourseExplainer === "设计批评学"
+                        ? "建构基于中国本土语境的设计批评标准，培养批判性思维与前沿文化策展话语。"
+                        : activeCourseExplainer === "设计战略与策展"
+                        ? "深度结合文博展陈实战、文旅文创产业运营与跨学科协同设计工作坊。"
+                        : `重点讲授《${activeCourseExplainer}》的理论方法论与前沿实践范式。`}
                     </span>
                   </div>
                 )}
               </div>
 
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">调取完整培养方案与课程拓扑图</span>
-                <span className="cell-arrow">↗</span>
-              </div>
-            </div>
+              {/* 学术向度与去向标签 */}
+              <div className="dossier-directions-grid">
+                <div className="directions-col">
+                  <span className="col-sub-heading">主干学术研究向度</span>
+                  <div className="sub-tag-list">
+                    {currentProgram.coreDirections.map((dir, i) => (
+                      <div key={i} className="direction-bullet-item">
+                        <span className="dir-glyph">■</span>
+                        <span className="dir-label">{dir}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            {/* 顶尖主干 02: 艺术史论（占 8 至 12 列，5列典雅典籍质感） */}
-            <div
-              className="program-table-cell bento-theory-program"
-              onClick={() => setActiveProgramModal(academicPrograms[1])}
-            >
-              <div className="watermark-seal-bg" aria-hidden="true">
-                齊魯學派
-              </div>
-              <div className="cell-top-meta">
-                <span className="cell-no">02</span>
-                <span className="tag-pill tag-blue">国家级一流本科专业</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[1].name}</h3>
-                <div className="cell-en-name">{academicPrograms[1].enName}</div>
-                <div className="cell-code">{academicPrograms[1].code} · 四年制</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[1].summary}</p>
-              <div className="cell-courses-list">
-                <div className="courses-label">特色研讨方向：</div>
-                <div className="courses-tags">
-                  {academicPrograms[1].courses.map((c, i) => (
-                    <span key={i} className="course-chip">
-                      {c}
-                    </span>
-                  ))}
+                <div className="careers-col">
+                  <span className="col-sub-heading">主要毕业去向与深造发展领域</span>
+                  <div className="sub-tag-cloud">
+                    {currentProgram.careerFields.map((field, i) => (
+                      <span key={i} className="career-cloud-pill">
+                        {field}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">培养方案细则</span>
-                <span className="cell-arrow">→</span>
-              </div>
-            </div>
 
-            {/* 第二行：5 : 4 : 3 非对称三联 */}
-            {/* 03 文化产业管理（占 1-5 列，5列） */}
-            <div
-              className="program-table-cell cell-bento-mgt"
-              onClick={() => setActiveProgramModal(academicPrograms[2])}
-            >
-              <div className="cell-top-meta">
-                <span className="cell-no">03</span>
-                <span className="tag-pill tag-blue">国家级一流本科</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[2].name}</h3>
-                <div className="cell-en-name">{academicPrograms[2].enName}</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[2].summary}</p>
-              <div className="cell-industry-tags">
-                <span className="industry-pill">文旅深度融合</span>
-                <span className="industry-pill">数字文化产业</span>
-                <span className="industry-pill">艺术策展运营</span>
-              </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">培养方案细则</span>
-                <span className="cell-arrow">→</span>
-              </div>
-            </div>
-
-            {/* 04 美术学（占 6-9 列，4列） */}
-            <div
-              className="program-table-cell cell-bento-fa"
-              onClick={() => setActiveProgramModal(academicPrograms[3])}
-            >
-              <div className="cell-top-meta">
-                <span className="cell-no">04</span>
-                <span className="tag-pill tag-yellow">国家级特色专业</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[3].name}</h3>
-                <div className="cell-en-name">{academicPrograms[3].enName}</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[3].summary}</p>
-              <div className="cell-courses-list">
-                <div className="courses-tags">
-                  {academicPrograms[3].courses.slice(0, 3).map((c, i) => (
-                    <span key={i} className="course-chip">{c}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">培养方案细则</span>
-                <span className="cell-arrow">→</span>
-              </div>
-            </div>
-
-            {/* 05 非物质文化遗产保护（占 10-12 列，3列高密度田野卡片） */}
-            <div
-              className="program-table-cell cell-bento-ich"
-              onClick={() => setActiveProgramModal(academicPrograms[4])}
-            >
-              <div className="cell-top-meta">
-                <span className="cell-no">05</span>
-                <span className="tag-pill tag-green">山东首批非遗本科</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[4].name}</h3>
-                <div className="cell-en-name">{academicPrograms[4].enName}</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[4].summary}</p>
-              <div className="ich-field-badge">
-                <span>黄河流域田野测绘活态保护</span>
-              </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">培养方案细则</span>
-                <span className="cell-arrow">→</span>
-              </div>
-            </div>
-
-            {/* 第三行：4 : 4 : 4 实验室与教研室 */}
-            {/* 06 文物保护与修复（占 1-4 列） */}
-            <div
-              className="program-table-cell cell-bento-con"
-              onClick={() => setActiveProgramModal(academicPrograms[5])}
-            >
-              <div className="cell-top-meta">
-                <span className="cell-no">06</span>
-                <span className="tag-pill tag-green">省级实验教学示范依托</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[5].name}</h3>
-                <div className="cell-en-name">{academicPrograms[5].enName}</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[5].summary}</p>
-              <div className="cell-courses-list">
-                <div className="courses-tags">
-                  <span className="course-chip">古籍书画修复</span>
-                  <span className="course-chip">科技材质检测</span>
-                </div>
-              </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">实验教学方案</span>
-                <span className="cell-arrow">→</span>
-              </div>
-            </div>
-
-            {/* 07 广告策划与管理（占 5-8 列） */}
-            <div
-              className="program-table-cell cell-bento-adv"
-              onClick={() => setActiveProgramModal(academicPrograms[6])}
-            >
-              <div className="cell-top-meta">
-                <span className="cell-no">07</span>
-                <span className="tag-pill tag-blue">省级一流专业建设点</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[6].name}</h3>
-                <div className="cell-en-name">{academicPrograms[6].enName}</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[6].summary}</p>
-              <div className="cell-courses-list">
-                <div className="courses-tags">
-                  <span className="course-chip">品牌战略规划</span>
-                  <span className="course-chip">全国大广赛孵化</span>
-                </div>
-              </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">培养方案细则</span>
-                <span className="cell-arrow">→</span>
-              </div>
-            </div>
-
-            {/* 08 公共艺术史论教研室（占 9-12 列） */}
-            <div
-              className="program-table-cell cell-bento-pub"
-              onClick={() => setActiveProgramModal(academicPrograms[7])}
-            >
-              <div className="cell-top-meta">
-                <span className="cell-no">08</span>
-                <span className="tag-pill tag-yellow">跨学科虚拟教研室</span>
-              </div>
-              <div className="cell-main-info">
-                <h3 className="cell-prog-name">{academicPrograms[7].name}</h3>
-                <div className="cell-en-name">{academicPrograms[7].enName}</div>
-              </div>
-              <p className="cell-summary">{academicPrograms[7].summary}</p>
-              <div className="cell-courses-list">
-                <div className="courses-tags">
-                  <span className="course-chip">城市微更新</span>
-                  <span className="course-chip">通识人文协同</span>
-                </div>
-              </div>
-              <div className="cell-bottom-indicator">
-                <span className="cell-action-text">教研室章程</span>
-                <span className="cell-arrow">→</span>
+              <div className="dossier-footer-action-row">
+                <span className="dossier-hint-text">
+                  完整课程大纲与学分修读方案可在线查阅
+                </span>
+                <button
+                  className="btn-open-program-modal"
+                  onClick={() => setActiveProgramModal(currentProgram)}
+                >
+                  <span>调取该专业完整培养方案细则 ↗</span>
+                </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ================= SECTION 4: 重点科研基地与学术高地 (三重视角视窗切换) ================= */}
-        <section className="editorial-section sec-research" id="sec-research">
-          <div className="section-title-strip">
-            <div className="strip-left">
-              <span className="strip-index">04</span>
-              <span className="strip-tag tag-pill tag-yellow">RESEARCH REPOSITORY & FIELD SPECIMENS</span>
-              <h2 className="strip-h2">学术研究与科研高地</h2>
+        {/* ================= 5. SECTION 04: 科研高地与标本案卷库 (三态全景检视视窗) ================= */}
+        <section className="arch-section sec-research-repository" id="sec-research">
+          <div className="arch-section-header">
+            <div className="header-index-block">
+              <span className="sec-num-large">04</span>
+              <div className="sec-title-wrap">
+                <span className="sec-tag-pill">NATIONAL RESEARCH & FIELD SPECIMENS</span>
+                <h2 className="sec-heading-serif">学术研究与科研高地</h2>
+              </div>
             </div>
-            <div className="strip-right">
-              <span className="strip-note">国家社科重点项目与齐鲁造物学术成果档案</span>
+            <div className="header-meta-block">
+              <span>国家社科艺术学重点项目与齐鲁造物学术成果档案</span>
             </div>
           </div>
 
-          <div className="research-panoramic-split">
-            {/* 左侧项目名录（占 1 至 5 列，41.7%） */}
-            <div className="research-curation-list">
-              <div className="list-mast-kicker">
+          <div className="research-curatorial-spread">
+            {/* 左侧项目名录导轨 (占第 1 至 4 列) */}
+            <div className="research-selector-rail">
+              <div className="selector-mast-label">
                 <span>PROJECT DOSSIER SELECTION · 重点课题集刊</span>
               </div>
-              {researchProjects.map((proj) => {
-                const isActive = proj.id === activeResearchId
-                return (
-                  <div
-                    key={proj.id}
-                    className={`research-list-item ${isActive ? "is-selected" : ""}`}
-                    onClick={() => setActiveResearchId(proj.id)}
-                  >
-                    <div className="item-meta-col">
-                      <span className="item-idx">#{proj.id}</span>
-                      <span className={`tag-pill ${proj.categoryClass}`}>{proj.category}</span>
-                    </div>
-                    <div className="item-main-col">
-                      <div className="item-code-line">
+              <div className="selector-items-list">
+                {researchProjects.map((proj) => {
+                  const isActive = proj.id === activeResearchId
+                  return (
+                    <button
+                      key={proj.id}
+                      className={`research-item-btn ${isActive ? "is-active" : ""}`}
+                      onClick={() => setActiveResearchId(proj.id)}
+                    >
+                      <div className="proj-idx-row">
+                        <span className="proj-num">#{proj.id}</span>
+                        <span className={`tag-pill ${proj.categoryClass}`}>{proj.category}</span>
+                      </div>
+                      <div className="proj-code-line">
                         <span>{proj.code}</span>
                         <span className="sep-dot">·</span>
                         <span>{proj.dept}</span>
                       </div>
-                      <h3 className="item-title">{proj.title}</h3>
-                    </div>
-                    <div className="item-arrow-col">
-                      <span className="arrow-glyph">{isActive ? "●" : "→"}</span>
-                    </div>
-                  </div>
-                )
-              })}
+                      <h4 className="proj-title-text">{proj.title}</h4>
+                      <div className="proj-arrow-status">
+                        {isActive ? "●" : "→"}
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
             </div>
 
-            {/* 右侧学术标本检视视窗（占 6 至 12 列，58.3% 舒展大图与三态 HUD） */}
-            <div className="research-specimen-viewer">
-              {/* 局部变化：三态 HUD 切换栏 */}
-              <div className="specimen-hud-switch-bar">
+            {/* 右侧标本视窗与多维 HUD (占第 5 至 12 列) */}
+            <div className="research-stage-view">
+              {/* 三态 HUD 切换栏 */}
+              <div className="research-hud-nav-bar">
                 <button
-                  className={`hud-tab-btn ${researchTab === "specimen" ? "is-active" : ""}`}
+                  className={`hud-mode-btn ${researchTab === "specimen" ? "is-active" : ""}`}
                   onClick={() => setResearchTab("specimen")}
                 >
                   [ 01 标本影像图谱 ]
                 </button>
                 <button
-                  className={`hud-tab-btn ${researchTab === "metrics" ? "is-active" : ""}`}
+                  className={`hud-mode-btn ${researchTab === "metrics" ? "is-active" : ""}`}
                   onClick={() => setResearchTab("metrics")}
                 >
                   [ 02 课题立项案卷指标 ]
                 </button>
                 <button
-                  className={`hud-tab-btn ${researchTab === "map" ? "is-active" : ""}`}
+                  className={`hud-mode-btn ${researchTab === "map" ? "is-active" : ""}`}
                   onClick={() => setResearchTab("map")}
                 >
                   [ 03 田野考察坐标网络 ]
                 </button>
               </div>
 
-              {/* 视窗内容切换区 */}
+              {/* 模式 1: 标本影像图谱 */}
               {researchTab === "specimen" && (
-                <div className="viewer-specimen-frame">
+                <div className="hud-view-specimen-frame">
                   <img
                     src={selectedResearch.image}
                     alt={selectedResearch.title}
-                    className="specimen-img"
+                    className="specimen-hero-image"
                   />
-                  <div className="specimen-overlay-tags">
-                    <span className="specimen-tag tag-pill tag-yellow">{selectedResearch.category}</span>
-                    <span className="specimen-id-badge">{selectedResearch.code}</span>
+                  <div className="specimen-tag-badge-overlay">
+                    <span className="tag-pill tag-yellow">{selectedResearch.category}</span>
+                    <span className="specimen-code-tag">{selectedResearch.code}</span>
                   </div>
                   {/* 中国传统藏书印鉴 */}
-                  <div className="specimen-seal-mark" title="齐鲁民间艺术特藏印鉴">
+                  <div className="specimen-vermilion-seal" title="齐鲁民间艺术特藏印鉴">
                     齊魯造物
                   </div>
-                  <div className="specimen-coordinates">
+                  <div className="specimen-coords-bar">
                     <span>{selectedResearch.coordinates}</span>
                   </div>
                 </div>
               )}
 
+              {/* 模式 2: 课题立项案卷指标 */}
               {researchTab === "metrics" && (
-                <div className="viewer-metrics-table-panel">
-                  <div className="metrics-panel-kicker">ACADEMIC METRICS & RESEARCH GRANT DOSSIER</div>
-                  <table className="metrics-spec-table">
+                <div className="hud-view-metrics-table">
+                  <div className="metrics-table-kicker">ACADEMIC METRICS & RESEARCH GRANT DOSSIER</div>
+                  <table className="table-archival">
                     <tbody>
                       <tr>
-                        <td className="tb-label">课题立项全称</td>
-                        <td className="tb-val">{selectedResearch.title}</td>
+                        <td className="tb-kicker">课题立项全称</td>
+                        <td className="tb-content">{selectedResearch.title}</td>
                       </tr>
                       <tr>
-                        <td className="tb-label">课题级别与类别</td>
-                        <td className="tb-val">{selectedResearch.role}</td>
+                        <td className="tb-kicker">课题级别与类别</td>
+                        <td className="tb-content">{selectedResearch.role}</td>
                       </tr>
                       <tr>
-                        <td className="tb-label">资助信息与编号</td>
-                        <td className="tb-val">{selectedResearch.fundInfo}</td>
+                        <td className="tb-kicker">资助信息与编号</td>
+                        <td className="tb-content">{selectedResearch.fundInfo}</td>
                       </tr>
                       <tr>
-                        <td className="tb-label">首席专家团队</td>
-                        <td className="tb-val">{selectedResearch.leader}</td>
+                        <td className="tb-kicker">首席专家团队</td>
+                        <td className="tb-content">{selectedResearch.leader}</td>
                       </tr>
                       <tr>
-                        <td className="tb-label">执行周期与节点</td>
-                        <td className="tb-val">{selectedResearch.year}（{selectedResearch.targetMilestone}）</td>
+                        <td className="tb-kicker">执行周期与节点</td>
+                        <td className="tb-content">{selectedResearch.year}（{selectedResearch.targetMilestone}）</td>
                       </tr>
                       <tr>
-                        <td className="tb-label">代表性最终成果</td>
-                        <td className="tb-val">{selectedResearch.medium}</td>
+                        <td className="tb-kicker">代表性最终成果</td>
+                        <td className="tb-content">{selectedResearch.medium}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               )}
 
+              {/* 模式 3: 田野考察坐标网络 */}
               {researchTab === "map" && (
-                <div className="viewer-map-network-panel">
-                  <div className="map-panel-header">
-                    <span className="map-badge">FIELD SURVEY RADAR · 沿黄九省区全流域测绘网络</span>
-                    <span className="map-stat">{selectedResearch.fieldStations} 处田野考察常态工作站</span>
+                <div className="hud-view-map-radar">
+                  <div className="radar-header-line">
+                    <span className="radar-badge">FIELD SURVEY RADAR · 沿黄九省区全流域测绘网络</span>
+                    <span className="radar-count">{selectedResearch.fieldStations} 处田野考察常态工作站</span>
                   </div>
-                  <div className="map-coordinates-radar">
-                    <div className="radar-grid-line h1" />
-                    <div className="radar-grid-line h2" />
-                    <div className="radar-grid-line v1" />
-                    <div className="radar-grid-line v2" />
-                    <div className="radar-station-node station-jinan">
-                      <span className="node-ping" />
-                      <span className="node-label">长清湖科研本部 (36.65°N, 116.82°E)</span>
+                  <div className="radar-canvas-grid">
+                    <div className="r-line r-h1" />
+                    <div className="r-line r-h2" />
+                    <div className="r-line r-v1" />
+                    <div className="r-line r-v2" />
+                    <div className="r-node node-jinan">
+                      <span className="node-beacon" />
+                      <span className="node-caption">长清湖科研本部 (36.65°N, 116.82°E)</span>
                     </div>
-                    <div className="radar-station-node station-weifang">
-                      <span className="node-ping" />
-                      <span className="node-label">潍坊杨家埠木版年画测绘站</span>
+                    <div className="r-node node-weifang">
+                      <span className="node-beacon" />
+                      <span className="node-caption">杨家埠木版年画测绘站</span>
                     </div>
-                    <div className="radar-station-node station-heze">
-                      <span className="node-ping" />
-                      <span className="node-label">菏泽黄河故道手工艺文献点</span>
+                    <div className="r-node node-heze">
+                      <span className="node-beacon" />
+                      <span className="node-caption">菏泽黄河故道手工艺文献点</span>
                     </div>
-                    <div className="radar-station-node station-zibo">
-                      <span className="node-ping" />
-                      <span className="node-label">淄博传统陶瓷琉璃活态基地</span>
+                    <div className="r-node node-zibo">
+                      <span className="node-beacon" />
+                      <span className="node-caption">淄博传统陶瓷琉璃活态基地</span>
                     </div>
                   </div>
-                  <div className="map-panel-footer">
-                    <span>地理信息采集系统由传统工艺与数字人文重点实验室提供技术支持</span>
+                  <div className="radar-footer-note">
+                    地理信息采集系统由传统工艺与数字人文重点实验室提供技术支持
                   </div>
                 </div>
               )}
 
-              <div className="viewer-data-deck">
-                <div className="deck-header">
-                  <span className="deck-dept">{selectedResearch.dept}</span>
-                  <span className="deck-year">{selectedResearch.year}</span>
+              {/* 案卷详细解读栏 */}
+              <div className="research-summary-dossier">
+                <div className="dossier-meta-sub-row">
+                  <span className="d-dept">{selectedResearch.dept}</span>
+                  <span className="d-year">{selectedResearch.year}</span>
                 </div>
-                <h3 className="deck-title">{selectedResearch.title}</h3>
-                <div className="deck-role-badge">{selectedResearch.role}</div>
-                <p className="deck-summary">{selectedResearch.summary}</p>
-                <div className="deck-medium-row">
-                  <span className="medium-label">成果形式：</span>
-                  <span className="medium-val">{selectedResearch.medium}</span>
+                <h3 className="d-title">{selectedResearch.title}</h3>
+                <div className="d-role-label">{selectedResearch.role}</div>
+                <p className="d-paragraph">{selectedResearch.summary}</p>
+                <div className="d-medium-strip">
+                  <span className="m-label">成果形式：</span>
+                  <span className="m-text">{selectedResearch.medium}</span>
                 </div>
-                <div className="deck-actions">
+                <div className="d-action-block">
                   <button
-                    className="btn-open-dossier"
+                    className="btn-trigger-dossier-modal"
                     onClick={() => setModalProject(selectedResearch)}
                   >
                     <span>调取完整学术案卷</span>
-                    <span className="btn-arrow">↗</span>
+                    <span className="btn-icon">↗</span>
                   </button>
                 </div>
               </div>
@@ -1406,50 +1210,49 @@ export default function App() {
           </div>
         </section>
 
-        {/* ================= SECTION 5: 文心讲堂与学术通报 (5:4:3 票根 + 两层名家学术席) ================= */}
-        <section className="editorial-section sec-lectures" id="sec-lectures">
-          <div className="section-title-strip">
-            <div className="strip-left">
-              <span className="strip-index">05</span>
-              <span className="strip-tag tag-pill tag-green">COLLOQUIUM PASS & SCHOLAR FORUM</span>
-              <h2 className="strip-h2">文心讲堂与学术通报</h2>
+        {/* ================= 6. SECTION 05: 文心讲堂与学术领航 (非对称票根 + 名家谱系散点) ================= */}
+        <section className="arch-section sec-colloquium-pass" id="sec-lectures">
+          <div className="arch-section-header">
+            <div className="header-index-block">
+              <span className="sec-num-large">05</span>
+              <div className="sec-title-wrap">
+                <span className="sec-tag-pill">COLLOQUIUM PASS & SCHOLAR FORUM</span>
+                <h2 className="sec-heading-serif">文心讲堂与学术通报</h2>
+              </div>
             </div>
-            <div className="strip-right">
-              <span className="strip-note">齐鲁艺文名家讲坛与高规格学科领航学术盛会</span>
+            <div className="header-meta-block">
+              <span>齐鲁艺文名家讲坛与高规格学科领航学术盛会</span>
             </div>
           </div>
 
-          {/* 局部变化：非对称 5:4:3 票券律动 */}
-          <div className="lectures-ticket-strip">
-            {/* Ticket 1: 范迪安名家特约席（占 1-5 列，5列，红色庄重缎带） */}
-            <div className="lecture-ticket-card ticket-vip-card">
-              <div className="ticket-body">
-                <div className="ticket-top-row">
-                  <div className="ticket-vip-tag">
-                    <span className="vip-star">★</span>
-                    <span className="ticket-pass-id">PASS #01 · 旗舰讲坛</span>
-                  </div>
+          {/* 5 : 4 : 3 异构票券阵列 */}
+          <div className="colloquium-ticket-array">
+            {/* Ticket 01: 范迪安 教授名家特邀讲席 (占 5 列) */}
+            <div className="arch-ticket-card ticket-vip-col">
+              <div className="ticket-inner-deck">
+                <div className="ticket-top-badge-row">
+                  <span className="ticket-star-id">★ PASS #01 · 旗舰讲坛</span>
                   <span className="tag-pill tag-red">{lectureSeries[0].status}</span>
                 </div>
-                <div className="ticket-series-name">{lectureSeries[0].series}</div>
-                <h3 className="ticket-title">{lectureSeries[0].title}</h3>
+                <div className="ticket-series-mono">{lectureSeries[0].series}</div>
+                <h3 className="ticket-headline-serif">{lectureSeries[0].title}</h3>
 
-                <div className="ticket-speaker-block speaker-block-vip">
-                  <div className="speaker-name">{lectureSeries[0].speaker}</div>
-                  <div className="speaker-title">{lectureSeries[0].speakerTitle}</div>
+                <div className="ticket-speaker-spotlight">
+                  <div className="speaker-name-strong">{lectureSeries[0].speaker}</div>
+                  <div className="speaker-title-sub">{lectureSeries[0].speakerTitle}</div>
                 </div>
 
-                <div className="ticket-footer-meta">
-                  <div className="meta-time">
-                    <span className="time-date">{lectureSeries[0].date}</span>
-                    <span className="time-hour">{lectureSeries[0].time}</span>
+                <div className="ticket-footer-telemetry">
+                  <div className="telemetry-time">
+                    <span className="time-d">{lectureSeries[0].date}</span>
+                    <span className="time-h">{lectureSeries[0].time}</span>
                   </div>
-                  <div className="meta-loc-row">
-                    <span className="meta-loc">{lectureSeries[0].location}</span>
-                    <span className="meta-cap">{lectureSeries[0].capacity}</span>
+                  <div className="telemetry-loc-row">
+                    <span className="loc-text">{lectureSeries[0].location}</span>
+                    <span className="cap-tag">{lectureSeries[0].capacity}</span>
                   </div>
                   <button
-                    className="btn-ticket-reserve"
+                    className="btn-reserve-seat"
                     onClick={() => {
                       setBookedLectureNo("01")
                       setTimeout(() => setBookedLectureNo(null), 3000)
@@ -1461,32 +1264,32 @@ export default function App() {
               </div>
             </div>
 
-            {/* Ticket 2: 许文清重点课题汇报（占 6-9 列，4列） */}
-            <div className="lecture-ticket-card ticket-academic-card">
-              <div className="ticket-body">
-                <div className="ticket-top-row">
-                  <span className="ticket-pass-id">PASS #02 · 课题汇报</span>
+            {/* Ticket 02: 许文清 教授重点课题报告 (占 4 列) */}
+            <div className="arch-ticket-card ticket-research-col">
+              <div className="ticket-inner-deck">
+                <div className="ticket-top-badge-row">
+                  <span className="ticket-star-id">PASS #02 · 课题汇报</span>
                   <span className="tag-pill tag-yellow">{lectureSeries[1].status}</span>
                 </div>
-                <div className="ticket-series-name">{lectureSeries[1].series}</div>
-                <h3 className="ticket-title">{lectureSeries[1].title}</h3>
+                <div className="ticket-series-mono">{lectureSeries[1].series}</div>
+                <h3 className="ticket-headline-serif">{lectureSeries[1].title}</h3>
 
-                <div className="ticket-speaker-block">
-                  <div className="speaker-name">{lectureSeries[1].speaker}</div>
-                  <div className="speaker-title">{lectureSeries[1].speakerTitle}</div>
+                <div className="ticket-speaker-spotlight">
+                  <div className="speaker-name-strong">{lectureSeries[1].speaker}</div>
+                  <div className="speaker-title-sub">{lectureSeries[1].speakerTitle}</div>
                 </div>
 
-                <div className="ticket-footer-meta">
-                  <div className="meta-time">
-                    <span className="time-date">{lectureSeries[1].date}</span>
-                    <span className="time-hour">{lectureSeries[1].time}</span>
+                <div className="ticket-footer-telemetry">
+                  <div className="telemetry-time">
+                    <span className="time-d">{lectureSeries[1].date}</span>
+                    <span className="time-h">{lectureSeries[1].time}</span>
                   </div>
-                  <div className="meta-loc-row">
-                    <span className="meta-loc">{lectureSeries[1].location}</span>
-                    <span className="meta-cap">{lectureSeries[1].capacity}</span>
+                  <div className="telemetry-loc-row">
+                    <span className="loc-text">{lectureSeries[1].location}</span>
+                    <span className="cap-tag">{lectureSeries[1].capacity}</span>
                   </div>
                   <button
-                    className="btn-ticket-reserve"
+                    className="btn-reserve-seat"
                     onClick={() => {
                       setBookedLectureNo("02")
                       setTimeout(() => setBookedLectureNo(null), 3000)
@@ -1498,32 +1301,32 @@ export default function App() {
               </div>
             </div>
 
-            {/* Ticket 3: 陈立言计算美学研讨（占 10-12 列，3列） */}
-            <div className="lecture-ticket-card ticket-lab-card">
-              <div className="ticket-body">
-                <div className="ticket-top-row">
-                  <span className="ticket-pass-id">PASS #03 · 实验研讨</span>
+            {/* Ticket 03: 陈立言 教授算法美学研讨 (占 3 列) */}
+            <div className="arch-ticket-card ticket-lab-col">
+              <div className="ticket-inner-deck">
+                <div className="ticket-top-badge-row">
+                  <span className="ticket-star-id">PASS #03 · 实验研讨</span>
                   <span className="tag-pill tag-blue">{lectureSeries[2].status}</span>
                 </div>
-                <div className="ticket-series-name">{lectureSeries[2].series}</div>
-                <h3 className="ticket-title">{lectureSeries[2].title}</h3>
+                <div className="ticket-series-mono">{lectureSeries[2].series}</div>
+                <h3 className="ticket-headline-serif">{lectureSeries[2].title}</h3>
 
-                <div className="ticket-speaker-block">
-                  <div className="speaker-name">{lectureSeries[2].speaker}</div>
-                  <div className="speaker-title">{lectureSeries[2].speakerTitle}</div>
+                <div className="ticket-speaker-spotlight">
+                  <div className="speaker-name-strong">{lectureSeries[2].speaker}</div>
+                  <div className="speaker-title-sub">{lectureSeries[2].speakerTitle}</div>
                 </div>
 
-                <div className="ticket-footer-meta">
-                  <div className="meta-time">
-                    <span className="time-date">{lectureSeries[2].date}</span>
-                    <span className="time-hour">{lectureSeries[2].time}</span>
+                <div className="ticket-footer-telemetry">
+                  <div className="telemetry-time">
+                    <span className="time-d">{lectureSeries[2].date}</span>
+                    <span className="time-h">{lectureSeries[2].time}</span>
                   </div>
-                  <div className="meta-loc-row">
-                    <span className="meta-loc">{lectureSeries[2].location}</span>
-                    <span className="meta-cap">{lectureSeries[2].capacity}</span>
+                  <div className="telemetry-loc-row">
+                    <span className="loc-text">{lectureSeries[2].location}</span>
+                    <span className="cap-tag">{lectureSeries[2].capacity}</span>
                   </div>
                   <button
-                    className="btn-ticket-reserve"
+                    className="btn-reserve-seat"
                     onClick={() => {
                       setBookedLectureNo("03")
                       setTimeout(() => setBookedLectureNo(null), 3000)
@@ -1536,107 +1339,110 @@ export default function App() {
             </div>
           </div>
 
-          {/* 局部变化：分级学术领航学者席（巨擘双领衔 + 学科负责人） */}
-          <div className="faculty-committee-strip">
-            <div className="committee-header-col">
-              <div className="committee-title">学术委员会与学科领航学者</div>
-              <div className="committee-sub">汇聚全国顶尖工艺美学理论家、国务院特贴专家与国家级领军人才</div>
+          {/* 学术委员会与学科领航学者谱系 (非卡片化，直接依附网格线) */}
+          <div className="scholarly-lineage-wall">
+            <div className="lineage-wall-header">
+              <div className="wall-title-serif">学术委员会与学科领航学者</div>
+              <div className="wall-sub-mono">汇聚全国顶尖工艺美学理论家、国务院特贴专家与国家级领军人才</div>
             </div>
 
-            {/* 第一层级：名誉院长与学术导师（两栏阔版 6:6） */}
-            <div className="committee-tier-senior">
-              {academicLeadersTier1.map((leader) => (
-                <div key={leader.num} className="senior-scholar-card">
-                  <div className="senior-card-header">
-                    <span className="senior-badge">{leader.role}</span>
-                    <span className="senior-idx">{leader.num}</span>
+            {/* 第一梯队：名誉院长与资深学术巨擘 (占 6:6) */}
+            <div className="lineage-tier-masters">
+              {academicLeadersTier1.map((master) => (
+                <div key={master.num} className="master-scholar-block">
+                  <div className="master-header-row">
+                    <span className="master-role-badge">{master.role}</span>
+                    <span className="master-num-tag">{master.num}</span>
                   </div>
-                  <h3 className="senior-name">{leader.name}</h3>
-                  <div className="senior-spec">{leader.spec}</div>
-                  <div className="senior-monograph">{leader.monograph}</div>
-                  <p className="senior-bio">{leader.bio}</p>
+                  <h3 className="master-name-serif">{master.name}</h3>
+                  <div className="master-spec-text">{master.spec}</div>
+                  <div className="master-monograph-pill">{master.monograph}</div>
+                  <p className="master-bio-p">{master.bio}</p>
                 </div>
               ))}
             </div>
 
-            {/* 第二层级：学科带头人（紧凑细线结构 6:6） */}
-            <div className="committee-tier-chairs">
-              {academicLeadersTier2.map((leader) => (
-                <div key={leader.num} className="chair-scholar-card">
-                  <div className="chair-top-row">
-                    <span className="chair-num">{leader.num}</span>
-                    <span className="chair-name">{leader.name}</span>
+            {/* 第二梯队：学科带头人与领航导师 (占 6:6) */}
+            <div className="lineage-tier-chairs">
+              {academicLeadersTier2.map((chair) => (
+                <div key={chair.num} className="chair-scholar-block">
+                  <div className="chair-header-row">
+                    <span className="chair-num-tag">{chair.num}</span>
+                    <h4 className="chair-name-serif">{chair.name}</h4>
                   </div>
-                  <div className="chair-role">{leader.role}</div>
-                  <div className="chair-spec">{leader.spec}</div>
+                  <div className="chair-role-mono">{chair.role}</div>
+                  <div className="chair-spec-desc">{chair.spec}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ================= SECTION 6: 招考通道与育人体系 (招考时间轴 + 双色对比) ================= */}
-        <section className="editorial-section sec-admissions" id="sec-admissions">
-          <div className="section-title-strip">
-            <div className="strip-left">
-              <span className="strip-index">06</span>
-              <span className="strip-tag tag-pill tag-red">TALENT CULTIVATION & ENROLLMENT</span>
-              <h2 className="strip-h2">招生与学业培养</h2>
+        {/* ================= 7. SECTION 06: 招考通道与育人体系 (招考时序路线 + 双材质对比) ================= */}
+        <section className="arch-section sec-admissions-gateway" id="sec-admissions">
+          <div className="arch-section-header">
+            <div className="header-index-block">
+              <span className="sec-num-large">06</span>
+              <div className="sec-title-wrap">
+                <span className="sec-tag-pill">TALENT CULTIVATION & ENROLLMENT</span>
+                <h2 className="sec-heading-serif">招生与学业培养</h2>
+              </div>
             </div>
-            <div className="strip-right">
-              <span className="strip-note">本科拔尖创新人才与学术型硕士研究生招考选拔</span>
+            <div className="header-meta-block">
+              <span>本科拔尖创新人才与学术型硕士研究生招考选拔</span>
             </div>
           </div>
 
-          {/* 局部变化：2026 招考关键节点时间轴（跨 12 列铺展） */}
-          <div className="admissions-milestone-strip">
-            <div className="milestone-strip-header">
-              <span className="m-title">2026 招考关键时序路线</span>
-              <span className="m-sub">本科普通批 / 艺术提前批 / 学术型硕士招考时间节点</span>
+          {/* 2026 招考时序路线图 (横跨 12 列的建筑进度标尺) */}
+          <div className="admissions-chronological-roadmap">
+            <div className="roadmap-header-bar">
+              <span className="r-bar-title">2026 招考关键时序路线</span>
+              <span className="r-bar-sub">本科普通批 / 艺术类提前批 / 学术型硕士研究生选拔</span>
             </div>
-            <div className="milestone-timeline-grid">
+            <div className="roadmap-stages-grid">
               {admissionsMilestones.map((m) => (
-                <div key={m.step} className="milestone-node">
-                  <div className="m-step-indicator">
-                    <span className="m-num">{m.step}</span>
-                    <span className="m-period">{m.period}</span>
+                <div key={m.step} className="roadmap-stage-node">
+                  <div className="stage-num-row">
+                    <span className="stage-step-num">{m.step}</span>
+                    <span className="stage-period-tag">{m.period}</span>
                   </div>
-                  <h4 className="m-node-title">{m.title}</h4>
-                  <p className="m-node-desc">{m.desc}</p>
+                  <h4 className="stage-title-serif">{m.title}</h4>
+                  <p className="stage-desc-text">{m.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="admissions-contrast-grid">
+          {/* 双材质对比色块 (炭黑研究生 6列 + 骨白本科生 6列) */}
+          <div className="admissions-material-juxtaposition">
             {/* 深色炭黑块（研究生） */}
-            <div className="admissions-card card-dark">
-              <div className="card-top-deck">
-                <span className="card-badge badge-dark-accent">POSTGRADUATE & PHD</span>
-                <span className="card-year">2026 学年度</span>
+            <div className="admissions-slab slab-charcoal">
+              <div className="slab-top-deck">
+                <span className="slab-accent-badge">POSTGRADUATE & PHD</span>
+                <span className="slab-year-mono">2026 学年度</span>
               </div>
-              <h3 className="card-title">研究生招考与拔尖学者培育通道</h3>
-              <p className="card-desc">
+              <h3 className="slab-heading-serif">研究生招考与拔尖学者培育通道</h3>
+              <p className="slab-desc-p">
                 面向全国招收学术型硕士研究生与协同培养博士生。依托国家社科重点基地与省重点实验室，实行双导师制与课题组沉浸式联合培养。
               </p>
-              <div className="card-specs-list">
-                <div className="spec-item">
-                  <span className="spec-dot">■</span>
+              <div className="slab-bullets-list">
+                <div className="bullet-row">
+                  <span className="bullet-sq">■</span>
                   <span>艺术设计学（设计史论、设计策划、文创管理、跨媒介设计）</span>
                 </div>
-                <div className="spec-item">
-                  <span className="spec-dot">■</span>
+                <div className="bullet-row">
+                  <span className="bullet-sq">■</span>
                   <span>艺术史论（中国美术史、工艺美术史、非遗理论与保护）</span>
                 </div>
-                <div className="spec-item">
-                  <span className="spec-dot">■</span>
+                <div className="bullet-row">
+                  <span className="bullet-sq">■</span>
                   <span>协同培养博士创新专项（黄河流域造物制度与文化治理）</span>
                 </div>
               </div>
-              <div className="card-action-wrap">
+              <div className="slab-action-wrap">
                 <a
                   href="#top"
-                  className="btn-card-white"
+                  className="btn-slab-light"
                   onClick={(e) => {
                     e.preventDefault()
                     alert("学术型硕士研究生招生专业目录与参考书目已就绪，欢迎广大学子报考。")
@@ -1649,33 +1455,33 @@ export default function App() {
             </div>
 
             {/* 暖白精装块（本科生） */}
-            <div className="admissions-card card-bone">
-              <div className="card-top-deck">
+            <div className="admissions-slab slab-bonewhite">
+              <div className="slab-top-deck">
                 <span className="tag-pill tag-blue">UNDERGRADUATE STUDIES</span>
-                <span className="card-year">2026 本科招生</span>
+                <span className="slab-year-mono">2026 本科招生</span>
               </div>
-              <h3 className="card-title">本科各专业招考与卓越培养计划</h3>
-              <p className="card-desc">
+              <h3 className="slab-heading-serif">本科各专业招考与卓越培养计划</h3>
+              <p className="slab-desc-p">
                 涵盖艺术设计学（软科 A+）、艺术史论、文化产业管理、非物质文化遗产保护等 7 个一流专业方向，实施“厚基础、宽口径、重实践、强通识”育人模式。
               </p>
-              <div className="card-specs-list">
-                <div className="spec-item">
-                  <span className="spec-dot-dark">●</span>
+              <div className="slab-bullets-list">
+                <div className="bullet-row">
+                  <span className="bullet-circle">●</span>
                   <span>招生咨询专线：0531-89626188 / 89626189</span>
                 </div>
-                <div className="spec-item">
-                  <span className="spec-dot-dark">●</span>
+                <div className="bullet-row">
+                  <span className="bullet-circle">●</span>
                   <span>录取批次：艺术类提前批 / 普通本科一批（文理兼招）</span>
                 </div>
-                <div className="spec-item">
-                  <span className="spec-dot-dark">●</span>
+                <div className="bullet-row">
+                  <span className="bullet-circle">●</span>
                   <span>拔尖创新实验班：黄河文脉造物创新实验班（大二选拔）</span>
                 </div>
               </div>
-              <div className="card-action-wrap">
+              <div className="slab-action-wrap">
                 <a
                   href="#top"
-                  className="btn-card-dark"
+                  className="btn-slab-dark"
                   onClick={(e) => {
                     e.preventDefault()
                     alert("本科生报考问答指南已准备就绪，欢迎咨询报考。")
@@ -1688,7 +1494,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* 全宽咨询横幅（带一键快捷复制与即时反馈） */}
+          {/* 全宽咨询横轴（一键快捷复制与即时反馈） */}
           <div className="admissions-hotline-strip">
             <div
               className="hotline-cell is-copyable"
@@ -1734,7 +1540,7 @@ export default function App() {
         </section>
       </main>
 
-      {/* ================= 官方严谨学术四列页脚 (100% 全宽) ================= */}
+      {/* ================= 8. 官方学术四列页脚 (直接依附 12 列建筑网格) ================= */}
       <footer className="editorial-footer">
         <div className="footer-container">
           <div className="footer-col col-brand">
