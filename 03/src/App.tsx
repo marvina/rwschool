@@ -540,8 +540,8 @@ export default function App() {
           </div>
 
           <div className="masthead-telemetry-col">
-            <span className="telemetry-dot" />
-            <span className="telemetry-text">JINAN 36.65°N · 2026 SPRING · VOL.08</span>
+            <span className="telemetry-dot" aria-hidden="true" />
+            <span className="telemetry-text">2026 教学科研纪事 · 春季号</span>
           </div>
 
           <nav className={`masthead-nav-col ${mobileMenuOpen ? "is-open" : ""}`}>
@@ -865,11 +865,6 @@ export default function App() {
 
             {/* 右侧核心培养大案卷画布 (占第 5 至 12 列) */}
             <div className="discipline-dossier-canvas">
-              {/* 背景学术水印 */}
-              <div className="dossier-watermark-seal" aria-hidden="true">
-                齊魯學派
-              </div>
-
               <div className="dossier-top-bar">
                 <div className="dossier-badge-cluster">
                   <span className="dossier-academic-rank">
@@ -1003,7 +998,7 @@ export default function App() {
                         <span className="sep-dot">·</span>
                         <span>{proj.dept}</span>
                       </div>
-                      <h4 className="proj-title-text">{proj.title}</h4>
+                      <h3 className="proj-title-text">{proj.title}</h3>
                       <div className="proj-arrow-status">
                         {isActive ? "●" : "→"}
                       </div>
@@ -1298,7 +1293,6 @@ export default function App() {
                 <div key={master.num} className="master-scholar-block">
                   <div className="master-header-row">
                     <span className="master-role-badge">{master.role}</span>
-                    <span className="master-num-tag">{master.num}</span>
                   </div>
                   <h3 className="master-name-serif">{master.name}</h3>
                   <div className="master-spec-text">{master.spec}</div>
@@ -1313,7 +1307,6 @@ export default function App() {
               {academicLeadersTier2.map((chair) => (
                 <div key={chair.num} className="chair-scholar-block">
                   <div className="chair-header-row">
-                    <span className="chair-num-tag">{chair.num}</span>
                     <h4 className="chair-name-serif">{chair.name}</h4>
                   </div>
                   <div className="chair-role-mono">{chair.role}</div>
@@ -1352,7 +1345,7 @@ export default function App() {
                     <span className="stage-step-num">{m.step}</span>
                     <span className="stage-period-tag">{m.period}</span>
                   </div>
-                  <h4 className="stage-title-serif">{m.title}</h4>
+                  <h3 className="stage-title-serif">{m.title}</h3>
                   <p className="stage-desc-text">{m.desc}</p>
                 </div>
               ))}

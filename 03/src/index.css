@@ -17,10 +17,10 @@
   --bg-dark-surface: #222226;
 
   --text-primary: #141416;
-  --text-secondary: #56565E;
-  --text-muted: #8A8A92;
+  --text-secondary: #3D3D44;
+  --text-muted: #52525A;
   --text-light: #F4F4F6;
-  --text-light-muted: #A0A0AA;
+  --text-light-muted: #B8B8C4;
 
   --border-hairline: rgba(20, 20, 22, 0.10);
   --border-strong: rgba(20, 20, 22, 0.85);
@@ -243,10 +243,11 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .telemetry-dot {
@@ -254,13 +255,6 @@ body {
   height: 6px;
   border-radius: 50%;
   background-color: #2D5A27;
-  box-shadow: 0 0 6px rgba(45, 90, 39, 0.6);
-  animation: pulse-dot 2.5s infinite ease-in-out;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
 .masthead-nav-col {
@@ -816,6 +810,10 @@ body {
   border-radius: 2px;
 }
 
+.feature-date-badge .dispatch-rubric {
+  color: #FFFFFF;
+}
+
 .badge-tag {
   color: #FFFFFF;
   font-weight: 600;
@@ -1145,14 +1143,15 @@ body {
   overflow: hidden;
 }
 
-.dossier-watermark-seal {
+.discipline-dossier-canvas::after {
+  content: "齊魯學派";
   position: absolute;
   top: 24px;
   right: 24px;
+  color: rgba(20, 20, 22, 0.035);
   font-family: var(--font-serif);
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 900;
-  color: rgba(20, 20, 22, 0.03);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -1411,6 +1410,10 @@ body {
 .research-item-btn.is-active {
   background-color: var(--text-primary);
   color: #FFFFFF;
+}
+
+.research-item-btn.is-active .proj-category-label {
+  color: #E2E2EA;
 }
 
 .proj-idx-row {
@@ -2113,9 +2116,9 @@ body {
 }
 
 .r-bar-sub {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
 }
 
 .roadmap-stages-grid {
@@ -2208,6 +2211,14 @@ body {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+.slab-charcoal .slab-accent-badge {
+  color: #D2D2DC;
+}
+
+.slab-charcoal .slab-year-mono {
+  color: #A4A4B0;
 }
 
 .slab-heading-serif {
@@ -2423,9 +2434,9 @@ body {
 }
 
 .footer-en {
-  font-size: 0.6875rem;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
   margin-bottom: 14px;
 }
 
