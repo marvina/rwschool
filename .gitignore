@@ -24,3 +24,13 @@ Desktop.ini
 .mise.toml
 dist_portal/
 dist_portal.zip
+
+# AI coding harness & skill caches
+.agent/
+.agents/
+.claude/
+.codex/
+.dsh/
+.gemini/
+.hermes/
+.opencode/
