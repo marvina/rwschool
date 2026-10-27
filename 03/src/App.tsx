@@ -726,8 +726,8 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">02</span>
               <div className="sec-title-wrap">
-                <div className="sec-kicker">[ 02 / ACADEMIC CHRONICLE · 学术纪事与动态 ]</div>
                 <h2 className="sec-heading-serif">学院新闻与学术动态</h2>
+                <span className="sec-title-en">Academic Chronicle & News</span>
               </div>
             </div>
             <div className="header-meta-block">
@@ -821,8 +821,8 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">03</span>
               <div className="sec-title-wrap">
-                <div className="sec-kicker">[ 03 / CURRICULUM MATRIX · 学科专业拓扑 ]</div>
                 <h2 className="sec-heading-serif">学科设置与专业矩阵</h2>
+                <span className="sec-title-en">Curriculum Matrix & Departments</span>
               </div>
             </div>
             <div className="header-meta-block">
@@ -959,14 +959,14 @@ export default function App() {
           </div>
         </section>
 
-        {/* ================= 5. SECTION 04: 科研高地与标本案卷库 (三态全景检视视窗) ================= */}
+        {/* ================= 5. SECTION 04: 科研高地与标本案卷库 (三态全景检视视窗 · 8:4 非对称交错排布) ================= */}
         <section className="arch-section sec-research-repository" id="sec-research">
           <div className="arch-section-header">
             <div className="header-index-block">
               <span className="sec-num-large">04</span>
               <div className="sec-title-wrap">
-                <div className="sec-kicker">[ 04 / RESEARCH REPOSITORY · 重点科研案卷 ]</div>
                 <h2 className="sec-heading-serif">学术研究与科研高地</h2>
+                <span className="sec-title-en">Research Excellence & Repository</span>
               </div>
             </div>
             <div className="header-meta-block">
@@ -975,40 +975,7 @@ export default function App() {
           </div>
 
           <div className="research-curatorial-spread">
-            {/* 左侧项目名录导轨 (占第 1 至 4 列) */}
-            <div className="research-selector-rail">
-              <div className="selector-mast-label">
-                <span>PROJECT DOSSIER SELECTION · 重点课题集刊</span>
-              </div>
-              <div className="selector-items-list">
-                {researchProjects.map((proj) => {
-                  const isActive = proj.id === activeResearchId
-                  return (
-                    <button
-                      key={proj.id}
-                      className={`research-item-btn ${isActive ? "is-active" : ""}`}
-                      onClick={() => setActiveResearchId(proj.id)}
-                    >
-                      <div className="proj-idx-row">
-                        <span className="proj-num">#{proj.id}</span>
-                        <span className="proj-category-label">[ {proj.category} ]</span>
-                      </div>
-                      <div className="proj-code-line">
-                        <span>{proj.code}</span>
-                        <span className="sep-dot">·</span>
-                        <span>{proj.dept}</span>
-                      </div>
-                      <h3 className="proj-title-text">{proj.title}</h3>
-                      <div className="proj-arrow-status">
-                        {isActive ? "●" : "→"}
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-
-            {/* 右侧标本视窗与多维 HUD (占第 5 至 12 列) */}
+            {/* 左侧标本视窗与多维 HUD 核心案卷展台 (占第 1 至 8 列) */}
             <div className="research-stage-view">
               {/* 三态 HUD 切换栏 */}
               <div className="research-hud-nav-bar">
@@ -1148,6 +1115,39 @@ export default function App() {
                 </div>
               </div>
             </div>
+
+            {/* 右侧项目名录导轨 (占第 9 至 12 列) */}
+            <div className="research-selector-rail">
+              <div className="selector-mast-label">
+                <span>ARCHIVAL CATALOGUE · 案卷集刊索引</span>
+              </div>
+              <div className="selector-items-list">
+                {researchProjects.map((proj) => {
+                  const isActive = proj.id === activeResearchId
+                  return (
+                    <button
+                      key={proj.id}
+                      className={`research-item-btn ${isActive ? "is-active" : ""}`}
+                      onClick={() => setActiveResearchId(proj.id)}
+                    >
+                      <div className="proj-idx-row">
+                        <span className="proj-num">#{proj.id}</span>
+                        <span className="proj-category-label">[ {proj.category} ]</span>
+                      </div>
+                      <div className="proj-code-line">
+                        <span>{proj.code}</span>
+                        <span className="sep-dot">·</span>
+                        <span>{proj.dept}</span>
+                      </div>
+                      <h3 className="proj-title-text">{proj.title}</h3>
+                      <div className="proj-arrow-status">
+                        {isActive ? "●" : "→"}
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1157,8 +1157,8 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">05</span>
               <div className="sec-title-wrap">
-                <div className="sec-kicker">[ 05 / SCHOLAR FORUM · 文心讲堂与学术通报 ]</div>
                 <h2 className="sec-heading-serif">文心讲堂与学术通报</h2>
+                <span className="sec-title-en">Scholarly Forum & Dispatches</span>
               </div>
             </div>
             <div className="header-meta-block">
@@ -1323,8 +1323,8 @@ export default function App() {
             <div className="header-index-block">
               <span className="sec-num-large">06</span>
               <div className="sec-title-wrap">
-                <div className="sec-kicker">[ 06 / TALENT CULTIVATION · 招生与学业培养 ]</div>
                 <h2 className="sec-heading-serif">招生与学业培养</h2>
+                <span className="sec-title-en">Admissions & Cultivation</span>
               </div>
             </div>
             <div className="header-meta-block">

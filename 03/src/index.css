@@ -730,14 +730,7 @@ body {
 .sec-title-wrap {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.sec-tag-pill {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
+  gap: 2px;
 }
 
 .sec-heading-serif {
@@ -746,6 +739,15 @@ body {
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.sec-title-en {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #52525A;
+  text-transform: uppercase;
 }
 
 .header-meta-block {
@@ -1015,7 +1017,7 @@ body {
 .discipline-interactive-stage {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 28px;
+  gap: 32px;
   align-items: start;
 }
 
@@ -1024,6 +1026,8 @@ body {
   grid-column: span 4;
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
+  position: sticky;
+  top: 96px;
 }
 
 .rail-mast-label {
@@ -1354,20 +1358,31 @@ body {
 }
 
 /* ==========================================================================
-   5. SECTION 04: 科研高地与标本案卷库 (4:8 三态全景检视视窗)
+   5. SECTION 04: 科研高地与标本案卷库 (8:4 三态全景检视视窗 · 非对称反向交错)
    ========================================================================== */
 .research-curatorial-spread {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 28px;
+  gap: 32px;
   align-items: start;
 }
 
-/* Left Research Selector Rail (占 4 列) */
-.research-selector-rail {
-  grid-column: span 4;
+/* Left Research Stage View (占第 1 至 8 列) */
+.research-stage-view {
+  grid-column: 1 / span 8;
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Right Research Selector Rail (占第 9 至 12 列) */
+.research-selector-rail {
+  grid-column: 9 / span 4;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-hairline);
+  position: sticky;
+  top: 96px;
 }
 
 .selector-mast-label {
@@ -1473,15 +1488,6 @@ body {
 
 .research-item-btn.is-active .proj-arrow-status {
   color: #FFFFFF;
-}
-
-/* Right Research Stage View (占 8 列) */
-.research-stage-view {
-  grid-column: span 8;
-  background-color: #FFFFFF;
-  border: 1px solid var(--border-hairline);
-  display: flex;
-  flex-direction: column;
 }
 
 .research-hud-nav-bar {
@@ -1716,7 +1722,7 @@ body {
 .radar-footer-note {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: #888894;
+  color: #A0A0AC;
 }
 
 /* Research Summary Dossier Deck */
@@ -2877,21 +2883,25 @@ body {
   /* Discipline topology */
   .discipline-interactive-stage {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .discipline-directory-rail,
   .discipline-dossier-canvas {
     grid-column: span 12;
+    position: static;
   }
 
   /* Research spread */
   .research-curatorial-spread {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .research-selector-rail,
-  .research-stage-view {
+  .research-stage-view,
+  .research-selector-rail {
     grid-column: span 12;
+    position: static;
   }
 
   /* Tickets */
@@ -2927,6 +2937,14 @@ body {
 @media (max-width: 768px) {
   :root {
     --canvas-padding: 20px;
+  }
+
+  .grid-overlay {
+    display: none;
+  }
+
+  .hero-archival-watermark {
+    display: none;
   }
 
   .masthead-logo-img {
