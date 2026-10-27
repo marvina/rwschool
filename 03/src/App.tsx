@@ -589,28 +589,16 @@ export default function App() {
 
       {/* ================= 页面主画布：完全重构的内容空间 ================= */}
       <main className="editorial-canvas" id="top">
-        {/* ================= 2. HERO: 典雅学术三联体画卷 (高定博物馆风，无横向网格，平衡尊崇) ================= */}
+        {/* ================= 2. HERO: 高定艺术人文画卷 (7:5 非对称建筑网格 · 纯粹空灵留白) ================= */}
         <section className="arch-hero-stage" id="sec-hero">
-          {/* 背景古典学术微水印 */}
+          {/* 背景极淡学术水印 */}
           <div className="hero-archival-watermark" aria-hidden="true">
             SHANDONG CRAFT & HUMANITIES · 1973–2026
           </div>
 
-          {/* 顶端纯净极简学术标尺（无全宽横线） */}
-          <div className="hero-editorial-mast-kicker">
-            <div className="mast-kicker-left">
-              <span className="kicker-mono-index">VOL. 2026 / 08</span>
-              <span className="kicker-sep">/</span>
-              <span className="kicker-topic">齐鲁造物学派文献库与一流学科高地</span>
-            </div>
-            <div className="mast-kicker-right">
-              <span className="kicker-coords">JINAN · 36.65°N, 116.82°E</span>
-            </div>
-          </div>
-
-          {/* 非对称高定学术画卷 (左侧巨幅建筑展陈画卷 · 右侧庄严学术篇章) */}
+          {/* 非对称高定学术画卷 (左侧第 1 至 7 列通栏画卷 · 右侧第 8 至 12 列学术主章) */}
           <div className="hero-asymmetric-spread">
-            {/* 左侧：巨幅建筑焦点画卷与平滑典藏切换 (占第 1 至 7 列，延伸至左边缘) */}
+            {/* 左侧：巨幅建筑与学术实践影像，带三联沉浸式典藏切换 */}
             <div className="hero-anchor-gallery">
               <div className="anchor-frame">
                 <img
@@ -623,50 +611,59 @@ export default function App() {
                   }
                   alt={
                     activePlate === 2
-                      ? "齐鲁造物文献特藏室与古籍善本"
+                      ? "齐鲁造物文献特藏室 · 古籍善本"
                       : activePlate === 3
-                      ? "黄河流域民间艺术抢救性田野测绘"
+                      ? "黄河流域民间手工艺抢救性田野测绘"
                       : "学院当代艺术展陈空间与实践现场"
                   }
                   className="anchor-img"
                 />
-                <div className="anchor-hud-tag">
-                  <span className="anchor-hud-code">
-                    {activePlate === 2
-                      ? "PLATE #02 · ARCHIVAL FOLIO"
-                      : activePlate === 3
-                      ? "PLATE #03 · FIELD SURVEY SPECIMEN"
-                      : "PLATE #01 · CONTEMPORARY EXHIBITION"}
-                  </span>
-                  <span className="anchor-hud-title">
+                <div className="anchor-caption-plate">
+                  <span className="caption-subject">
                     {activePlate === 2
                       ? "齐鲁造物文献特藏室 · 古籍善本"
                       : activePlate === 3
                       ? "黄河流域民间手工艺抢救性田野测绘"
-                      : "国家级实验教学示范中心 · 现场实景"}
+                      : "国家级实验教学示范中心 · 当代艺术展陈现场"}
+                  </span>
+                  <span className="caption-scope">
+                    {activePlate === 2
+                      ? "山东工艺美术学院学术典藏"
+                      : activePlate === 3
+                      ? "国家社科基金艺术学重点项目田野档案"
+                      : "山东省高校人文艺术重点实验室"}
                   </span>
                 </div>
               </div>
 
               {/* 沉静极简的典藏画幅切换器（纯正编辑排版，无花哨浮标） */}
-              <div className="anchor-plate-tabs">
+              <div className="anchor-plate-tabs" role="tablist" aria-label="典藏影像视窗">
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activePlate === 1 || activePlate === null}
                   className={`plate-tab-item ${activePlate === 1 || activePlate === null ? "is-active" : ""}`}
                   onClick={() => setActivePlate(1)}
                 >
                   <span className="tab-idx">01</span>
                   <span className="tab-text">当代展陈</span>
                 </button>
-                <span className="tab-divider">/</span>
+                <span className="tab-divider" aria-hidden="true">/</span>
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activePlate === 2}
                   className={`plate-tab-item ${activePlate === 2 ? "is-active" : ""}`}
                   onClick={() => setActivePlate(2)}
                 >
                   <span className="tab-idx">02</span>
                   <span className="tab-text">文献特藏</span>
                 </button>
-                <span className="tab-divider">/</span>
+                <span className="tab-divider" aria-hidden="true">/</span>
                 <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activePlate === 3}
                   className={`plate-tab-item ${activePlate === 3 ? "is-active" : ""}`}
                   onClick={() => setActivePlate(3)}
                 >
@@ -676,84 +673,49 @@ export default function App() {
               </div>
             </div>
 
-            {/* 右侧：当代使命与学术英才引航主章 (占第 8 至 12 列) */}
+            {/* 右侧：院训主标、考生报考导语与权威学术背书 (第 8 至 12 列) */}
             <div className="hero-flank hero-flank-vision">
-              <div className="flank-kicker-row">
-                <span className="flank-rubric">[ 01 / 时代引航 · 学院愿景与学术文脉 · VISION & HERITAGE ]</span>
-              </div>
               <h1 className="flank-title-serif">
+                <span className="title-affiliation">山东工艺美术学院 · 人文艺术学院</span>
                 <span className="title-line">以人文涵养艺术</span>
                 <span className="title-line">以设计赋能时代</span>
               </h1>
+
               <p className="flank-prose">
-                承袭齐鲁千年造物哲思与学术文脉，立足软科 A+ 顶尖学科与国家级一流专业建设点。深耕设计史论、古代造物制度与黄河民艺抢救性测绘，建构中国自主设计理论学术话语体系。面向国家文化战略与前沿社会创新命题，深化拔尖育人体系，培养引领未来的领军学人。
+                承袭齐鲁千年造物哲思，立足国家级一流专业集群与软科 A+ 顶尖学科高地。学院深耕设计史论、古代造物制度考释与黄河民艺抢救性测绘，建构中国自主设计理论学术话语。面向拔尖创新人才选拔与培养，以深厚人文底蕴与现代策展文创实战，引领新时代艺术英才成长。
               </p>
+
               <div className="flank-action-row">
-                <a href="#sec-disciplines" className="flank-action-btn">
-                  <span>探索专业拓扑与文脉谱系</span>
-                  <span className="action-circle-arrow">→</span>
+                <a href="#sec-disciplines" className="flank-action-btn primary">
+                  <span>探索 8 大专业培养方案</span>
+                  <span className="action-circle-arrow" aria-hidden="true">→</span>
                 </a>
                 <a href="#sec-admissions" className="flank-action-btn secondary">
-                  <span>2026 招考指南</span>
-                  <span className="action-circle-arrow">↗</span>
+                  <span>2026 招考咨询与指南</span>
+                  <span className="action-circle-arrow" aria-hidden="true">↗</span>
                 </a>
               </div>
 
               {/* 权威认证与印鉴双重背书 */}
               <div className="flank-cultural-endorsement">
                 <div className="flank-archival-stamp">
-                  <div className="archival-seal-block" title="齐鲁造物印鉴">
+                  <div className="archival-seal-block" title="齊魯造物印">
                     <span>齊魯</span>
                     <span>造物</span>
                   </div>
                   <div className="stamp-meta">
-                    <span className="stamp-code">ARCHIVE NO. SDADA-DES-1305</span>
+                    <span className="stamp-org">齐鲁造物学派文献库</span>
                     <span className="stamp-desc">国家一流本科专业建设点档案</span>
                   </div>
                 </div>
 
                 <div className="flank-accolade-card">
                   <div className="accolade-rank-strong">软科顶尖学科 A+</div>
-                  <div className="accolade-desc-mono">
+                  <div className="accolade-desc-text">
                     全国排名前列 · 艺术设计学与艺术史论双双入选国家级一流本科专业
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* 四列学术坐标定位标尺（直接落于 12 列垂直线之间，零横向网格线） */}
-          <div className="hero-architectural-metrics">
-            <div className="arch-metric-cell">
-              <div className="metric-meta-rubric">COORDINATE 01 · DISCIPLINE RANK</div>
-              <div className="metric-number-display">全国 A+</div>
-              <div className="metric-title-text">软科中国大学专业排名顶尖评级</div>
-              <div className="metric-detail-p">艺术设计学专业连续保持全国排名前列，奠定自主造物学派体系。</div>
-            </div>
-
-            <div className="arch-metric-cell">
-              <div className="metric-meta-rubric">COORDINATE 02 · NATIONAL FIRST-CLASS</div>
-              <div className="metric-number-display">
-                2 <span className="metric-unit-tag">个</span>
-              </div>
-              <div className="metric-title-text">国家级一流本科专业建设点</div>
-              <div className="metric-detail-p">艺术设计学与艺术史论双双入选国家一流，构筑全省唯一双一流理论阵地。</div>
-            </div>
-
-            <div className="arch-metric-cell">
-              <div className="metric-meta-rubric">COORDINATE 03 · FACULTY EXCELLENCE</div>
-              <div className="metric-number-display">100%</div>
-              <div className="metric-title-text">专任教师高职及博士学位比例</div>
-              <div className="metric-detail-p">汇聚国务院特贴专家、全国美展评委与省部级教学名师高水平团队。</div>
-            </div>
-
-            <div className="arch-metric-cell">
-              <div className="metric-meta-rubric">COORDINATE 04 · MAJOR RESEARCH</div>
-              <div className="metric-number-display">
-                50+ <span className="metric-unit-tag">项</span>
-              </div>
-              <div className="metric-title-text">国家社科艺术学及省部重点课题</div>
-              <div className="metric-detail-p">涵盖黄河流域民间手工艺数字化抢救、古代造物制度考据与美育实践。</div>
             </div>
           </div>
         </section>
