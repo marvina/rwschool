@@ -8,13 +8,14 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.resolve(rootDir, 'dist');
 
-console.log('🚀 [Build] 开始构建人文艺术学院官网四套方案整合网站...');
+console.log('🚀 [Build] 开始构建人文艺术学院官网五套方案整合网站...');
 
 const schemes = [
-  { id: '01', name: '方案一：现代学术综合门户', dir: '01' },
-  { id: '02', name: '方案二：典雅人文展览年刊', dir: '02' },
-  { id: '03', name: '方案三：高定极简典雅风', dir: '03' },
-  { id: '04', name: '方案四：高校规范全功能门户', dir: '04' }
+  { id: '01', name: '方案一：现代学术综合门户 (首页原型)', dir: '01' },
+  { id: '02', name: '方案二：现代学术综合门户 (React版)', dir: '02' },
+  { id: '03', name: '方案三：典雅人文展览年刊', dir: '03' },
+  { id: '04', name: '方案四：高定极简典雅风', dir: '04' },
+  { id: '05', name: '方案五：高校规范全功能门户', dir: '05' }
 ];
 
 // Helper: recursive copy
@@ -83,6 +84,7 @@ const floatingSwitcherScript = `
   if (pathname.includes('/02')) cur = '02';
   else if (pathname.includes('/03')) cur = '03';
   else if (pathname.includes('/04')) cur = '04';
+  else if (pathname.includes('/05')) cur = '05';
 
   const menu = document.createElement('div');
   menu.id = 'standalone-scheme-dock';
@@ -179,16 +181,19 @@ const floatingSwitcherScript = `
       </a>
       <div class="dock-divider"></div>
       <a href="../01/index.html" class="dock-item \${cur === '01' ? 'active' : ''}">
-        <span>方案 01 · 现代学术综合</span>
+        <span>方案 01 · 现代学术综合 (首页原型)</span>
       </a>
       <a href="../02/index.html" class="dock-item \${cur === '02' ? 'active' : ''}">
-        <span>方案 02 · 典雅人文年刊</span>
+        <span>方案 02 · 现代学术综合 (React版)</span>
       </a>
       <a href="../03/index.html" class="dock-item \${cur === '03' ? 'active' : ''}">
-        <span>方案 03 · 高定极简典雅</span>
+        <span>方案 03 · 典雅人文年刊</span>
       </a>
       <a href="../04/index.html" class="dock-item \${cur === '04' ? 'active' : ''}">
-        <span>方案 04 · 高校规范全能</span>
+        <span>方案 04 · 高定极简典雅</span>
+      </a>
+      <a href="../05/index.html" class="dock-item \${cur === '05' ? 'active' : ''}">
+        <span>方案 05 · 高校规范全能</span>
       </a>
     </div>
     <div class="dock-pill" id="dock-toggle">
@@ -249,8 +254,8 @@ for (const scheme of schemes) {
       }
     }
 
-    // Special asset copying for scheme 04
-    if (scheme.id === '04') {
+    // Special asset copying for scheme 05 (formerly 04)
+    if (scheme.id === '05') {
       const logoInAssets = path.join(assetsDir, 'school-logo-yunOovs1.png');
       const logoInRoot = path.join(schemeDistDir, 'school-logo-yunOovs1.png');
       if (fs.existsSync(logoInAssets) && !fs.existsSync(logoInRoot)) {
@@ -283,11 +288,12 @@ if (fs.existsSync(portalIndexSrc)) {
 
 // 6. Copy shared images & logos to dist root
 const sharedAssets = [
-  '01/public/college-logo.png',
-  '01/public/favicon.svg',
-  '02/public/field-library.jpg',
-  '02/public/hero-exhibition.jpg',
-  '02/public/research-folk-art.jpg'
+  '01/assets/logo.png',
+  '02/public/college-logo.png',
+  '02/public/favicon.svg',
+  '03/public/field-library.jpg',
+  '03/public/hero-exhibition.jpg',
+  '03/public/research-folk-art.jpg'
 ];
 
 for (const relAsset of sharedAssets) {

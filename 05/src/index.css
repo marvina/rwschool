@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans SC", sans-serif;
+  --font-serif: "Noto Serif SC", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f6f4ed;
+  font-family: "Noto Serif SC", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a {
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  color: white;
+  background: #a13a2a;
+}
+
+.major-card {
+  overflow: hidden;
+  transition: color 300ms ease;
+}
+
+.major-card > :not(.major-image, .major-overlay) {
+  position: relative;
+  z-index: 1;
+}
+
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.6rem;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transition: gap 250ms ease;
+}
+
+.arrow-link:hover {
+  gap: 2.75rem;
+}
+
+.footer-title {
+  margin-bottom: 1.25rem;
+  color: #d7c581;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+footer div > a,
+footer div > p:not(.footer-title) {
+  display: block;
+  margin-top: 0.7rem;
+  color: rgb(255 255 255 / 48%);
+  line-height: 1.7;
+  transition: color 200ms ease;
+}
+
+footer div > a:hover {
+  color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

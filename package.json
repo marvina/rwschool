@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "人文艺术学院官网改版四套设计方案统一汇报展示平台（适配 Cloudflare Pages）",
+  "description": "人文艺术学院官网改版五套设计方案统一汇报展示平台（适配 Cloudflare Pages）",
   "scripts": {
     "build:01": "cd 01 && pnpm run build",
     "build:02": "cd 02 && pnpm run build",
     "build:03": "cd 03 && pnpm run build",
     "build:04": "cd 04 && pnpm run build",
+    "build:05": "cd 05 && pnpm run build",
     "build": "node scripts/build.js",
     "preview": "npx serve dist -l 3000"
   },

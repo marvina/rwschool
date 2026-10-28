@@ -1,0 +1,10 @@
+{
+  "description": "Showcases a design school homepage highlighting art and philosophy majors to attract and inform prospective students effectively.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

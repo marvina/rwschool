@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>方案一：现代学术综合门户 | 人文艺术学院官网改版</title>
+<title>方案一：现代学术综合门户 (首页原型) | 人文艺术学院官网改版</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1192,6 +1192,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   if (pathname.includes('/02')) cur = '02';
   else if (pathname.includes('/03')) cur = '03';
   else if (pathname.includes('/04')) cur = '04';
+  else if (pathname.includes('/05')) cur = '05';
 
   const menu = document.createElement('div');
   menu.id = 'standalone-scheme-dock';
@@ -1288,16 +1289,19 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       </a>
       <div class="dock-divider"></div>
       <a href="../01/index.html" class="dock-item ${cur === '01' ? 'active' : ''}">
-        <span>方案 01 · 现代学术综合</span>
+        <span>方案 01 · 现代学术综合 (首页原型)</span>
       </a>
       <a href="../02/index.html" class="dock-item ${cur === '02' ? 'active' : ''}">
-        <span>方案 02 · 典雅人文年刊</span>
+        <span>方案 02 · 现代学术综合 (React版)</span>
       </a>
       <a href="../03/index.html" class="dock-item ${cur === '03' ? 'active' : ''}">
-        <span>方案 03 · 高定极简典雅</span>
+        <span>方案 03 · 典雅人文年刊</span>
       </a>
       <a href="../04/index.html" class="dock-item ${cur === '04' ? 'active' : ''}">
-        <span>方案 04 · 高校规范全能</span>
+        <span>方案 04 · 高定极简典雅</span>
+      </a>
+      <a href="../05/index.html" class="dock-item ${cur === '05' ? 'active' : ''}">
+        <span>方案 05 · 高校规范全能</span>
       </a>
     </div>
     <div class="dock-pill" id="dock-toggle">
