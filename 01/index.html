@@ -1,16 +1,1181 @@
-<!doctype html>
-<html lang="<!-- figma:lang -->">
-  <head>
-    <!-- figma:head-start -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><!-- figma:title --></title>
-    <!-- figma:head-end -->
-  </head>
-  <body>
-    <!-- figma:body-start -->
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <!-- figma:body-end -->
-  </body>
-</html>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>人文艺术学院首页原型</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@700;900&display=swap">
+<style>
+/* Layout: fixed two-tier header over a smooth-scrolling column of full-bleed bands; content held to a 1200px measure.
+   Tokens mirror the Figma file's 学院网站 Colors / Type collections. Single light brand theme by design. */
+:root {
+  color-scheme: light;
+  --ink: #1C1B2E;        /* ink/900 */
+  --ink-700: #3E3D52;    /* ink/700 */
+  --ink-500: #6D6B80;    /* ink/500 */
+  --paper: #FFFDF8;      /* paper/50 */
+  --paper-100: #F6F0E4;  /* paper/100 */
+  --white: #FFFFFF;
+  --line: #E7E0D2;       /* line/200 */
+  --red: #D62E52;        /* maroon/700 · header */
+  --blue: #2A5DB0;       /* maroon/900 · utility bar, tools */
+  --sky: #1D7FB0;        /* gold/700 · eyebrows, kinds */
+  --yellow: #F6C324;     /* gold/500 · admissions */
+  --on-dark: #FFFFFF;
+  --on-dark-dim: rgba(255,255,255,.72);
+  --f-display: "Noto Serif SC", "Songti SC", "STSong", serif;
+  --f-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --f-latin: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --measure: 1200px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --header-h: 128px;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--paper); color: var(--ink); }
+body { font-family: var(--f-body); font-size: 14px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--blue); }
+
+.wrap { width: 100%; max-width: calc(var(--measure) + 240px); margin-inline: auto; padding-left: max(var(--gutter-l), min(120px, 8.33vw)); padding-right: max(var(--gutter-r), min(120px, 8.33vw)); }
+.band { padding-block: 96px; }
+.bg-white { background: var(--white); }
+.bg-paper { background: var(--paper); }
+
+/* type */
+.eyebrow { font-family: var(--f-latin); font-weight: 700; font-size: 15px; line-height: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--sky); }
+.h2 { font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 44px; margin: 4px 0 0; text-wrap: balance; }
+.h3 { font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 32px; margin: 0; text-wrap: balance; }
+.h4 { font-family: var(--f-display); font-weight: 700; font-size: 18px; line-height: 28px; margin: 0; }
+.cap { font-size: 12px; line-height: 18px; color: var(--ink-500); }
+.label { font-weight: 500; font-size: 14px; line-height: 20px; }
+.num { font-family: var(--f-latin); font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* shared bits */
+.arrow { width: 16px; height: 16px; flex: none; }
+.more { display: inline-flex; align-items: center; gap: 8px; color: var(--red); font-weight: 500; font-size: 14px; }
+.more .arrow { transition: transform .3s; }
+.more:hover .arrow { transform: translateX(4px); }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px; }
+.tag { display: inline-flex; align-items: center; height: 28px; padding: 4px 8px; border: 1px solid var(--red); color: var(--red); font-size: 12px; line-height: 18px; border-radius: 2px; white-space: nowrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 12px 24px; border-radius: 2px; font-weight: 500; font-size: 14px; border: 1px solid var(--ink); white-space: nowrap; transition: background .25s, color .25s; }
+.btn-primary { background: var(--red); border-color: var(--red); color: var(--white); }
+.btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--white); }
+
+/* ---------- S00 fixed header ---------- */
+.site-header { position: fixed; inset: 0 0 auto; z-index: 50; padding-top: env(safe-area-inset-top, 0px); background: var(--blue); will-change: transform; transition: box-shadow .3s; }
+.site-header.is-scrolled { box-shadow: 0 8px 24px rgba(28,27,46,.18); }
+.utility { background: var(--blue); color: var(--on-dark); font-size: 12px; line-height: 18px; }
+.utility .wrap { display: flex; justify-content: space-between; align-items: center; height: 34px; gap: 16px; }
+.utility nav { display: flex; gap: 24px; align-items: center; }
+.utility .divider { width: 1px; height: 12px; background: var(--on-dark-dim); }
+.mainbar { background: var(--red); color: var(--on-dark); }
+.mainbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 94px; gap: 24px; }
+.brand img { width: 260px; height: auto; }
+.mainnav { display: flex; gap: 32px; }
+.mainnav a { font-weight: 500; font-size: 14px; position: relative; padding-block: 4px; }
+.mainnav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--on-dark); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.mainnav a:hover::after { transform: scaleX(1); }
+.actions { display: flex; gap: 12px; }
+.icon-btn { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.6); border-radius: 2px; }
+.role-menu { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 10px 12px 10px 16px; background: var(--white); color: var(--ink); border-radius: 2px; font-weight: 500; white-space: nowrap; }
+
+/* ---------- S01 hero ---------- */
+.hero { min-height: 100vh; padding-top: var(--header-h); display: flex; align-items: center; overflow: hidden; position: relative; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 536px); justify-content: space-between; gap: 64px; align-items: center; padding-block: 48px 72px; }
+.hero-text { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+.hero h1 { font-family: var(--f-display); font-weight: 900; font-size: clamp(36px, 4.2vw, 56px); line-height: 1.36; margin: 20px 0 0; letter-spacing: .01em; }
+.hero-lede { font-size: 16px; line-height: 28px; color: var(--ink-700); margin: 0; max-width: 38em; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.stats { display: flex; gap: 48px; padding-top: 24px; border-top: 1px solid var(--ink); }
+.stat .num { font-size: 48px; line-height: 52px; color: var(--red); display: block; }
+.stat .cap { margin-top: 8px; display: block; }
+.hero-art { position: relative; z-index: 2; aspect-ratio: 536 / 616; overflow: hidden; will-change: transform; }
+.hero-art img { width: 107.5%; max-width: none; height: auto; }
+.scroll-hint { position: absolute; left: max(var(--gutter-l), min(120px, 8.33vw)); bottom: 32px; display: flex; align-items: center; gap: 8px; font-family: var(--f-latin); font-weight: 700; font-size: 12px; letter-spacing: .14em; }
+.scroll-hint i { width: 40px; height: 1px; background: var(--ink); transform-origin: left; }
+
+/* page-jump veil: covers the instant jump for menu / anchor links */
+.jump-veil { position: fixed; inset: 0; z-index: 45; background: var(--paper); opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* ---------- marquee bands ---------- */
+.marquee { height: 40px; overflow: hidden; background: var(--paper); }
+.marquee .track { height: 40px; width: calc(100% + 1440px); background: url("assets/band.png") 0 0 / 1440px 40px repeat-x; will-change: transform; }
+
+/* ---------- S02 admissions ---------- */
+.admit { background: var(--yellow); position: relative; }
+.admit-bg { position: absolute; inset: 0; background: var(--yellow); transform-origin: top; }
+.admit .wrap { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 48px; padding-block: 32px; }
+.admit-text { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.admit-text .tag { align-self: flex-start; color: var(--ink); border-color: var(--ink); }
+.admit-text p { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 32px; }
+.admit-text .cap { color: var(--ink-700); }
+.admit .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- S03 roles ---------- */
+.roles { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-block: 96px; overflow: hidden; }
+.roles .sec-head { margin-bottom: 40px; }
+.roles-viewport { padding-left: max(var(--gutter-l), min(120px, 8.33vw), calc((100% - var(--measure)) / 2)); }
+.roles-track { display: flex; gap: 24px; width: max-content; padding-right: max(var(--gutter-r), min(120px, 8.33vw), calc((100vw - var(--measure)) / 2)); will-change: transform; }
+.role-card { width: 384px; flex: none; background: var(--white); border: 1px solid var(--line); padding: 32px; display: flex; flex-direction: column; gap: 16px; border-radius: 2px; transition: border-color .3s, transform .3s; }
+.role-card:hover { border-color: var(--ink); }
+.role-card .swatch { width: 320px; max-width: 100%; height: 56px; overflow: hidden; }
+.role-card .swatch img { width: 100%; height: 100%; object-fit: cover; }
+.role-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.role-top .num { font-size: 22px; line-height: 30px; color: var(--sky); }
+.role-top .en { font-family: var(--f-latin); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-500); }
+.role-card .rule { width: 24px; height: 2px; background: var(--red); }
+.role-card ul { list-style: none; padding: 0; margin: 0; color: var(--ink-700); font-size: 14px; line-height: 24px; flex: 1; }
+.role-card ul a:hover { color: var(--red); }
+.roles-progress { display: flex; align-items: center; gap: 24px; margin-top: 40px; }
+.roles-progress .cap { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.roles-progress .bar { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; }
+.roles-progress .fill { position: absolute; inset: 0; background: var(--red); transform-origin: left; transform: scaleX(.17); }
+
+/* ---------- S04 news ---------- */
+.news-grid { display: grid; grid-template-columns: minmax(0, 680fr) minmax(0, 472fr); gap: 48px; align-items: start; }
+.filters { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+.filters .h4 { margin-right: 8px; }
+.filters .spacer { width: 16px; height: 1px; background: var(--ink-500); margin-right: 8px; }
+.news-img { position: relative; aspect-ratio: 680 / 360; overflow: hidden; background: var(--paper-100); }
+.news-img img { position: absolute; left: 0; top: -10%; width: 100%; height: 120%; object-fit: cover; max-width: none; }
+.feat-text { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.meta { display: flex; align-items: center; gap: 12px; }
+.feat-text h3 { font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 32px; margin: 0; }
+.feat-text p { margin: 0; color: var(--ink-700); font-size: 14px; line-height: 24px; }
+.rows { margin-top: 24px; }
+.row { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+.row .day { font-size: 22px; line-height: 30px; color: var(--red); display: block; }
+.row .kind { color: var(--sky); font-size: 12px; line-height: 18px; display: block; margin-bottom: 4px; }
+.row .title { font-size: 14px; line-height: 24px; color: var(--ink); transition: color .25s; }
+.row:hover .title { color: var(--red); }
+.tabs { display: flex; gap: 32px; border-bottom: 1px solid var(--line); }
+.tab { position: relative; padding-bottom: 12px; font-family: var(--f-display); font-weight: 700; font-size: 18px; line-height: 28px; color: var(--ink-500); }
+.tab[aria-selected="true"] { color: var(--ink); }
+.tab-ink { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--red); }
+.panel[hidden] { display: none !important; }
+.panel .rows { margin-top: 0; }
+.panel-note { padding-block: 24px; color: var(--ink-500); font-size: 12px; }
+.all-link { margin-top: 20px; }
+
+/* ---------- S05 scholars · 4 per term, pinned portrait sequence → faculty index ---------- */
+.scholars { position: relative; background: var(--paper); }
+.scholars > .wrap { padding-block: 96px; }
+.sch-rule { margin: 8px 0 0; }
+.sch-body { position: relative; display: flex; flex-direction: column; gap: 64px; }
+.sch-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+.sch-card { display: flex; gap: 32px; min-width: 0; }
+.sch-photo { width: 45%; flex: none; aspect-ratio: 282 / 400; overflow: hidden; background: var(--paper-100); position: relative; }
+.sch-photo img { width: 100%; height: 100%; object-fit: cover; }
+.sch-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding-top: 20px; }
+.sch-head, .sch-foot { display: flex; flex-direction: column; gap: 8px; }
+.sch-foot { border-top: 1px solid var(--line); padding-top: 20px; gap: 12px; }
+.sch-badge { color: var(--red); font-size: 12px; line-height: 18px; font-weight: 500; }
+.sch-role { color: var(--ink-700); font-size: 14px; line-height: 24px; margin: 0; }
+.sch-research { font-size: 16px; line-height: 28px; margin: 0; }
+.sch-recent { margin: 0; font-size: 13px; line-height: 20px; color: var(--ink-500); }
+.sch-recent b { font-weight: 500; color: var(--sky); margin-right: 8px; }
+.ph-frame { display: grid; align-content: space-between; padding: 0; }
+.ph-frame img { width: 100%; height: 32px; object-fit: cover; object-position: left; }
+.ph-frame .cap { padding: 16px; }
+.sch-stage { display: none; }
+
+/* faculty index (also the static block on phones) */
+.sch-index { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 64px; align-items: end; }
+.sch-index-head { display: flex; flex-direction: column; gap: 16px; }
+.sch-total { margin: 0; display: flex; align-items: baseline; gap: 12px; }
+.sch-total .num { font-size: clamp(72px, 7.5vw, 112px); line-height: 1; color: var(--red); letter-spacing: -.02em; }
+.sch-total .unit { font-family: var(--f-display); font-weight: 900; font-size: 28px; line-height: 1.2; }
+.sch-index-lede { margin: 0; color: var(--ink-700); font-size: 15px; line-height: 26px; max-width: 24em; }
+.sch-index-head .btn { align-self: flex-start; margin-top: 8px; }
+.dept-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.dept-grid li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.dept-grid a { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; height: 100%; min-height: 140px; padding: 20px; background: var(--paper); transition: background .3s, color .3s; }
+.dept-name { font-family: var(--f-display); font-weight: 700; font-size: 17px; line-height: 26px; }
+.dept-note { display: block; color: var(--ink-500); font-size: 12px; line-height: 18px; margin-top: 6px; transition: color .3s; }
+.dept-go { display: flex; justify-content: space-between; align-items: center; color: var(--red); font-size: 13px; font-weight: 500; transition: color .3s; }
+.dept-go .arrow { transition: transform .3s; }
+.dept-grid a:hover { background: var(--ink); color: var(--white); }
+.dept-grid a:hover .dept-note { color: var(--on-dark-dim); }
+.dept-grid a:hover .dept-go { color: var(--yellow); }
+.dept-grid a:hover .arrow { transform: translateX(4px); }
+
+/* stage mode (desktop, pinned) */
+.scholars.is-stage { height: 100vh; overflow: hidden; }
+.scholars.is-stage > .wrap { height: 100%; display: flex; flex-direction: column; padding-block: 72px 56px; }
+.scholars.is-stage .sec-head { margin-bottom: 36px; }
+.scholars.is-stage .sch-body { flex: 1; min-height: 0; display: block; }
+.scholars.is-stage .sch-list { display: none; }
+.scholars.is-stage .sch-stage { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 96px; height: 100%; }
+.scholars.is-stage .sch-index { position: absolute; inset: 0; align-content: center; }
+.scholars.is-stage .sch-index, .scholars.is-stage .sch-index * { pointer-events: none; }
+.scholars.is-stage .sch-index a { pointer-events: auto; }
+.sch-visual { position: relative; height: 100%; max-height: 620px; aspect-ratio: 282 / 400; align-self: center; margin-left: 32px; }
+.sch-decor { position: absolute; inset: 0; transform: translate(-32px, 32px); background: var(--paper-100); border: 1px solid var(--line); overflow: hidden; }
+.sch-decor img { position: absolute; left: 0; bottom: 0; width: 100%; height: 32px; object-fit: cover; object-position: left; }
+.sch-frame { position: absolute; inset: 0; margin: 0; overflow: hidden; background: var(--paper-100); }
+.sch-frame > img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.sch-frame.ph-frame > img { height: 40px; }
+.sch-panel { display: flex; flex-direction: column; min-width: 0; padding-block: 8px; }
+.sch-texts { flex: 1; display: grid; align-content: center; }
+.sch-text { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 14px; }
+.sch-text .sch-badge { font-size: 13px; letter-spacing: .04em; }
+.sch-name { font-family: var(--f-display); font-weight: 900; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.15; margin: 0; }
+.sch-text .sch-role { font-size: 16px; }
+.sch-text .sch-research { font-family: var(--f-display); font-weight: 700; font-size: 20px; line-height: 34px; max-width: 22em; margin-top: 16px; padding-top: 20px; border-top: 1px solid var(--line); }
+.sch-text .sch-research .cap { display: block; font-family: var(--f-body); font-weight: 400; margin-bottom: 6px; }
+.sch-text .sch-recent { font-size: 14px; }
+.sch-text .more { margin-top: 4px; }
+.sch-ctrl { display: flex; align-items: center; gap: 24px; }
+.sch-count { display: flex; gap: 8px; font-size: 22px; line-height: 30px; }
+.sch-count .roll { display: block; height: 30px; overflow: hidden; color: var(--red); }
+.sch-count .roll span { display: block; }
+.sch-count .of { color: var(--ink-500); }
+.sch-ctrl .bar { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.sch-ctrl .seg { height: 2px; background: var(--line); position: relative; overflow: hidden; }
+.sch-ctrl .seg i { position: absolute; inset: 0; background: var(--red); transform-origin: left; transform: scaleX(0); }
+.sch-ctrl .seg:first-child i { transform: scaleX(1); }
+.arrows { display: flex; gap: 8px; }
+.arrow-btn { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 2px; transition: background .25s, color .25s, border-color .25s; }
+.arrow-btn:hover:not(:disabled) { background: var(--ink); color: var(--white); }
+.arrow-btn:disabled { border-color: var(--line); color: var(--line); cursor: default; }
+
+/* ---------- S06 research · index rows + cursor card ---------- */
+.research { position: relative; overflow: hidden; }
+.r-list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.r-row { position: relative; border-top: 1px solid var(--line); }
+.r-rule { position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--ink); transform-origin: left; }
+.r-row a { display: grid; grid-template-columns: 180px minmax(0, 1fr) 220px 48px; gap: 32px; align-items: center; padding-block: 40px; }
+.r-kind { color: var(--sky); font-size: 13px; line-height: 20px; font-weight: 500; }
+.r-title { display: block; overflow: hidden; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.r-title > span { display: block; font-family: var(--f-display); font-weight: 700; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.4; transition: color .3s; }
+.r-row a:hover .r-title { transform: translateX(16px); }
+.r-row a:hover .r-title > span { color: var(--red); }
+.r-meta { text-align: right; }
+.r-go { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; transition: background .3s, color .3s, transform .4s; }
+.r-row a:hover .r-go { background: var(--ink); color: var(--white); transform: rotate(-45deg); }
+.r-float { position: absolute; left: 0; top: 0; width: 220px; height: 260px; overflow: hidden; pointer-events: none; z-index: 3; visibility: hidden; border-radius: 2px; }
+.r-float-track { display: flex; flex-direction: column; }
+.r-float-card { height: 260px; flex: none; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; color: var(--white); }
+.r-float-card:nth-child(1) { background: var(--sky); }
+.r-float-card:nth-child(2) { background: var(--red); }
+.r-float-card:nth-child(3) { background: var(--blue); }
+.r-float-glyph { font-family: var(--f-display); font-weight: 900; font-size: 128px; line-height: 1; }
+.r-float-label { font-size: 13px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; }
+
+/* ---------- feature stage · shared by S04 学院要闻 and S07 学生作品: inset frame expands to full bleed ---------- */
+.feature { position: relative; }
+.feature > .wrap { padding-block: 96px 0; }
+.feature-frame { position: relative; margin: 0; overflow: hidden; background: var(--paper-100); }
+.feature-frame > img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; will-change: transform; }
+.feature-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28,27,46,0) 25%, rgba(28,27,46,.85) 100%); opacity: 0; }
+.feature-over { display: flex; flex-direction: column; gap: 12px; max-width: 880px; padding: 24px max(var(--gutter-r), min(120px, 8.33vw)) 96px max(var(--gutter-l), min(120px, 8.33vw)); }
+.feature-over .tag { align-self: flex-start; }
+.feature-kicker { display: flex; align-items: center; gap: 12px; }
+.feature-title { font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 32px; margin: 0; }
+.feature-desc { margin: 0; color: var(--ink-700); font-size: 14px; line-height: 24px; max-width: 40em; }
+.feature-meta { color: var(--ink-500); font-size: 13px; }
+.feature.is-stage { height: 100vh; overflow: hidden; }
+.feature.is-stage > .wrap { position: relative; z-index: 2; }
+.feature.is-stage .feature-frame { position: absolute; inset: 0; z-index: 1; }
+.feature.is-stage .feature-frame > img { height: 100%; aspect-ratio: auto; }
+.feature.is-stage .feature-over { position: absolute; left: 0; bottom: 0; z-index: 2; padding-bottom: 72px; max-width: calc(880px + 240px); color: var(--white); }
+.feature.is-stage .feature-title { font-weight: 900; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.3; }
+.feature.is-stage .feature-desc { color: var(--on-dark-dim); font-size: 16px; line-height: 28px; }
+.feature.is-stage .feature-meta { color: var(--on-dark-dim); }
+.feature.is-stage .feature-over .tag { border-color: var(--white); color: var(--white); }
+.feature.is-stage .feature-over .more { color: var(--yellow); }
+.rows-lg .title { font-family: var(--f-display); font-weight: 700; font-size: 18px; line-height: 30px; }
+
+/* ---------- S08+S09 footer finale (quick tools merged in) ---------- */
+.footer { --rule-dark: rgba(255,255,255,.16); background: var(--ink); color: var(--on-dark); overflow: hidden; position: relative; }
+.weave { display: flex; flex-direction: column; gap: 6px; padding-top: 6px; overflow: hidden; }
+.weave-row { height: 24px; width: calc(100% + 864px); background: url("assets/band.png") 0 0 / 864px 24px repeat-x; will-change: transform; }
+.weave-row:nth-child(2) { background-position: -288px 0; }
+.weave-row:nth-child(3) { background-position: -576px 0; }
+
+.f-stage { padding-block: 96px 72px; }
+.f-stage .eyebrow { color: var(--yellow); opacity: .4; margin-bottom: 24px; }
+.f-mark { opacity: .05; font-family: var(--f-display); font-weight: 900; font-size: clamp(48px, 13.2vw, 190px); line-height: 1.1; letter-spacing: .02em; margin: 0; white-space: nowrap; }
+.f-stage-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--rule-dark); }
+.f-motto { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 34px; }
+.btn-ondark { border-color: rgba(255,255,255,.6); color: var(--on-dark); }
+.btn-ondark:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+.btn-ondark-primary { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+.btn-ondark-primary:hover { background: var(--white); border-color: var(--white); }
+
+.f-tools { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; padding-block: 56px; border-top: 1px solid var(--rule-dark); }
+.f-tools .eyebrow { color: var(--yellow); }
+.f-tools .cap { color: var(--on-dark-dim); margin-top: 8px; }
+.tool-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; }
+.tool-list a { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 20px; border-top: 1px solid var(--rule-dark); font-family: var(--f-display); font-weight: 700; font-size: 18px; line-height: 28px; transition: color .3s; }
+.tool-list a::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.tool-list a:hover { color: var(--yellow); }
+.tool-list a:hover::after { transform: scaleX(1); }
+.tool-list .arrow { transition: transform .3s; }
+.tool-list a:hover .arrow { transform: translateX(4px); }
+
+.f-cols { display: grid; grid-template-columns: 360px 1fr 1fr 112px; gap: 64px; padding-top: 56px; border-top: 1px solid var(--rule-dark); }
+.f-brand { display: flex; flex-direction: column; gap: 32px; }
+.f-brand p { margin: 0; color: var(--on-dark-dim); font-size: 12px; line-height: 20px; }
+.f-col h4 { margin: 0 0 12px; font-weight: 500; font-size: 14px; color: var(--yellow); }
+.f-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; color: var(--on-dark-dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+.f-col a:hover { color: var(--on-dark); }
+.qr { width: 112px; aspect-ratio: 1; background: var(--paper-100); color: var(--ink-500); display: grid; place-items: end start; padding: 10px; font-size: 11px; }
+.legal { margin-top: 56px; padding-block: 24px 32px; border-top: 1px solid var(--rule-dark); display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--on-dark-dim); font-size: 12px; }
+.legal-links { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.to-top { display: inline-flex; align-items: center; gap: 8px; color: var(--on-dark); font-weight: 500; font-size: 13px; }
+.to-top svg { transform: rotate(-90deg); transition: transform .3s; }
+.to-top:hover svg { transform: rotate(-90deg) translateX(4px); }
+
+/* ---------- narrow screens ---------- */
+@media (max-width: 1180px) {
+  .mainnav { display: none; }
+  .f-tools { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .f-cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .hero-art { max-width: 420px; }
+  .news-grid { grid-template-columns: minmax(0, 1fr); }
+  .sch-list { grid-template-columns: minmax(0, 1fr); }
+  .sch-index { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .dept-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .r-row a { grid-template-columns: minmax(0, 1fr) 48px; row-gap: 8px; padding-block: 28px; }
+  .r-kind, .r-title, .r-meta { grid-column: 1; text-align: left; }
+  .r-go { grid-column: 2; grid-row: 1 / span 3; }
+  .tool-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .f-stage-row { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 767px) {
+  :root { --header-h: 90px; }
+  .utility nav { display: none; }
+  .mainbar .wrap { height: 56px; }
+  .brand img { width: 160px; }
+  .icon-btn { width: 36px; height: 36px; }
+  .role-menu { height: 36px; padding: 6px 10px; }
+  .hero h1 { font-size: min(30px, 7.6vw); line-height: 1.45; }
+  .band { padding-block: 64px; }
+  .h2 { font-size: 26px; line-height: 36px; }
+  .sec-head { margin-bottom: 32px; }
+  .hero { min-height: auto; }
+  .hero .wrap { padding-block: 32px 80px; gap: 40px; }
+  .stats { gap: 32px; }
+  .scroll-hint { bottom: 24px; }
+  .admit .wrap { flex-direction: column; align-items: flex-start; gap: 20px; padding-block: 28px; }
+  .admit-text p { font-size: 18px; line-height: 28px; }
+  .roles { min-height: auto; padding-block: 64px; }
+  .roles-viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .roles-viewport::-webkit-scrollbar { display: none; }
+  .role-card { width: 82vw; max-width: 340px; scroll-snap-align: start; padding: 24px; }
+  .roles-progress { display: none; }
+  .sch-card { flex-direction: column; gap: 20px; }
+  .sch-photo { width: 100%; aspect-ratio: 4 / 5; }
+  .r-row a { grid-template-columns: minmax(0, 1fr); }
+  .r-go { display: none; }
+  .feature-over { padding-bottom: 64px; }
+  .f-stage { padding-block: 64px 48px; }
+  .f-motto { font-size: 18px; line-height: 28px; }
+  .tool-list { grid-template-columns: minmax(0, 1fr); }
+  .tool-list a { font-size: 16px; padding-block: 16px; }
+  .f-cols { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .legal { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3.33 8h9.34M8.67 12l4-4-4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-l" viewBox="0 0 16 16"><path d="M12.67 8H3.33M7.33 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 18 18"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 12l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 12 12"><path d="M3 4.5L6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 12 12"><path d="M4 2h6v6M10 2L3 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- S00 · [fixed] 站点顶栏 — outside #smooth-wrapper -->
+<header class="site-header" id="siteHeader">
+  <div class="utility">
+    <div class="wrap">
+      <span>山东工艺美术学院 · Shandong University of Art &amp; Design</span>
+      <nav aria-label="辅助导航">
+        <a href="#">师生服务</a><a href="#">党建工作</a><a href="#">校友之家</a><a href="#">加入我们</a><a href="#">一网通办</a>
+        <span class="divider"></span><a href="#" lang="en">EN</a>
+      </nav>
+    </div>
+  </div>
+  <div class="mainbar">
+    <div class="wrap">
+      <a class="brand" href="#" aria-label="人文艺术学院首页"><img src="assets/logo.png" alt="山东工艺美术学院 人文艺术学院" width="260" height="53"></a>
+      <nav class="mainnav" aria-label="主导航">
+        <a href="#">关于学院</a><a href="#news">新闻动态</a><a href="#scholars">师资队伍</a><a href="#roles">人才培养</a><a href="#research">学术研究</a><a href="#">平台合作</a><a href="#admit">招生就业</a>
+      </nav>
+      <div class="actions">
+        <button class="icon-btn" type="button" aria-label="搜索"><svg width="18" height="18"><use href="#i-search"/></svg></button>
+        <button class="role-menu" type="button">我是…… <svg width="12" height="12"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main>
+
+  <!-- S01 · 首屏 Hero · pin + scrub -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <div class="hero-text" data-hero-text>
+        <div>
+          <div class="eyebrow" data-hero-eyebrow>School of Humanities and Arts</div>
+          <h1 data-split>为人文注入艺术想象，<br>为设计铸造思想灵魂</h1>
+        </div>
+        <p class="hero-lede" data-hero-fade>在以造型与设计为主体的大学中，人文艺术学院承担全校公共艺术史论教学。<br>7 个本科专业与 1 个公共艺术史论教研室，横跨艺术学、管理学、文学三个门类。</p>
+        <div class="ctas" data-hero-ctas>
+          <a class="btn btn-primary" href="#admit">报考指南 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-secondary" href="#roles">专业与平台 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-secondary" href="#research">讲座与研究 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="stats" data-hero-fade>
+          <div class="stat"><span class="num" data-count="4">4</span><span class="cap">国家级一流<br>本科专业</span></div>
+          <div class="stat"><span class="num">A+</span><span class="cap">艺术设计学<br>2025 软科</span></div>
+        </div>
+      </div>
+      <div class="hero-art" data-hero-art aria-hidden="true">
+        <img src="assets/field.png" alt="" width="576" height="616">
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><i data-hint-line></i>SCROLL&nbsp;&nbsp;向下滚动</div>
+  </section>
+
+  <!-- M1 · 图案色带 -->
+  <div class="marquee" aria-hidden="true"><div class="track"></div></div>
+
+  <!-- S02 · 招生提示 · reveal -->
+  <section class="admit" id="admit" data-admit>
+    <div class="admit-bg" data-admit-bg></div>
+    <div class="wrap">
+      <div class="admit-text" data-admit-text>
+        <span class="tag">本科招生 · 报考须知</span>
+        <p>除文物保护与修复外，学院其余本科专业均面向普通高考考生，<br>在普通类常规批录取，无需参加艺考。</p>
+        <span class="cap">以当年山东省招生计划为准</span>
+      </div>
+      <div class="btns" data-admit-text>
+        <a class="btn btn-primary" href="#">我能不能报 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-secondary" href="#">历年录取位次 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- S03 · 快速直达 Roles · pin + 横向滚动 -->
+  <section class="roles" id="roles">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Find your way</div><h2 class="h2">快速直达</h2></div>
+      </div>
+    </div>
+    <div class="roles-viewport" id="rolesViewport">
+      <div class="roles-track" id="rolesTrack"></div>
+    </div>
+    <div class="wrap">
+      <div class="roles-progress" aria-hidden="true">
+        <span class="cap" id="rolesCounter">01 / 06 · 继续向下滚动浏览</span>
+        <div class="bar"><div class="fill" id="rolesFill"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M2 · 图案色带 -->
+  <div class="marquee" aria-hidden="true"><div class="track"></div></div>
+
+  <!-- S04a · 学院要闻 Featured · pin + 画框展开 -->
+  <section class="feature bg-white" id="news">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">News &amp; Events</div><h2 class="h2">学院动态</h2></div>
+        <a class="more" href="#newsList">全部新闻 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <figure class="feature-frame">
+      <img src="assets/news.jpg" alt="学生在陶瓷修复实验室中修复瓷器" width="1360" height="864">
+      <div class="feature-shade"></div>
+      <figcaption class="feature-over">
+        <span class="feature-kicker"><span class="tag">学术</span><span class="feature-meta">学院要闻 · 2026.10.26</span></span>
+        <h3 class="feature-title">文物保护与修复专业开展陶瓷修复实践教学周：从病害调查到修复档案</h3>
+        <p class="feature-desc">依托省级实验教学示范中心的陶瓷修复教学实验室与陶瓷修复补烧实验室，学生完成从病害记录、清洗加固到补配作色的完整流程，并编制修复档案。</p>
+        <a class="more" href="#">阅读全文 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- S04b · 学院动态 News · batch + Flip tabs -->
+  <section class="band bg-white" id="newsList">
+    <div class="wrap">
+      <div class="news-grid">
+        <article>
+          <div class="filters"><span class="h4">学院要闻</span><span class="spacer"></span><a class="tag" href="#">学术</a><a class="tag" href="#">教学</a><a class="tag" href="#">学生</a></div>
+          <div class="rows rows-lg">
+            <a class="row" href="#" data-batch><div><span class="day num">10.20</span><span class="cap">2026</span></div><div><span class="kind">教学</span><span class="title">艺术史论专业“社会美育”方向开展中小学美育实践课程</span></div></a>
+            <a class="row" href="#" data-batch><div><span class="day num">10.16</span><span class="cap">2026</span></div><div><span class="kind">学生</span><span class="title">非遗保护专业学生完成传统手工艺田野考察与传承人口述史采集</span></div></a>
+          </div>
+          <a class="more all-link" href="#">全部学院要闻 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        </article>
+        <aside>
+          <div class="tabs" role="tablist" aria-label="通知与讲座">
+            <button class="tab" role="tab" id="tab-notice" aria-selected="true" aria-controls="panel-notice">通知公告<span class="tab-ink" id="tabInk"></span></button>
+            <button class="tab" role="tab" id="tab-lecture" aria-selected="false" aria-controls="panel-lecture">讲座日历</button>
+          </div>
+          <div class="panel" id="panel-notice" role="tabpanel" aria-labelledby="tab-notice">
+            <div class="rows">
+              <a class="row" href="#" data-batch><div><span class="day num">10.24</span><span class="cap">2026</span></div><div><span class="kind">通知 · 教务</span><span class="title">关于 2026–2027 学年第一学期公共史论课结课考试安排的通知</span></div></a>
+              <a class="row" href="#" data-batch><div><span class="day num">10.22</span><span class="cap">2026</span></div><div><span class="kind">通知 · 研招与推免</span><span class="title">2027 年推荐免试攻读硕士学位研究生名单公示（公示期 10.22–10.28）</span></div></a>
+              <a class="row" href="#" data-batch><div><span class="day num">10.18</span><span class="cap">2026</span></div><div><span class="kind">通知 · 科研</span><span class="title">关于申报 2027 年度省级艺术科学课题的通知</span></div></a>
+              <a class="row" href="#" data-batch><div><span class="day num">10.15</span><span class="cap">2026</span></div><div><span class="kind">通知 · 评奖评优</span><span class="title">2025–2026 学年本科生奖学金院内评审结果公示</span></div></a>
+              <a class="row" href="#" data-batch><div><span class="day num">10.10</span><span class="cap">2026</span></div><div><span class="kind">通知 · 人才招聘</span><span class="title">人文艺术学院 2027 年高层次人才与青年博士招聘公告（截止 12.31）</span></div></a>
+            </div>
+            <a class="more all-link" href="#">全部通知公告 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="panel" id="panel-lecture" role="tabpanel" aria-labelledby="tab-lecture" hidden>
+            <div class="rows">
+              <a class="row" href="#"><div><span class="day num">10.12</span><span class="cap">2026</span></div><div><span class="kind">讲座回顾</span><span class="title">讲座综述：博物馆藏品与图版来源的引用规范</span></div></a>
+            </div>
+            <p class="panel-note">近期讲座安排将从学院讲座日历同步，原型中暂只列出已发布的讲座回顾。</p>
+            <a class="more all-link" href="#">全部讲座 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- S05 · 学者聚焦 Scholars · 每学期 4 位 · pin 肖像序列 → 按专业找老师 -->
+  <section class="scholars" id="scholars">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Scholars</div><h2 class="h2">学者聚焦</h2><p class="cap sch-rule">每学期一期 · 每期 4 位 · 至少 1 位青年教师</p></div>
+        <a class="more" href="#">全部学者 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="sch-body">
+      <!-- list layout: phones, reduced motion, no script -->
+      <div class="sch-list">
+        <article class="sch-card">
+          <div class="sch-photo"><img src="assets/scholar-1.jpg" alt="教师肖像" width="564" height="800"></div>
+          <div class="sch-info">
+            <div class="sch-head"><span class="sch-badge">领军学者</span><h3 class="h3">教师姓名</h3><p class="sch-role">教授 · 艺术设计学</p></div>
+            <div class="sch-foot"><p class="sch-research">研究方向：民艺学、传统工艺造物的现当代转换</p><p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p><a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
+          </div>
+        </article>
+        <article class="sch-card">
+          <div class="sch-photo"><img src="assets/scholar-2.jpg" alt="教师肖像" width="564" height="800"></div>
+          <div class="sch-info">
+            <div class="sch-head"><span class="sch-badge">青年教师</span><h3 class="h3">教师姓名</h3><p class="sch-role">讲师 · 文物保护与修复</p></div>
+            <div class="sch-foot"><p class="sch-research">研究方向：陶瓷文物保护与修复、修复档案编制</p><p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p><a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
+          </div>
+        </article>
+        <article class="sch-card">
+          <div class="sch-photo ph-frame"><img src="assets/sw-plaid.png" alt="" width="640" height="112"><span class="cap">照片待补充</span></div>
+          <div class="sch-info">
+            <div class="sch-head"><span class="sch-badge">本期精选</span><h3 class="h3">教师姓名</h3><p class="sch-role">职称 · 所属专业</p></div>
+            <div class="sch-foot"><p class="sch-research">研究方向：待补充</p><p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p><a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
+          </div>
+        </article>
+        <article class="sch-card">
+          <div class="sch-photo ph-frame"><img src="assets/sw-lattice.png" alt="" width="640" height="112"><span class="cap">照片待补充</span></div>
+          <div class="sch-info">
+            <div class="sch-head"><span class="sch-badge">本期精选</span><h3 class="h3">教师姓名</h3><p class="sch-role">职称 · 所属专业</p></div>
+            <div class="sch-foot"><p class="sch-research">研究方向：待补充</p><p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p><a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a></div>
+          </div>
+        </article>
+      </div>
+      <!-- stage layout: desktop pinned sequence -->
+      <div class="sch-stage">
+        <div class="sch-visual">
+          <div class="sch-decor"><img src="assets/sw-diamond.png" alt="" width="640" height="112"></div>
+          <figure class="sch-frame"><img src="assets/scholar-1.jpg" alt="" width="564" height="800"></figure>
+          <figure class="sch-frame"><img src="assets/scholar-2.jpg" alt="" width="564" height="800"></figure>
+          <figure class="sch-frame ph-frame"><img src="assets/sw-plaid.png" alt="" width="640" height="112"><span class="cap">照片待补充</span></figure>
+          <figure class="sch-frame ph-frame"><img src="assets/sw-lattice.png" alt="" width="640" height="112"><span class="cap">照片待补充</span></figure>
+        </div>
+        <div class="sch-panel">
+          <div class="sch-texts">
+            <div class="sch-text">
+              <span class="sch-badge">领军学者</span>
+              <p class="sch-name">教师姓名</p>
+              <p class="sch-role">教授 · 艺术设计学</p>
+              <p class="sch-research"><span class="cap">研究方向</span>民艺学、传统工艺造物的现当代转换</p>
+              <p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p>
+              <a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="sch-text">
+              <span class="sch-badge">青年教师</span>
+              <p class="sch-name">教师姓名</p>
+              <p class="sch-role">讲师 · 文物保护与修复</p>
+              <p class="sch-research"><span class="cap">研究方向</span>陶瓷文物保护与修复、修复档案编制</p>
+              <p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p>
+              <a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="sch-text">
+              <span class="sch-badge">本期精选</span>
+              <p class="sch-name">教师姓名</p>
+              <p class="sch-role">职称 · 所属专业</p>
+              <p class="sch-research"><span class="cap">研究方向</span>待补充</p>
+              <p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p>
+              <a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="sch-text">
+              <span class="sch-badge">本期精选</span>
+              <p class="sch-name">教师姓名</p>
+              <p class="sch-role">职称 · 所属专业</p>
+              <p class="sch-research"><span class="cap">研究方向</span>待补充</p>
+              <p class="sch-recent"><b>近期</b>待补充（新著、展览、获奖或主持项目）</p>
+              <a class="more" href="#">学者主页 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+          <div class="sch-ctrl">
+            <div class="sch-count num"><span class="roll"><span>01</span><span>02</span><span>03</span><span>04</span></span><span class="of">/ 04</span></div>
+            <div class="bar"><span class="seg"><i></i></span><span class="seg"><i></i></span><span class="seg"><i></i></span><span class="seg"><i></i></span></div>
+            <div class="arrows">
+              <button class="arrow-btn" id="schPrev" type="button" aria-label="上一位学者"><svg width="20" height="20"><use href="#i-arrow-l"/></svg></button>
+              <button class="arrow-btn" id="schNext" type="button" aria-label="下一位学者"><svg width="20" height="20"><use href="#i-arrow"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- faculty index: every scholar, by programme -->
+      <div class="sch-index" id="schIndex">
+        <div class="sch-index-head">
+          <p class="sch-total"><span class="num" data-total="56">56</span><span class="unit">位教师</span></p>
+          <a class="btn btn-primary" href="#">查看全部教师 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+        <ul class="dept-grid">
+          <li><a href="#"><span><span class="dept-name">艺术设计学</span><span class="dept-note">国家级一流 · 软科 A+</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">艺术史论</span><span class="dept-note">国家级一流本科专业</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">文化产业管理</span><span class="dept-note">国家级一流本科专业</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">美术学</span><span class="dept-note">国家级一流 · 国家级特色</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">非物质文化遗产保护</span><span class="dept-note">山东省首批非遗本科</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">文物保护与修复</span><span class="dept-note">省级实验教学示范中心</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">广告策划与管理</span><span class="dept-note">省级一流本科专业建设点</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+          <li><a href="#"><span><span class="dept-name">公共艺术史论教研室</span><span class="dept-note">承担全校公共艺术史论教学</span></span><span class="dept-go">查看教师 <svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S06 · 研究成果 Research · 索引列表 + 光标卡片 -->
+  <section class="band bg-white research" id="research">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Research</div><h2 class="h2">研究成果</h2></div>
+        <a class="more" href="#">全部研究 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="r-list" id="rList">
+        <li class="r-row"><i class="r-rule"></i><a href="#"><span class="r-kind">民艺学与批评</span><span class="r-title"><span>民艺学研究脉络：传统工艺造物的现当代转换</span></span><span class="r-meta cap">专栏 · 教师姓名</span><span class="r-go"><svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+        <li class="r-row"><i class="r-rule"></i><a href="#"><span class="r-kind">讲座回顾</span><span class="r-title"><span>讲座综述：博物馆藏品与图版来源的引用规范</span></span><span class="r-meta cap">2026.10.12 · 综述与推荐书目</span><span class="r-go"><svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+        <li class="r-row"><i class="r-rule"></i><a href="#"><span class="r-kind">期刊新刊</span><span class="r-title"><span>《民艺》最新一期目录与精选文章</span></span><span class="r-meta cap">合办期刊 · 以授权范围为限</span><span class="r-go"><svg class="arrow"><use href="#i-arrow"/></svg></span></a></li>
+      </ul>
+    </div>
+    <div class="r-float" id="rFloat" aria-hidden="true">
+      <div class="r-float-track" id="rFloatTrack">
+        <div class="r-float-card"><span class="r-float-glyph">民</span><span class="r-float-label">民艺学与批评 <svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+        <div class="r-float-card"><span class="r-float-glyph">讲</span><span class="r-float-label">讲座回顾 <svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+        <div class="r-float-card"><span class="r-float-glyph">刊</span><span class="r-float-label">期刊新刊 <svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S07 · 学生作品 Student Work · pin + 画框展开 -->
+  <section class="feature bg-paper" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Student Work</div><h2 class="h2">学生作品</h2></div>
+        <a class="more" href="#">全部学生作品 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <figure class="feature-frame">
+      <img src="assets/work.jpg" alt="艺术史论专业毕业展现场" width="1600" height="920">
+      <div class="feature-shade"></div>
+      <figcaption class="feature-over">
+        <span class="feature-kicker"><span class="tag">展览与策展</span></span>
+        <h3 class="feature-title">“手艺的当代回声”——艺术史论专业毕业展策展方案</h3>
+        <span class="feature-meta">2026 届 · 艺术史论 · 指导教师：教师姓名</span>
+        <a class="more" href="#">查看策展方案 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<!-- S09 · 页脚收尾 Footer Finale · 展开 + 经纬色带 + 巨幅院名（师生工具条并入） -->
+<footer class="footer" id="footer">
+  <div class="weave" aria-hidden="true"><div class="weave-row"></div><div class="weave-row"></div><div class="weave-row"></div></div>
+  <div class="wrap">
+    <div class="f-stage">
+      <div class="eyebrow">School of Humanities and Arts · SUAD</div>
+      <p class="f-mark" data-footer-mark>人文艺术学院</p>
+      <div class="f-stage-row" data-footer-row>
+        <p class="f-motto">为人文注入艺术想象，<br>为设计铸造思想灵魂</p>
+        <div class="ctas">
+          <a class="btn btn-ondark-primary" href="#admit">报考指南 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ondark" href="#">联系学院 <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-tools">
+      <div><div class="eyebrow">Quick Tools</div><h2 class="h3">师生工具条</h2><p class="cap">在校师生最常用的入口</p></div>
+      <ul class="tool-list" id="toolList">
+        <li><a href="#">公共史论课 <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#">教务文档 <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#news">通知公告 <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#">课程大纲 <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#">导师邮箱 <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#">一网通办 <svg class="arrow"><use href="#i-ext"/></svg></a></li>
+      </ul>
+    </div>
+
+    <div class="f-cols" id="fCols">
+      <div class="f-brand">
+        <img src="assets/logo.png" alt="山东工艺美术学院 人文艺术学院" width="260" height="53" style="width:220px; height:auto">
+        <p>地址：【待补充：校区、楼栋与房间号】<br>对外合作邮箱：【待补充】@sdada.edu.cn</p>
+      </div>
+      <div class="f-col"><h4>联系我们</h4><ul><li>院办  0531-XXXXXXXX</li><li>教务  0531-XXXXXXXX</li><li>学工  0531-XXXXXXXX</li><li>科研  0531-XXXXXXXX</li><li>研究生秘书  0531-XXXXXXXX</li></ul></div>
+      <div class="f-col"><h4>快速链接</h4><ul><li><a href="#">党建工作</a></li><li><a href="#">校友之家</a></li><li><a href="#">加入我们</a></li><li><a href="#">学校官网 ↗</a></li><li><a href="#">一网通办 ↗</a></li></ul></div>
+      <div class="f-col"><h4>关注我们</h4><div class="qr">公众号二维码</div></div>
+    </div>
+
+    <div class="legal">
+      <span>© 2026 山东工艺美术学院人文艺术学院 · 鲁ICP备XXXXXXXX号</span>
+      <span class="legal-links"><span>网站地图 · 无障碍浏览 · EN</span><button class="to-top" id="toTop" type="button">回到顶部 <svg class="arrow"><use href="#i-arrow"/></svg></button></span>
+    </div>
+  </div>
+</footer>
+</div>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script>window.gsap || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"><\/script>')</script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script>window.ScrollTrigger || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"><\/script>')</script>
+<script src="vendor/ScrollSmoother.min.js"></script>
+<script>window.ScrollSmoother || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"><\/script>')</script>
+<script src="vendor/SplitText.min.js"></script>
+<script>window.SplitText || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"><\/script>')</script>
+<script src="vendor/Flip.min.js"></script>
+<script>window.Flip || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"><\/script>')</script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const arrow = '<svg class="arrow"><use href="#i-arrow"/></svg>';
+
+  /* ---------- content: S03 role cards ---------- */
+  const ROLES = [
+    ["01", "Prospective Students", "考生与家长", "plaid", ["本科报考指南", "历年录取数据", "7 个本科专业", "升学与就业", "招生咨询"]],
+    ["02", "Current Students", "在校生", "check", ["教务文档与办事指南", "通知公告", "本周讲座", "教师名录（邮箱）", "培养方案与课程大纲", "学生工作"]],
+    ["03", "Public Courses", "公共史论课同学", "diamond", ["我的课程（大纲、进度、考核）", "论文模板与引注规范", "考试安排", "任课老师答疑", "书目", "对全校开放的讲座"]],
+    ["04", "Faculty", "教师", "lattice", ["学者主页维护入口", "新闻 / 讲座投稿", "科研事务", "实验室预约", "校级系统直达"]],
+    ["05", "Partners", "合作机构", "cross", ["能力清单", "合作案例", "找专家（按服务领域）", "合作流程", "联系人与合作能力手册"]],
+    ["06", "Join Us", "应聘学者", "dots", ["加入我们", "教师名录", "学科与平台", "文物修复实验教学示范中心", "讲座与学术活动", "学院数据概览"]],
+  ];
+  $("#rolesTrack").innerHTML = ROLES.map(([no, en, title, sw, links]) => `
+    <article class="role-card">
+      <div class="swatch" data-swatch><img src="assets/sw-${sw}.png" alt="" width="640" height="112"></div>
+      <div class="role-top"><span class="num">${no}</span><span class="en">${en}</span></div>
+      <h3 class="h3">${title}</h3>
+      <div class="rule"></div>
+      <ul>${links.map(l => `<li><a href="#">${l}</a></li>`).join("")}</ul>
+      <a class="more" href="#">进入专区 ${arrow}</a>
+    </article>`).join("");
+
+  /* ---------- S04 tabs: Flip underline (works without GSAP too) ---------- */
+  // animate only when every GSAP file arrived; otherwise the page stays static and fully readable
+  const hasGSAP = ["gsap", "ScrollTrigger", "ScrollSmoother", "SplitText", "Flip"].every(k => typeof window[k] !== "undefined");
+  const tabs = $$(".tab"), ink = $("#tabInk");
+  tabs.forEach(tab => tab.addEventListener("click", () => {
+    if (tab.getAttribute("aria-selected") === "true") return;
+    const state = hasGSAP && window.Flip ? Flip.getState(ink) : null;
+    tabs.forEach(t => t.setAttribute("aria-selected", String(t === tab)));
+    tab.appendChild(ink);
+    $$(".panel").forEach(p => p.hidden = p.id !== tab.getAttribute("aria-controls"));
+    const panel = $("#" + tab.getAttribute("aria-controls"));
+    if (state) {
+      Flip.from(state, { duration: 0.45, ease: "power3.inOut" });
+      gsap.from(panel.querySelectorAll(".row, .panel-note, .all-link"), { y: 16, autoAlpha: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" });
+    }
+    if (hasGSAP) ScrollTrigger.refresh();
+  }));
+
+  // placeholder links (href="#") in the prototype go nowhere instead of yanking the page to the top
+  document.addEventListener("click", e => { if (e.target.closest('a[href="#"]')) e.preventDefault(); });
+  let jumpTo = null; // set below once GSAP is ready
+  $("#toTop").addEventListener("click", () => jumpTo ? jumpTo(0) : window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  if (!hasGSAP) return; // page stays fully readable without the animation layer
+
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, Flip);
+  gsap.defaults({ ease: "power3.out", duration: 0.8 });
+
+  /* ---------- in-page jumps ----------
+     ScrollSmoother moves #smooth-content with transforms inside a fixed, overflow-hidden #smooth-wrapper.
+     A native #anchor jump (or focus moving to an off-screen element) scrolls that wrapper instead of the page,
+     so content lands in place while every ScrollTrigger still thinks the page is at the top.
+     Route every jump through the smoother instead, hidden behind a short veil, and settle scrubbed animations. */
+  const headerCtl = { hide: null };
+  const veil = document.createElement("div"); veil.className = "jump-veil"; veil.setAttribute("aria-hidden", "true"); document.body.appendChild(veil);
+  const settle = () => { ScrollTrigger.update(); ScrollTrigger.getAll().forEach(t => { const tw = t.getTween && t.getTween(); tw && tw.progress(1); }); };
+  const targetY = target => {
+    if (typeof target === "number") return target;
+    const pin = ScrollTrigger.getAll().find(t => t.pin && (t.trigger === target || t.pin === target));
+    if (pin) return pin.start; // pinned sections: land where the pin begins
+    const s = ScrollSmoother.get();
+    return s ? s.offset(target, "top top") : target.getBoundingClientRect().top + window.scrollY;
+  };
+  const place = y => { const s = ScrollSmoother.get(); s ? s.scrollTo(y, false) : window.scrollTo(0, y); requestAnimationFrame(() => { settle(); headerCtl.hide && y > 160 && headerCtl.hide(); }); };
+  jumpTo = target => {
+    const y = Math.max(0, targetY(target));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return place(y);
+    gsap.timeline()
+      .to(veil, { autoAlpha: 1, duration: 0.22, ease: "power1.in" })
+      .add(() => place(y))
+      .to(veil, { autoAlpha: 0, duration: 0.4, ease: "power1.out" }, "+=0.12");
+  };
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    const id = a && a.getAttribute("href");
+    if (!id || id === "#") return;
+    let el = null; try { el = document.querySelector(id); } catch (_) {}
+    if (!el) return;
+    e.preventDefault();
+    jumpTo(el);
+  });
+  // keyboard focus moving off-screen: bring it into view through the smoother
+  let viaKeyboard = false;
+  document.addEventListener("keydown", e => { if (e.key === "Tab") viaKeyboard = true; }, true);
+  document.addEventListener("pointerdown", () => { viaKeyboard = false; }, true);
+  document.addEventListener("focusin", e => {
+    const s = ScrollSmoother.get(), el = e.target;
+    if (!s || !viaKeyboard || !el.getBoundingClientRect || el.closest(".site-header")) return;
+    const r = el.getBoundingClientRect();
+    if (r.top >= 140 && r.bottom <= window.innerHeight - 40) return;
+    place(Math.max(0, s.scrollTop() + r.top - window.innerHeight / 3));
+  });
+  // safety net: if the browser scrolls the wrapper anyway (keyboard focus, a #hash on load), hand that offset to the smoother
+  const wrapperEl = $("#smooth-wrapper");
+  wrapperEl.addEventListener("scroll", () => {
+    const s = ScrollSmoother.get();
+    if (!s || !wrapperEl.scrollTop) return;
+    const y = s.scrollTop() + wrapperEl.scrollTop;
+    wrapperEl.scrollTop = 0;
+    s.scrollTo(y, false);
+    requestAnimationFrame(settle);
+  });
+
+  /* ---------- responsive + reduced motion ---------- */
+  const mm = gsap.matchMedia();
+  mm.add({
+    isDesktop: "(min-width: 768px)",
+    isMobile: "(max-width: 767px)",
+    reduce: "(prefers-reduced-motion: reduce)",
+  }, (ctx) => {
+    const { isDesktop, reduce } = ctx.conditions;
+    if (reduce) return; // everything stays in its final, readable state
+    const cleanups = [];
+
+    if (isDesktop) ScrollSmoother.create({ wrapper: "#smooth-wrapper", content: "#smooth-content", smooth: 1, effects: false, normalizeScroll: false });
+
+    /* S00 header: hide on scroll down, return on scroll up.
+       Follow the reader's input (wheel / touch / keys), not the page's motion: label snapping and the
+       smoother's settle move the page by themselves and would otherwise flip the direction back to "down". */
+    const header = $("#siteHeader");
+    const showHeader = gsap.from(header, { yPercent: -100, paused: true, duration: 0.35, ease: "power2.out" }).progress(1);
+    headerCtl.hide = () => showHeader.reverse();
+    const scrollNow = () => { const s = ScrollSmoother.get(); return s ? s.scrollTop() : window.scrollY; };
+    let lastInput = 0, touchY = null;
+    const want = dir => { lastInput = Date.now(); if (dir < 0 || scrollNow() < 160) showHeader.play(); else showHeader.reverse(); };
+    const onWheel = e => { if (Math.abs(e.deltaY) > 2) want(Math.sign(e.deltaY)); };
+    const onTouchStart = e => { touchY = e.touches[0].clientY; lastInput = Date.now(); };
+    const onTouchMove = e => {
+      if (touchY === null) return;
+      const dy = e.touches[0].clientY - touchY;
+      if (Math.abs(dy) > 6) { want(dy > 0 ? -1 : 1); touchY = e.touches[0].clientY; }
+    };
+    const onKey = e => {
+      if (e.target.closest && e.target.closest("input, textarea, select")) return;
+      if (["ArrowUp", "PageUp", "Home"].includes(e.key)) want(-1);
+      else if (["ArrowDown", "PageDown", "End", " "].includes(e.key)) want(1);
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("keydown", onKey);
+    ScrollTrigger.create({
+      start: 0, end: "max",
+      onUpdate(self) {
+        const y = self.scroll();
+        header.classList.toggle("is-scrolled", y > window.innerHeight * 0.6);
+        if (y < 160) return showHeader.play();
+        if (Date.now() - lastInput < 1000) return; // recent input decides; ignore snap / settle motion
+        self.direction === -1 ? showHeader.play() : showHeader.reverse(); // e.g. scrollbar dragging
+      },
+    });
+    cleanups.push(() => {
+      headerCtl.hide = null;
+      window.removeEventListener("wheel", onWheel); window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove); window.removeEventListener("keydown", onKey);
+    });
+
+    /* S01 hero: load timeline */
+    const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+    intro.from("[data-hero-eyebrow]", { y: 20, autoAlpha: 0, duration: 0.6 });
+    SplitText.create("[data-split]", {
+      type: "chars,lines", mask: "lines", linesClass: "hero-line", autoSplit: true,
+      onSplit(self) { return gsap.from(self.lines, { yPercent: 105, duration: 1, stagger: 0.12, delay: 0.15, ease: "power3.out" }); },
+    });
+    intro.from("[data-hero-fade]", { y: 24, autoAlpha: 0, duration: 0.7, stagger: 0.12 }, 0.55)
+         .from("[data-hero-ctas] > *", { y: 16, autoAlpha: 0, duration: 0.5, stagger: 0.08 }, 0.7)
+         .fromTo("[data-hero-art]", { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power4.inOut" }, 0.1)
+         .from("[data-hero-art] img", { scale: 1.12, duration: 1.6, ease: "power3.out" }, 0.1);
+    const counter = $("[data-count]"), cnt = { v: 0 };
+    intro.to(cnt, { v: +counter.dataset.count, duration: 1, ease: "power1.out", snap: { v: 1 }, onUpdate: () => counter.textContent = cnt.v }, 0.8);
+    gsap.fromTo("[data-hint-line]", { scaleX: 0.2 }, { scaleX: 1, duration: 1.2, ease: "power1.inOut", repeat: -1, yoyo: true });
+
+    /* S01 hero: pinned — text steps aside, the pattern grows from its box to cover the screen;
+       after the pin releases, the full-screen pattern fades out as the page scrolls on */
+    if (isDesktop) {
+      const hero = $("#hero"), art = $("[data-hero-art]");
+      // layout boxes (offset*) ignore transforms, so these stay correct on every refresh
+      const cover = () => {
+        const w = art.offsetWidth, h = art.offsetHeight, vw = hero.clientWidth, vh = window.innerHeight;
+        return { x: vw / 2 - (art.offsetLeft + w / 2), y: vh / 2 - (art.offsetTop + h / 2), scale: Math.max(vw / w, vh / h) * 1.02 };
+      };
+      const heroTl = gsap.timeline({ scrollTrigger: { trigger: hero, start: "top top", end: "+=110%", pin: true, scrub: 1, invalidateOnRefresh: true } });
+      heroTl
+        .to("[data-hero-text]", { x: -80, autoAlpha: 0, duration: 0.35, ease: "power2.in" }, 0)
+        .to(".scroll-hint", { autoAlpha: 0, duration: 0.2, ease: "none" }, 0)
+        .to(art, { x: () => cover().x, y: () => cover().y, scale: () => cover().scale, duration: 1, ease: "power2.inOut" }, 0.05)
+        .to("[data-hero-art] img", { xPercent: -3.5, duration: 1, ease: "power2.inOut" }, 0.05) // re-centre the 107.5%-wide pattern as it grows
+        .to({}, { duration: 0.2 }); // brief hold at full screen
+      gsap.fromTo(art, { autoAlpha: 1 }, { autoAlpha: 0, ease: "none", immediateRender: false,
+        scrollTrigger: { trigger: hero, start: () => heroTl.scrollTrigger.end, end: () => heroTl.scrollTrigger.end + window.innerHeight * 0.6, scrub: true, invalidateOnRefresh: true } });
+    }
+
+    /* M1–M3 marquees: endless loop, speed follows scroll velocity */
+    const loops = $$(".marquee .track").map((t, i) => {
+      const l = gsap.to(t, { x: -1440, duration: 24 + i * 4, ease: "none", repeat: -1 });
+      l.totalTime(l.duration() * 1000); // far from 0 so a negative timeScale can run backwards
+      return l;
+    });
+    let lastDir = 1, settle;
+    ScrollTrigger.create({
+      start: 0, end: "max",
+      onUpdate(self) {
+        if (self.direction) lastDir = self.direction;
+        const ts = lastDir * gsap.utils.clamp(1, 6, 1 + Math.abs(self.getVelocity()) / 300);
+        loops.forEach(l => gsap.to(l, { timeScale: ts, duration: 0.25, overwrite: true }));
+        settle && settle.kill();
+        settle = gsap.delayedCall(0.3, () => loops.forEach(l => gsap.to(l, { timeScale: lastDir, duration: 1, overwrite: true })));
+      },
+    });
+
+    /* S02 admissions reveal */
+    gsap.timeline({ scrollTrigger: { trigger: "[data-admit]", start: "top 80%", toggleActions: "play none none reverse" } })
+      .from("[data-admit-bg]", { scaleY: 0, duration: 0.7, ease: "power3.inOut" })
+      .from("[data-admit-text]", { y: 24, autoAlpha: 0, stagger: 0.12, duration: 0.6 }, 0.3);
+
+    /* S03 roles: pinned horizontal scroll (desktop) */
+    const track = $("#rolesTrack"), view = $("#rolesViewport");
+    const cards = $$(".role-card", track);
+    gsap.from(cards.slice(0, 3), { y: 48, autoAlpha: 0, stagger: 0.1, duration: 0.8,
+      scrollTrigger: { trigger: "#roles", start: "top 70%", toggleActions: "play none none reverse" } });
+    if (isDesktop) {
+      const dist = () => Math.max(0, track.scrollWidth - view.clientWidth);
+      const fill = $("#rolesFill"), counterEl = $("#rolesCounter");
+      const hTween = gsap.to(track, {
+        x: () => -dist(), ease: "none", // ease "none" keeps scroll and x in 1:1 sync
+        scrollTrigger: {
+          trigger: "#roles", start: "top top", end: () => "+=" + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
+          onUpdate(self) {
+            gsap.set(fill, { scaleX: 1 / 6 + self.progress * 5 / 6 });
+            const n = Math.min(6, 3 + Math.round(self.progress * 3));
+            counterEl.textContent = `${String(n).padStart(2, "0")} / 06 · ${n < 6 ? "继续向下滚动浏览" : "已浏览全部入口"}`;
+          },
+        },
+      });
+      cards.slice(3).forEach(card => gsap.from(card, { y: 60, autoAlpha: 0, rotation: 2, duration: 0.7,
+        scrollTrigger: { trigger: card, containerAnimation: hTween, start: "left 92%", toggleActions: "play none none reverse" } }));
+      cards.slice(3).forEach(card => gsap.fromTo($("[data-swatch]", card), { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none",
+        scrollTrigger: { trigger: card, containerAnimation: hTween, start: "left 100%", end: "left 60%", scrub: true } }));
+    }
+
+    /* S04b news list: batched rows */
+    gsap.set("[data-batch]", { y: 24, autoAlpha: 0 });
+    ScrollTrigger.batch("[data-batch]", {
+      start: "top 90%",
+      onEnter: b => gsap.to(b, { y: 0, autoAlpha: 1, stagger: 0.08, duration: 0.6, overwrite: true }),
+      onLeaveBack: b => gsap.to(b, { y: 24, autoAlpha: 0, stagger: 0.04, duration: 0.3, overwrite: true }),
+    });
+
+    /* S05 scholars — 4 per term: pinned portrait sequence, then the faculty index (desktop) */
+    const schSec = $("#scholars");
+    if (isDesktop) {
+      schSec.classList.add("is-stage");
+      const frames = $$(".sch-frame", schSec), texts = $$(".sch-text", schSec), n = frames.length;
+      const roll = $(".sch-count .roll", schSec), segs = $$(".sch-ctrl .seg i", schSec);
+      const pBtn = $("#schPrev"), nBtn = $("#schNext");
+      const totalEl = $("[data-total]", schSec), total = { v: 0 };
+      gsap.set(frames.slice(1), { clipPath: "inset(100% 0% 0% 0%)" });
+      texts.slice(1).forEach(t => gsap.set(t.children, { yPercent: 60, autoAlpha: 0 }));
+      gsap.timeline({ scrollTrigger: { trigger: schSec, start: "top 65%", toggleActions: "play none none reverse" } })
+        .fromTo(frames[0], { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "power4.inOut" })
+        .from($("img", frames[0]), { scale: 1.3, duration: 1.4 }, 0)
+        .from(".sch-decor", { x: -64, autoAlpha: 0, duration: 1 }, 0.25)
+        .from(texts[0], { y: 40, autoAlpha: 0, duration: 0.8 }, 0.4)
+        .from(".sch-ctrl", { autoAlpha: 0, duration: 0.6 }, 0.6);
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.inOut" },
+        scrollTrigger: {
+          trigger: schSec, start: "top top", end: () => "+=" + n * window.innerHeight * 0.75, pin: true, scrub: 1,
+          // inertia: false → snap to the nearest label, so a button jump isn't projected past its target
+          snap: { snapTo: "labels", inertia: false, duration: { min: 0.2, max: 0.6 }, delay: 0.1, ease: "power1.inOut" },
+          onUpdate(self) { const i = Math.round(self.progress * n); pBtn.disabled = i === 0; nBtn.disabled = i >= n - 1; },
+        },
+      });
+      tl.addLabel("s0");
+      for (let i = 1; i < n; i++) {
+        const at = `s${i - 1}`;
+        tl.to(frames[i], { clipPath: "inset(0% 0% 0% 0%)", duration: 1 }, at)
+          .fromTo($("img", frames[i]), { scale: 1.3 }, { scale: 1, duration: 1, ease: "power2.out" }, at)
+          .to($("img", frames[i - 1]), { scale: 1.12, yPercent: -8, duration: 1 }, at)
+          .to(texts[i - 1].children, { yPercent: -60, autoAlpha: 0, stagger: 0.04, duration: 0.45, ease: "power2.in" }, at)
+          .to(texts[i].children, { yPercent: 0, autoAlpha: 1, stagger: 0.05, duration: 0.5, ease: "power2.out" }, `${at}+=0.5`)
+          .to(roll.children, { yPercent: -100 * i, duration: 0.6 }, `${at}+=0.2`)
+          .to(segs[i], { scaleX: 1, duration: 1, ease: "none" }, at)
+          .addLabel(`s${i}`);
+      }
+      // last step: the featured sequence steps back, the whole faculty comes forward
+      const at = `s${n - 1}`;
+      tl.to(".sch-stage", { yPercent: -10, autoAlpha: 0, duration: 0.6, ease: "power2.in" }, at)
+        .from(".sch-index-head > *", { y: 50, autoAlpha: 0, stagger: 0.07, duration: 0.55, ease: "power3.out" }, `${at}+=0.4`)
+        .to(total, { v: +totalEl.dataset.total, duration: 0.8, ease: "power1.out", onUpdate: () => totalEl.textContent = Math.round(total.v) }, `${at}+=0.4`)
+        .from(".dept-grid", { autoAlpha: 0, duration: 0.2, ease: "none" }, `${at}+=0.45`)
+        .from(".dept-grid li", { y: 60, autoAlpha: 0, stagger: { each: 0.05, grid: [2, 4], from: "start" }, duration: 0.55, ease: "power3.out" }, `${at}+=0.5`)
+        .addLabel("index");
+      const st = tl.scrollTrigger, labels = [...Array(n).keys()].map(i => `s${i}`).concat("index");
+      // jump straight to the label: scrub: 1 eases the visuals, and an exact label position leaves snap nothing to undo
+      const goTo = i => { const y = st.labelToScroll(labels[gsap.utils.clamp(0, labels.length - 1, i)]); const s = ScrollSmoother.get(); s ? s.scrollTo(y, false) : window.scrollTo(0, y); };
+      const cur = () => Math.round(st.progress * n);
+      const onPrev = () => goTo(cur() - 1), onNext = () => goTo(cur() + 1);
+      pBtn.addEventListener("click", onPrev); nBtn.addEventListener("click", onNext);
+      pBtn.disabled = cur() === 0; nBtn.disabled = cur() >= n - 1;
+      cleanups.push(() => { pBtn.removeEventListener("click", onPrev); nBtn.removeEventListener("click", onNext); pBtn.disabled = nBtn.disabled = false; schSec.classList.remove("is-stage"); });
+    } else {
+      gsap.from(".sch-card", { y: 40, autoAlpha: 0, stagger: 0.12, duration: 0.8,
+        scrollTrigger: { trigger: ".sch-list", start: "top 80%", toggleActions: "play none none reverse" } });
+      gsap.from(".dept-grid li", { y: 24, autoAlpha: 0, stagger: 0.05, duration: 0.5,
+        scrollTrigger: { trigger: ".dept-grid", start: "top 85%", toggleActions: "play none none reverse" } });
+    }
+
+    /* S06 research — rules draw with scroll, titles rise from a mask, cursor card follows */
+    $$(".r-row").forEach(row => {
+      gsap.fromTo($(".r-rule", row), { scaleX: 0 }, { scaleX: 1, ease: "none",
+        scrollTrigger: { trigger: row, start: "top 95%", end: "top 55%", scrub: true } });
+      gsap.timeline({ scrollTrigger: { trigger: row, start: "top 85%", toggleActions: "play none none reverse" } })
+        .from($(".r-title > span", row), { yPercent: 110, duration: 0.9, ease: "power4.out" })
+        .from([$(".r-kind", row), $(".r-meta", row), $(".r-go", row)], { y: 16, autoAlpha: 0, stagger: 0.08, duration: 0.5 }, 0.15);
+    });
+    if (isDesktop && window.matchMedia("(hover: hover)").matches) {
+      const rSec = $("#research"), fl = $("#rFloat"), fTrack = $("#rFloatTrack"), rList = $("#rList"), rows = $$(".r-row");
+      gsap.set(fl, { autoAlpha: 0, scale: 0.6, xPercent: 18, yPercent: -55, transformOrigin: "0% 50%" }); // sits to the right of the cursor so the hovered title stays readable
+      const xTo = gsap.quickTo(fl, "x", { duration: 0.6, ease: "power3" });
+      const yTo = gsap.quickTo(fl, "y", { duration: 0.6, ease: "power3" });
+      const rTo = gsap.quickTo(fl, "rotation", { duration: 0.8, ease: "power3" });
+      let lastX = null, calm;
+      const local = e => { const r = rSec.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+      const onMove = e => {
+        const [x, y] = local(e);
+        xTo(x); yTo(y);
+        if (lastX !== null) rTo(gsap.utils.clamp(-14, 14, (x - lastX) * 0.8));
+        lastX = x;
+        calm && calm.kill(); calm = gsap.delayedCall(0.12, () => rTo(0));
+      };
+      const onEnterList = e => { const [x, y] = local(e); xTo(x, x); yTo(y, y); lastX = x; gsap.to(fl, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(1.7)" }); };
+      const onLeaveList = () => gsap.to(fl, { autoAlpha: 0, scale: 0.6, duration: 0.3, ease: "power2.in" });
+      const rowEnters = rows.map((row, i) => { const f = () => gsap.to(fTrack, { yPercent: -100 * i / rows.length, duration: 0.55, ease: "power3.inOut" }); row.addEventListener("mouseenter", f); return [row, f]; });
+      rSec.addEventListener("mousemove", onMove); rList.addEventListener("mouseenter", onEnterList); rList.addEventListener("mouseleave", onLeaveList);
+      cleanups.push(() => { rSec.removeEventListener("mousemove", onMove); rList.removeEventListener("mouseenter", onEnterList); rList.removeEventListener("mouseleave", onLeaveList); rowEnters.forEach(([r, f]) => r.removeEventListener("mouseenter", f)); });
+    }
+
+    // S04a, S07 and S09 split text into lines/chars, so build them once the web fonts have loaded
+    const late = () => {
+    /* S04a 学院要闻 + S07 学生作品 — pinned: inset frame expands to full bleed, headline rises over the photo */
+    const expand = sec => {
+      const frame = $(".feature-frame", sec), img = $(".feature-frame > img", sec), over = $(".feature-over", sec), title = $(".feature-title", sec);
+      if (isDesktop) {
+        sec.classList.add("is-stage");
+        const split = SplitText.create(title, { type: "chars,lines", mask: "lines" });
+        const kids = [...over.children], at = kids.indexOf(title);
+        gsap.timeline({ scrollTrigger: { trigger: sec, start: "top top", end: "+=130%", pin: true, scrub: 1 } })
+          .fromTo(frame, { clipPath: "inset(27% 22% 9% 22%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power2.inOut" }, 0)
+          .fromTo(img, { scale: 1.25 }, { scale: 1, duration: 1, ease: "power2.out" }, 0)
+          .to($(".sec-head", sec), { yPercent: -40, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, 0.1)
+          .fromTo($(".feature-shade", sec), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: "none" }, 0.55)
+          .from(kids.slice(0, at), { y: 20, autoAlpha: 0, duration: 0.3 }, 0.75)
+          .from(split.lines, { yPercent: 105, stagger: 0.08, duration: 0.45, ease: "power3.out" }, 0.8)
+          .from(kids.slice(at + 1), { y: 20, autoAlpha: 0, stagger: 0.06, duration: 0.3 }, 1.0)
+          .to({}, { duration: 0.35 });
+        cleanups.push(() => sec.classList.remove("is-stage"));
+      } else {
+        gsap.fromTo(img, { clipPath: "inset(12% 8% 12% 8%)", scale: 1.15 }, { clipPath: "inset(0% 0% 0% 0%)", scale: 1, ease: "none",
+          scrollTrigger: { trigger: frame, start: "top 90%", end: "center 55%", scrub: 1 } });
+      }
+    };
+    expand($("#news"));
+    expand($("#work"));
+
+    /* S09 footer finale — 1) panel opens to full bleed  2) weave threads slide against each other
+       3) the school name rises character by character  4) motto, tools and columns follow */
+    gsap.fromTo("#footer", { clipPath: isDesktop ? "inset(0% 4% 0% 4%)" : "inset(0% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none",
+      scrollTrigger: { trigger: "#footer", start: "top bottom", end: "top 35%", scrub: true } });
+    $$(".weave-row").forEach((row, i) => gsap.fromTo(row, { x: i % 2 ? -432 : 0 }, { x: i % 2 ? 0 : -432, ease: "none",
+      scrollTrigger: { trigger: "#footer", start: "top bottom", end: "bottom bottom", scrub: 0.6 } }));
+    SplitText.create("[data-footer-mark]", {
+      type: "chars", mask: "chars",
+      onSplit(self) {
+        return gsap.from(self.chars, { yPercent: 110, stagger: 0.1, ease: "none",
+          scrollTrigger: { trigger: "[data-footer-mark]", start: "top 92%", end: "top 50%", scrub: 1 } });
+      },
+    });
+    gsap.from("[data-footer-row] > *", { y: 24, autoAlpha: 0, stagger: 0.12, duration: 0.7,
+      scrollTrigger: { trigger: "[data-footer-row]", start: "top 92%", toggleActions: "play none none reverse" } });
+    gsap.timeline({ scrollTrigger: { trigger: "#toolList", start: "top 90%", toggleActions: "play none none reverse" } })
+      .from("#toolList li", { y: 24, autoAlpha: 0, stagger: 0.06, duration: 0.6 });
+    gsap.from("#fCols > *", { y: 24, autoAlpha: 0, stagger: 0.08, duration: 0.6,
+      scrollTrigger: { trigger: "#fCols", start: "top 95%", toggleActions: "play none none reverse" } });
+
+    };
+    if (document.fonts && document.fonts.status !== "loaded") document.fonts.ready.then(() => ctx.add(() => { late(); ScrollTrigger.sort(); ScrollTrigger.refresh(); }));
+    else { late(); ScrollTrigger.sort(); ScrollTrigger.refresh(); }
+
+    return () => cleanups.forEach(f => f());
+  });
+
+  /* layout changes after assets load → recalc trigger positions */
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+    // opened with a #hash (e.g. a shared link): go there through the smoother
+    let el = null; try { el = location.hash.length > 1 && document.querySelector(location.hash); } catch (_) {}
+    if (!el) return;
+    wrapperEl.scrollTop = 0;
+    // wait for the web fonts: the S04a/S07 pins are built after them and shift everything below
+    const go = () => setTimeout(() => { ScrollTrigger.refresh(); place(Math.max(0, targetY(el))); }, 60);
+    document.fonts ? document.fonts.ready.then(go) : go();
+  });
+  document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+})();
+</script>
+
+</body></html>
