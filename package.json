@@ -4,6 +4,10 @@
   "private": true,
   "type": "module",
   "description": "人文艺术学院官网改版五套设计方案统一汇报展示平台（适配 Cloudflare Pages）",
+  "packageManager": "pnpm@10.5.2",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "build:01": "cd 01 && pnpm run build",
     "build:02": "cd 02 && pnpm run build",

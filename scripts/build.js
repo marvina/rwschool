@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.resolve(rootDir, 'dist');
 
+process.env.VITE_CONFIG_NATIVE_IGNORE_WARNING = 'true';
+
 console.log('🚀 [Build] 开始构建人文艺术学院官网五套方案整合网站...');
 
 const schemes = [
@@ -33,14 +35,21 @@ function copyFolderSync(from, to) {
   });
 }
 
+// Package manager build command (defaults to pnpm run build)
+const buildCommand = process.env.BUILD_COMMAND || 'pnpm run build';
+
 // 1. Build each subproject
 for (const scheme of schemes) {
   console.log(`📦 正在构建 ${scheme.name} (${scheme.dir})...`);
   const schemeDir = path.join(rootDir, scheme.dir);
   try {
-    execSync('pnpm run build', {
+    execSync(buildCommand, {
       cwd: schemeDir,
-      stdio: 'inherit'
+      stdio: 'inherit',
+      env: {
+        ...process.env,
+        VITE_CONFIG_NATIVE_IGNORE_WARNING: 'true'
+      }
     });
     console.log(`✅ ${scheme.name} 构建成功`);
   } catch (err) {
