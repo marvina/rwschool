@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>人文艺术学院官网改版设计方案汇报与评选平台 | 2026</title>
+  <link rel="icon" href="./college-logo.png" type="image/png" />
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --bg-header: rgba(15, 23, 42, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-hover: rgba(99, 102, 241, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --accent-cyan: #06b6d4;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --header-height: 64px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.12) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 40%);
+    }
+
+    /* Top Master Control Header */
+    header.portal-header {
+      height: var(--header-height);
+      background: var(--bg-header);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 250px;
+    }
+
+    .brand-logo-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #38bdf8;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .brand-titles {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    .brand-tag {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Segmented Tabs Switcher */
+    .tabs-wrapper {
+      display: flex;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      padding: 0.25rem;
+      gap: 0.25rem;
+    }
+
+    .scheme-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.45rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .scheme-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .scheme-tab.active {
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.5);
+      font-weight: 600;
+    }
+
+    .scheme-tab.compare-tab.active {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      box-shadow: 0 4px 12px -2px rgba(14, 165, 233, 0.5);
+    }
+
+    .scheme-tab .tab-badge {
+      font-size: 0.68rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.15);
+      color: inherit;
+    }
+
+    /* Right Action Tools */
+    .tools-section {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 250px;
+      justify-content: flex-end;
+    }
+
+    .device-switcher {
+      display: flex;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.2rem;
+    }
+
+    .device-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      padding: 0.35rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .device-btn:hover {
+      color: var(--text-main);
+    }
+
+    .device-btn.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #38bdf8;
+    }
+
+    .tool-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 0.45rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .tool-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .tool-btn.btn-accent {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+    }
+
+    .tool-btn.btn-accent:hover {
+      background: rgba(99, 102, 241, 0.25);
+      color: #ffffff;
+    }
+
+    /* Main Content Area */
+    main.viewport-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #060913;
+      position: relative;
+      overflow: hidden;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Iframe Shell for Live Preview */
+    .preview-container {
+      width: 100%;
+      height: calc(100vh - var(--header-height));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .preview-container.device-desktop {
+      width: 100%;
+      height: calc(100vh - var(--header-height));
+    }
+
+    .preview-container.device-laptop {
+      width: 1280px;
+      max-width: 95vw;
+      height: calc(100vh - var(--header-height) - 40px);
+      margin: 20px auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+    }
+
+    .preview-container.device-mobile {
+      width: 390px;
+      height: 800px;
+      max-height: calc(100vh - var(--header-height) - 40px);
+      margin: 20px auto;
+      border-radius: 46px;
+      border: 10px solid #1e293b;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2), 0 30px 70px -15px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .mobile-notch {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 26px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    .preview-container.device-mobile .mobile-notch {
+      display: block;
+    }
+
+    iframe#preview-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+      display: block;
+    }
+
+    /* Loading Overlay */
+    .frame-loader {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 15, 29, 0.4);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .frame-loader.active {
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Fullscreen Mode Float Exit */
+    .fullscreen-exit-pill {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+      color: #f8fafc;
+      font-size: 0.82rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .fullscreen-exit-pill:hover {
+      transform: translateY(-2px);
+      background: #1e293b;
+    }
+
+    body.fullscreen-mode header.portal-header {
+      transform: translateY(-100%);
+      position: absolute;
+    }
+
+    body.fullscreen-mode .preview-container {
+      height: 100vh !important;
+      margin: 0 !important;
+    }
+
+    body.fullscreen-mode .fullscreen-exit-pill {
+      display: flex;
+    }
+
+    /* Comparison View Section */
+    #compare-view {
+      display: none;
+      width: 100%;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      overflow-y: auto;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    #compare-view.active {
+      display: block;
+    }
+
+    .compare-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .compare-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 60%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+    }
+
+    .compare-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* 4 Scheme Cards Grid */
+    .scheme-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .scheme-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scheme-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .scheme-card[data-scheme="01"]::before { background: linear-gradient(90deg, #3b82f6, #1d4ed8); }
+    .scheme-card[data-scheme="02"]::before { background: linear-gradient(90deg, #d97706, #b45309); }
+    .scheme-card[data-scheme="03"]::before { background: linear-gradient(90deg, #64748b, #0f172a); }
+    .scheme-card[data-scheme="04"]::before { background: linear-gradient(90deg, #0284c7, #0369a1); }
+
+    .scheme-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .scheme-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .card-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .btn-enter {
+      flex: 1;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: background 0.2s ease, transform 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-enter:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-ext {
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-ext:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    /* Comparison Table */
+    .compare-table-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .table-title {
+      padding: 1.25rem 1.75rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    table.compare-table th,
+    table.compare-table td {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      vertical-align: top;
+    }
+
+    table.compare-table th {
+      background: rgba(15, 23, 42, 0.6);
+      color: #94a3b8;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    table.compare-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .dim-name {
+      font-weight: 600;
+      color: #38bdf8;
+      white-space: nowrap;
+      width: 130px;
+    }
+
+    /* Side Drawer for Design Rationale */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 460px;
+      max-width: 90vw;
+      height: 100vh;
+      background: #0f172a;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: -15px 0 40px rgba(0, 0, 0, 0.8);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .drawer-overlay.open .drawer-panel {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-close {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+    }
+
+    .drawer-close:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .drawer-body {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    .drawer-section {
+      margin-bottom: 2rem;
+    }
+
+    .drawer-subtitle {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .color-swatch-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .color-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .color-hex {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .feature-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast-pill.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      header.portal-header {
+        height: auto;
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .brand-section {
+        min-width: auto;
+      }
+      .tools-section {
+        min-width: auto;
+      }
+      .tabs-wrapper {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Master Control Header -->
+  <header class="portal-header" id="portal-header">
+    <!-- Brand / Title -->
+    <div class="brand-section">
+      <div class="brand-logo-badge">🏛️</div>
+      <div class="brand-titles">
+        <h1 class="brand-title">人文艺术学院官网改版</h1>
+        <div class="brand-tag">
+          <span class="status-dot"></span>
+          <span>方案汇报与评选工作台 · 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scheme Tabs Switcher -->
+    <nav class="tabs-wrapper" role="tablist">
+      <button class="scheme-tab active" data-scheme="01" title="快捷键: 按 1">
+        <span>方案 01</span>
+        <span class="tab-badge">首页原型</span>
+      </button>
+      <button class="scheme-tab" data-scheme="02" title="快捷键: 按 2">
+        <span>方案 02</span>
+        <span class="tab-badge">学术(React)</span>
+      </button>
+      <button class="scheme-tab" data-scheme="03" title="快捷键: 按 3">
+        <span>方案 03</span>
+        <span class="tab-badge">人文年刊</span>
+      </button>
+      <button class="scheme-tab" data-scheme="04" title="快捷键: 按 4">
+        <span>方案 04</span>
+        <span class="tab-badge">极简典雅</span>
+      </button>
+      <button class="scheme-tab" data-scheme="05" title="快捷键: 按 5">
+        <span>方案 05</span>
+        <span class="tab-badge">规范全能</span>
+      </button>
+      <button class="scheme-tab compare-tab" data-scheme="compare" title="快捷键: 按 0 或 C">
+        <span>📊 方案对比矩阵</span>
+      </button>
+    </nav>
+
+    <!-- Right Controls -->
+    <div class="tools-section">
+      <!-- Device Viewport Switcher -->
+      <div class="device-switcher" title="视口模式切换">
+        <button class="device-btn active" data-device="desktop" title="桌面端 (100% 满屏) [按 D]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        </button>
+        <button class="device-btn" data-device="laptop" title="笔记本 (1280px)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>
+        </button>
+        <button class="device-btn" data-device="mobile" title="手机端 (390px 竖屏) [按 M]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+        </button>
+      </div>
+
+      <!-- Design Rationale Drawer Toggle -->
+      <button class="tool-btn btn-accent" id="btn-info" title="查看当前方案设计理念 [按 I]">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>方案阐述</span>
+      </button>
+
+      <!-- External Standalone Tab -->
+      <a class="tool-btn" id="btn-open-ext" href="./01/index.html" target="_blank" title="在新窗口独立打开当前方案">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        <span>独立全屏</span>
+      </a>
+
+      <!-- Fullscreen Presentation Mode -->
+      <button class="tool-btn" id="btn-fullscreen" title="进入全屏免打扰汇报 [按 F]">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen Exit Floating Button -->
+  <button class="fullscreen-exit-pill" id="btn-exit-fullscreen">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <span>退出全屏演示 (Esc)</span>
+  </button>
+
+  <!-- Main Viewport Area -->
+  <main class="viewport-area">
+    <!-- Live Preview Container -->
+    <div class="preview-container device-desktop" id="preview-container">
+      <div class="mobile-notch"></div>
+      
+      <!-- Loading indicator -->
+      <div class="frame-loader" id="frame-loader">
+        <div class="spinner"></div>
+        <p style="font-size: 0.85rem; color: #94a3b8;">正在加载方案页面...</p>
+      </div>
+
+      <iframe id="preview-frame" src="./01/index.html" title="方案实时交互预览"></iframe>
+    </div>
+
+    <!-- Scheme Comparison Matrix View -->
+    <div id="compare-view">
+      <div class="compare-header">
+        <h2 class="compare-title">五套方案横向对比与决策大厅</h2>
+        <p class="compare-subtitle">
+          聚焦人文艺术学科属性，针对官方形象定位、受众诉求与学术成果展陈，提供五种截然不同的重构维度。
+        </p>
+      </div>
+
+      <!-- 5 Cards -->
+      <div class="scheme-cards-grid">
+        <!-- Scheme 1 -->
+        <div class="scheme-card" data-scheme="01">
+          <div>
+            <div class="card-top">
+              <span class="card-badge">SCHEME 01</span>
+              <span style="font-size: 0.75rem; color: #38bdf8;">经典红蓝院系色</span>
+            </div>
+            <h3 class="card-title">现代学术综合门户 (首页原型)</h3>
+            <div class="card-tags">
+              <span class="card-tag">双轨红蓝顶栏</span>
+              <span class="card-tag">名师学者方阵</span>
+              <span class="card-tag">沿黄田野调查</span>
+              <span class="card-tag">织物平滑滚动</span>
+            </div>
+            <p class="card-desc">
+              以“为人文注入艺术想象，为设计铸造思想灵魂”为核心，集成双轨沉浸顶栏、招考专栏、动态师资名录、沿黄田野科研与学生作品全景展陈，体验丝滑灵动。
+            </p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-enter" onclick="switchScheme('01')">
+              <span>立即体验</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <a class="btn-ext" href="./01/index.html" target="_blank" title="在新标签中打开">↗</a>
+          </div>
+        </div>
+
+        <!-- Scheme 2 -->
+        <div class="scheme-card" data-scheme="02">
+          <div>
+            <div class="card-top">
+              <span class="card-badge">SCHEME 02</span>
+              <span style="font-size: 0.75rem; color: #60a5fa;">深邃经典学院蓝</span>
+            </div>
+            <h3 class="card-title">现代学术综合门户 (React版)</h3>
+            <div class="card-tags">
+              <span class="card-tag">React 19</span>
+              <span class="card-tag">分层视差滚动</span>
+              <span class="card-tag">科研学术矩阵</span>
+              <span class="card-tag">Tailwind v4</span>
+            </div>
+            <p class="card-desc">
+              基于现代 React 19 + Tailwind CSS 4 架构，采用沉稳内敛的深邃院系经典蓝，结合大尺度高精图文排版与沉浸式分层视差滚动，架构注重课题与动态的高效传达。
+            </p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-enter" onclick="switchScheme('02')">
+              <span>立即体验</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <a class="btn-ext" href="./02/index.html" target="_blank" title="在新标签中打开">↗</a>
+          </div>
+        </div>
+
+        <!-- Scheme 3 -->
+        <div class="scheme-card" data-scheme="03">
+          <div>
+            <div class="card-top">
+              <span class="card-badge">SCHEME 03</span>
+              <span style="font-size: 0.75rem; color: #f59e0b;">纸质年刊暖调</span>
+            </div>
+            <h3 class="card-title">典雅人文展览年刊</h3>
+            <div class="card-tags">
+              <span class="card-tag">出版物排版</span>
+              <span class="card-tag">民间艺术档案</span>
+              <span class="card-tag">田野调查</span>
+            </div>
+            <p class="card-desc">
+              突破常规网站模版，独创学术纸质年刊质感。侧重传统民间艺术当代新生、田野实态记录、工作室工坊展陈，人文底蕴最为深厚。
+            </p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-enter" onclick="switchScheme('03')">
+              <span>立即体验</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <a class="btn-ext" href="./03/index.html" target="_blank" title="在新标签中打开">↗</a>
+          </div>
+        </div>
+
+        <!-- Scheme 4 -->
+        <div class="scheme-card" data-scheme="04">
+          <div>
+            <div class="card-top">
+              <span class="card-badge">SCHEME 04</span>
+              <span style="font-size: 0.75rem; color: #94a3b8;">极简克制黑白</span>
+            </div>
+            <h3 class="card-title">高定极简典雅风</h3>
+            <div class="card-tags">
+              <span class="card-tag">画廊级大留白</span>
+              <span class="card-tag">先锋字排</span>
+              <span class="card-tag">纯粹沉浸</span>
+              <span class="card-tag">4轴纵深网格</span>
+            </div>
+            <p class="card-desc">
+              深度汲取国际前沿数字杂志与学术美术馆设计范式，以4轨纵深建筑网格为经纬，将微缩田野文献实录直接内嵌于排版中，营造沉静高端艺术学院气魄。
+            </p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-enter" onclick="switchScheme('04')">
+              <span>立即体验</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <a class="btn-ext" href="./04/index.html" target="_blank" title="在新标签中打开">↗</a>
+          </div>
+        </div>
+
+        <!-- Scheme 5 -->
+        <div class="scheme-card" data-scheme="05">
+          <div>
+            <div class="card-top">
+              <span class="card-badge">SCHEME 05</span>
+              <span style="font-size: 0.75rem; color: #0284c7;">高校规范标杆</span>
+            </div>
+            <h3 class="card-title">高校规范全功能门户</h3>
+            <div class="card-tags">
+              <span class="card-tag">完整九大分类</span>
+              <span class="card-tag">软科 A+ 专业</span>
+              <span class="card-tag">高校认证架构</span>
+            </div>
+            <p class="card-desc">
+              功能最完备的高校官方规范门户。囊括九大系统化导航分类、国家级一流本科专业矩阵、非遗专业特色与智库服务，符合所有评审规范。
+            </p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-enter" onclick="switchScheme('05')">
+              <span>立即体验</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <a class="btn-ext" href="./05/index.html" target="_blank" title="在新标签中打开">↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dimensional Comparison Table -->
+      <div class="compare-table-card">
+        <div class="table-title">
+          <span>📐 六维横向对比矩阵 (评审汇报参考)</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">支持按需选择最匹配学院发展阶段的方案</span>
+        </div>
+        <div class="table-responsive">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>对比维度</th>
+                <th>方案 01 · 首页原型</th>
+                <th>方案 02 · 综合门户 (React)</th>
+                <th>方案 03 · 典雅人文年刊</th>
+                <th>方案 04 · 高定极简典雅风</th>
+                <th>方案 05 · 高校规范全能</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="dim-name">视觉风格</td>
+                <td>经典院系红蓝双轨顶栏、平滑滚动、编织纹样</td>
+                <td>经典深邃学术蓝、分层视差滚动、现代工程化排版</td>
+                <td>实体学术杂志排版、暖纸底色、人文衬线</td>
+                <td>暖纸骨白基底、4轴纵深建筑网格、图文内嵌微缩视窗</td>
+                <td>标准高校规范、清新白蓝底、清晰紧凑</td>
+              </tr>
+              <tr>
+                <td class="dim-name">色彩体系</td>
+                <td>经典院系红 (#d62e52) / 蓝 (#2a5db0) / 暖纸白 (#fffdf8)</td>
+                <td>经典学术蓝 (#1e3a8a) / 天青蓝 (#2563eb) / 纯净白 (#ffffff)</td>
+                <td>大地暖纸色 (#f8f6f0 / #8c2d19)</td>
+                <td>齐鲁文脉暖纸骨白 (#faf9f6) / 炭墨黑 (#141416) / 洗水矿物彩</td>
+                <td>高校公立正蓝 (#0369a1 / #f1f5f9)</td>
+              </tr>
+              <tr>
+                <td class="dim-name">核心特色板块</td>
+                <td>招考专栏、6向度培养卡、名师学者方阵、沿黄田野调查、学生展陈</td>
+                <td>视差滚动英雄区、学术新闻日历、重点课题、学者介绍</td>
+                <td>民间艺术档案实录、田野考察文献</td>
+                <td>标题内联微缩视窗、学科矩阵角标、交互特藏文献抽屉、典藏讲座通行券</td>
+                <td>九大官方分类、软科A+专业专栏、教学成果</td>
+              </tr>
+              <tr>
+                <td class="dim-name">目标受众偏好</td>
+                <td>高校师生、科研申报、学术同行交流</td>
+                <td>现代化高校评估、综合型大学师生、学术信息日常检索</td>
+                <td>非遗研究者、文化学者、艺术策展人</td>
+                <td>国际当代学者、前沿设计评委、注重版式与典雅学术深度的专家及学子</td>
+                <td>高考生及家长、评估专家、教育主管部门</td>
+              </tr>
+              <tr>
+                <td class="dim-name">移动端体验</td>
+                <td>卡片流式堆叠，信息层级明确</td>
+                <td>现代自适应响应流，模块分明</td>
+                <td>纵向画报阅读流，图文张力强</td>
+                <td>极度轻盈通透，流式画报排版，微动效细腻丝滑</td>
+                <td>折叠式规范菜单，分类检索精准快捷</td>
+              </tr>
+              <tr>
+                <td class="dim-name">建议采用场景</td>
+                <td>推荐作为【学院官方主站长期改版】首选</td>
+                <td>推荐作为【现代学术综合主站/工程化系统】首选</td>
+                <td>推荐作为【院庆专题/民艺特色基地】特色站</td>
+                <td>推荐作为【高端学术形象 / 国际交流与学术评审标杆】首选</td>
+                <td>推荐作为【迎检评估/高校群建站统一标准】</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Side Drawer: Design Rationale & Specs -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer(event)">
+    <div class="drawer-panel" id="drawer-panel" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-title" style="font-size: 1.15rem; font-weight: 700; color: #ffffff;">方案设计阐述</h3>
+          <p id="drawer-tagline" style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.2rem;">详细设计参数与定位说明</p>
+        </div>
+        <button class="drawer-close" onclick="closeDrawer()" title="关闭抽屉 (Esc)">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="drawer-section">
+          <div class="drawer-subtitle">方案定位与设计初衷</div>
+          <p id="drawer-concept" style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;"></p>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-subtitle">核心色彩系统 (Color Palette)</div>
+          <div class="color-swatches" id="drawer-colors"></div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-subtitle">关键功能与版块架构</div>
+          <ul class="feature-list" id="drawer-features"></ul>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-subtitle">评审考量与决策建议</div>
+          <p id="drawer-advice" style="font-size: 0.88rem; line-height: 1.6; color: #38bdf8; background: rgba(56, 189, 248, 0.08); padding: 0.75rem 1rem; border-radius: 8px; border-left: 3px solid #38bdf8;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Message -->
+  <div class="toast-pill" id="toast-pill">
+    <span id="toast-icon">✨</span>
+    <span id="toast-text">已切换</span>
+  </div>
+
+  <script>
+    // Scheme specifications for drawer & metadata
+    const SCHEME_DATA = {
+      '01': {
+        title: '方案 01 · 现代学术综合门户 (首页原型)',
+        tagline: 'Modern Academic Comprehensive Portal (Prototype)',
+        path: './01/index.html',
+        concept: '以“为人文注入艺术想象，为设计铸造思想灵魂”为核心意象，采用沉稳庄重的院系红蓝经典双轨顶栏（Maroon & Blue），融合极具匠心的织物编织纹样与平滑滚动视效。系统架构涵盖 2026 拔尖人才招考专栏、6大特色培养向度、动态学术纪事、名师学者肖像方阵、沿黄九省区田野调查科研矩阵与学生创作全景展陈。',
+        colors: [
+          { name: '经典院系红', hex: '#D62E52' },
+          { name: '学术经典蓝', hex: '#2A5DB0' },
+          { name: '高光暖金色', hex: '#F6C324' },
+          { name: '齐鲁人文纸白', hex: '#FFFDF8' },
+          { name: '沉稳墨色', hex: '#1C1B2E' }
+        ],
+        features: [
+          '双轨沉浸式导航顶栏与快捷角色导引',
+          '2026 本科与学术型研究生招考专栏',
+          '6 大特色培养向度滑轨卡片与动态进度索引',
+          '名师与学者方阵肖像序列及 8 大教研室矩阵',
+          '齐鲁造物学派重大科研与光标跟随卡片',
+          '学生作品全景展开交互与织物纹样编织页脚'
+        ],
+        advice: '官方高保真首页原型方案，设计语言规范严谨、人文底蕴深厚，动效流畅丝滑，特别适合作为学院官方主干综合门户。'
+      },
+      '02': {
+        title: '方案 02 · 现代学术综合门户 (React版)',
+        tagline: 'Modern Academic Comprehensive Portal (React + Vite)',
+        path: './02/index.html',
+        concept: '采用沉稳内敛的深邃院系经典蓝，结合大尺度高精图文排版与分层视差滚动效果。全站基于现代 React 19 + Tailwind CSS 4 架构，注重科研课题、师资学术力量与日历型动态的高效传达，既庄重严谨又具现代高校学术活力。',
+        colors: [
+          { name: '学术深邃蓝', hex: '#1E3A8A' },
+          { name: '明亮院系蓝', hex: '#2563EB' },
+          { name: '纯净底白', hex: '#FFFFFF' },
+          { name: '沉稳炭黑', hex: '#0F172A' }
+        ],
+        features: [
+          '基于 React 19 + Tailwind CSS 4 全响应式工程化架构',
+          '英雄区沉浸大图分层视差滚动与动态学术格言',
+          '学术动态日历、名师学者与沿黄田野调查科研课题矩阵',
+          '四套专业方向与全功能院系服务快捷导引'
+        ],
+        advice: '交互逻辑现代化，工程化与状态扩展性极佳，适合需要复杂交互或系统对接的现代学术门户。'
+      },
+      '03': {
+        title: '方案 03 · 典雅人文展览年刊',
+        tagline: 'Refined Humanities Exhibition Journal',
+        path: './03/index.html',
+        concept: '彻底跳脱传统高校网站千篇一律的千人一面，将“人文艺术学刊 / 纸质年鉴”的阅读体验注入数字化网页。以暖调纸张质感、优雅衬线排版与图档纪实感，呈现学院深厚的人文积淀。',
+        colors: [
+          { name: '人文暖纸底', hex: '#FDFBF7' },
+          { name: '传统朱红印', hex: '#8C2D19' },
+          { name: '典雅墨黑', hex: '#1C1917' },
+          { name: '民艺大地灰', hex: '#78716C' }
+        ],
+        features: [
+          '“See. Think. Make.” 审视·思考·转化 独创报章封面',
+          '民间艺术研究与田野调查文献档案展陈',
+          '手工艺术工坊与特色创作工作室专栏',
+          '双语学术卷号（VOL / ISSUE）出版物式层级'
+        ],
+        advice: '文化韵味极强，极具辨识度，最适合突出传统工艺美术、非物质文化遗产与艺术史论特色的学院形象。'
+      },
+      '04': {
+        title: '方案 04 · 高定极简典雅风 (Minimalist Editorial)',
+        tagline: 'Curatorial & Editorial Typography Architecture',
+        path: './04/index.html',
+        concept: '深度汲取国际前沿数字杂志与学术美术馆设计范式（如 Wright’s Ferry Mansion、Iceberg 等案例），彻底打破常规高校网站模块盒装堆叠格局。以4轨纵深建筑网格为经纬，将微缩田野文献实录直接内嵌于巨幅排版中，配合错落工坊便签展盒与交互式特藏文献抽屉，营造沉静、深邃的高端学术与艺术学院气魄。',
+        colors: [
+          { name: '暖纸骨白底', hex: '#FAF9F6' },
+          { name: '典雅炭墨黑', hex: '#141416' },
+          { name: '齐鲁赭石彩', hex: '#FDEBEC' },
+          { name: '齐鲁松绿彩', hex: '#EDF3EC' },
+          { name: '齐鲁苍青彩', hex: '#E1F3FE' }
+        ],
+        features: [
+          '突破常规的4轨纵深建筑网格与标题内联微缩视窗',
+          '学科矩阵角标系统与错落工坊便签展盒',
+          '交互式重大科研成果文献档案抽屉系统 (Curatorial Modal)',
+          '官方院徽纯黑矢量反相渲染与键盘快捷操作'
+        ],
+        advice: '格调极高、内敛沉静、极具艺术设计高校的人文厚度与当代先锋感，是追求国际一流学术品味与版式创新的最佳方案。'
+      },
+      '05': {
+        title: '方案 05 · 高校规范全功能门户',
+        tagline: 'Comprehensive University Standard Portal',
+        path: './05/index.html',
+        concept: '严格对标教育部本科教学评估、高校双一流建设与国家级一流专业建设点标准。信息结构严密完备，九大分类一目了然，涵盖从专业招考到智库科研全链条。',
+        colors: [
+          { name: '高校官方蓝', hex: '#0284C7' },
+          { name: '深海蓝', hex: '#0C4A6E' },
+          { name: '浅雅灰蓝', hex: '#F0F9FF' },
+          { name: '纯净白', hex: '#FFFFFF' }
+        ],
+        features: [
+          '规范九大分类完整导航体系（招生/培养/教学/科研等）',
+          '国家级一流本科专业矩阵（软科 A+ 艺术设计学重点推介）',
+          '实验实训中心、协同育人与智库服务直达通道',
+          '高度规范的校级徽标与标准院系 VI 统一规范'
+        ],
+        advice: '功能最完备、信息承载量最大、完全免除评估合规顾虑的标准高校模范门户。'
+      }
+    };
+
+    let currentScheme = '01';
+    let currentDevice = 'desktop';
+    let isFullscreen = false;
+
+    const frame = document.getElementById('preview-frame');
+    const container = document.getElementById('preview-container');
+    const compareView = document.getElementById('compare-view');
+    const loader = document.getElementById('frame-loader');
+    const extLink = document.getElementById('btn-open-ext');
+    const toast = document.getElementById('toast-pill');
+    const toastText = document.getElementById('toast-text');
+
+    // Show toast message
+    function showToast(msg) {
+      toastText.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // Switch active scheme
+    function switchScheme(schemeId, force = false) {
+      if (!force && schemeId === currentScheme && schemeId !== 'compare' && frame.src.includes(schemeId)) return;
+      currentScheme = schemeId;
+
+      // Update Tab Styles
+      document.querySelectorAll('.scheme-tab').forEach(tab => {
+        if (tab.dataset.scheme === schemeId) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+
+      // Update URL hash
+      window.location.hash = schemeId;
+
+      if (schemeId === 'compare') {
+        container.style.display = 'none';
+        compareView.classList.add('active');
+        extLink.style.display = 'none';
+        document.getElementById('btn-info').style.display = 'none';
+        showToast('已进入方案对比大厅');
+      } else {
+        compareView.classList.remove('active');
+        container.style.display = 'flex';
+        extLink.style.display = 'inline-flex';
+        document.getElementById('btn-info').style.display = 'inline-flex';
+
+        const data = SCHEME_DATA[schemeId];
+        extLink.href = data.path;
+
+        // Show loader and load frame
+        loader.classList.add('active');
+        let done = false;
+        const removeLoader = () => {
+          if (!done) {
+            done = true;
+            loader.classList.remove('active');
+          }
+        };
+
+        frame.onload = () => {
+          setTimeout(removeLoader, 60);
+        };
+        setTimeout(removeLoader, 350);
+
+        frame.src = data.path;
+
+        showToast(`已切换至 ${data.title}`);
+      }
+    }
+
+    // Switch device mode
+    function switchDevice(device) {
+      currentDevice = device;
+      document.querySelectorAll('.device-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.device === device);
+      });
+
+      container.className = `preview-container device-${device}`;
+      showToast(device === 'mobile' ? '已切换至手机竖屏视口 (390px)' : device === 'laptop' ? '已切换至笔记本视口 (1280px)' : '已切换至桌面全屏视口');
+    }
+
+    // Toggle Fullscreen Presentation Mode
+    function toggleFullscreen() {
+      isFullscreen = !isFullscreen;
+      document.body.classList.toggle('fullscreen-mode', isFullscreen);
+      if (isFullscreen) {
+        showToast('已进入全屏汇报模式 (按 Esc 退出)');
+      }
+    }
+
+    // Drawer functions
+    function openDrawer() {
+      if (currentScheme === 'compare') return;
+      const data = SCHEME_DATA[currentScheme];
+      document.getElementById('drawer-title').textContent = data.title;
+      document.getElementById('drawer-tagline').textContent = data.tagline;
+      document.getElementById('drawer-concept').textContent = data.concept;
+      document.getElementById('drawer-advice').textContent = data.advice;
+
+      // Render colors
+      const colorsContainer = document.getElementById('drawer-colors');
+      colorsContainer.innerHTML = data.colors.map(c => `
+        <div class="color-swatch-item">
+          <div class="color-circle" style="background: ${c.hex}"></div>
+          <span class="color-hex">${c.hex}</span>
+          <span style="font-size:0.68rem; color:#94a3b8;">${c.name}</span>
+        </div>
+      `).join('');
+
+      // Render features
+      const featuresContainer = document.getElementById('drawer-features');
+      featuresContainer.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+
+      document.getElementById('drawer-overlay').classList.add('open');
+    }
+
+    function closeDrawer(e) {
+      document.getElementById('drawer-overlay').classList.remove('open');
+    }
+
+    // Event listeners
+    document.querySelectorAll('.scheme-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchScheme(tab.dataset.scheme));
+    });
+
+    document.querySelectorAll('.device-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchDevice(btn.dataset.device));
+    });
+
+    document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+    document.getElementById('btn-exit-fullscreen').addEventListener('click', toggleFullscreen);
+    document.getElementById('btn-info').addEventListener('click', openDrawer);
+
+    // Keyboard navigation shortcuts
+    window.addEventListener('keydown', (e) => {
+      // Don't trigger if user is typing in an input
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      if (e.key === '1') switchScheme('01');
+      else if (e.key === '2') switchScheme('02');
+      else if (e.key === '3') switchScheme('03');
+      else if (e.key === '4') switchScheme('04');
+      else if (e.key === '5') switchScheme('05');
+      else if (e.key === '0' || e.key.toLowerCase() === 'c') switchScheme('compare');
+      else if (e.key.toLowerCase() === 'd') switchDevice('desktop');
+      else if (e.key.toLowerCase() === 'm') switchDevice('mobile');
+      else if (e.key.toLowerCase() === 'i') openDrawer();
+      else if (e.key.toLowerCase() === 'f') toggleFullscreen();
+      else if (e.key === 'Escape') {
+        if (document.getElementById('drawer-overlay').classList.contains('open')) {
+          closeDrawer();
+        } else if (isFullscreen) {
+          toggleFullscreen();
+        }
+      }
+    });
+
+    // Check URL Hash on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['01', '02', '03', '04', '05', 'compare'].includes(hash)) {
+        switchScheme(hash);
+      }
+    });
+  </script>
+</body>
+</html>
