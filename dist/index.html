@@ -2,6 +2,19 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // 防死循环保护：若工作台本身被错误嵌入到 iframe 中，立刻终止渲染并跳出
+    if (window.self !== window.top) {
+      document.documentElement.style.display = 'none';
+      try {
+        window.top.location.href = window.location.href.replace(/\/dist\/?/, '/');
+      } catch (e) {}
+    }
+    // 纠正历史 /dist 路径缓存：如果用户在 /dist/ 路径下打开，自动归一化到根路径 /
+    if (window.location.pathname.startsWith('/dist')) {
+      window.location.replace('/' + window.location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>人文艺术学院官网改版设计方案汇报与评选平台 | 2026</title>
   <link rel="icon" href="./college-logo.png" type="image/png" />
@@ -836,7 +849,7 @@
         <p style="font-size: 0.85rem; color: #94a3b8;">正在加载方案页面...</p>
       </div>
 
-      <iframe id="preview-frame" src="./01/index.html" title="方案实时交互预览"></iframe>
+      <iframe id="preview-frame" src="./01/" title="方案实时交互预览"></iframe>
     </div>
   </main>
 
@@ -883,6 +896,10 @@
 
   <script>
     // Scheme specifications for drawer & metadata
+    function getSchemeUrl(id) {
+      return (window.location.protocol === 'file:') ? `./${id}/index.html` : `./${id}/`;
+    }
+
     const SCHEME_DATA = {
       '01': {
         title: '方案 01 · 现代学术综合门户 (首页原型)',
@@ -1026,7 +1043,7 @@
 
       const data = SCHEME_DATA[schemeId];
       if (!data) return;
-      extLink.href = data.path;
+      extLink.href = getSchemeUrl(schemeId);
 
       // Show loader and load frame
       loader.classList.add('active');
@@ -1043,7 +1060,7 @@
       };
       setTimeout(removeLoader, 350);
 
-      frame.src = data.path;
+      frame.src = getSchemeUrl(schemeId);
       showToast(`已切换至 ${data.title}`);
     }
 
@@ -1134,6 +1151,9 @@
 
     // Check URL Hash on Load
     window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'file:') {
+        frame.src = './01/index.html';
+      }
       const hash = window.location.hash.replace('#', '');
       if (['01', '02', '03', '04', '05'].includes(hash)) {
         switchScheme(hash);
