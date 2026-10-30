@@ -23,6 +23,7 @@ Desktop.ini
 # Environment & legacy archive
 .mise.toml
 *.bak
+*.zip
 dist_portal/
 dist_portal.zip
 
